@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd bmon-funnels && npm install",
+  "buildCommand": "cd bmon-funnels && npm run build",
+  "outputDirectory": "bmon-funnels/dist"
+}
