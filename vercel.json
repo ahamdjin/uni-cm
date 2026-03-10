@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd bmon-funnels && npm install",
-  "buildCommand": "cd bmon-funnels && npm run build",
-  "outputDirectory": "bmon-funnels/dist"
+  "installCommand": "if [ -f package.json ]; then npm install; else cd bmon-funnels && npm install; fi",
+  "buildCommand": "if [ -f package.json ]; then npm run build; else cd bmon-funnels && npm run build && rm -rf ../dist && cp -R dist ../dist; fi",
+  "outputDirectory": "dist"
 }
