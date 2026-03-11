@@ -58,7 +58,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       )}
 
       {/* HERO */}
-      <section style={{ textAlign: "center", padding: "76px 24px 52px", maxWidth: 900, margin: "0 auto" }}>
+      <section className="reveal" style={{ textAlign: "center", padding: "76px 24px 52px", maxWidth: 900, margin: "0 auto" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, var(--accent-soft), var(--accent-soft-2))`, border: `1px solid ${COLORS.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: COLORS.text, marginBottom: 26, fontWeight: 750 }}>
           <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})` }} aria-hidden="true" />
           Review management that compounds monthly
@@ -87,7 +87,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* SOCIAL PROOF BAR */}
-      <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
+      <section className="reveal" style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
           { num: "4.9★", label: "Avg client rating" },
           { num: "3.2Ã—", label: "More reviews in 90 days" },
@@ -101,7 +101,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" style={{ maxWidth: 1000, margin: "0 auto 100px", padding: "0 24px" }}>
+      <section id="how" className="reveal" style={{ maxWidth: 1000, margin: "0 auto 100px", padding: "0 24px" }}>
         <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 54, letterSpacing: "-0.03em" }}>
           Simple. Automated.{" "}
           <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
@@ -125,7 +125,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* WHAT'S INCLUDED */}
-      <section style={{ maxWidth: 800, margin: "0 auto 100px", padding: "0 24px" }}>
+      <section className="reveal" style={{ maxWidth: 800, margin: "0 auto 100px", padding: "0 24px" }}>
         <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 12, letterSpacing: "-0.03em" }}>
           Everything you need to{" "}
           <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
@@ -158,7 +158,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* PRICING */}
-      <section id="pricing" style={{ maxWidth: 540, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
+      <section id="pricing" className="reveal" style={{ maxWidth: 540, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
         <h2 style={{ fontSize: 40, fontWeight: 950, marginBottom: 10, letterSpacing: "-0.03em" }}>
           One price.{" "}
           <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
@@ -223,7 +223,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* TESTIMONIAL */}
-      <section style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
+      <section className="reveal" style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 20 }}>
           {[1, 2, 3, 4, 5].map(i => <StarIcon key={i} />)}
         </div>
@@ -236,7 +236,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       </section>
 
       {/* CTA */}
-      <section style={{
+      <section className="reveal" style={{
         maxWidth: 900,
         margin: "0 auto 80px",
         padding: "60px 40px",

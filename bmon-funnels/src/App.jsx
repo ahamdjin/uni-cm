@@ -7,7 +7,7 @@ import BMONReviewFunnel from "./bmon-funnel-review-management.jsx";
 function ContactPage() {
   return (
     <div className="container page">
-      <section className="pageHero">
+      <section className="pageHero reveal">
         <div className="pill">
           <span className="pillDot" aria-hidden="true" />
           Talk to BMON
@@ -22,7 +22,7 @@ function ContactPage() {
       </section>
 
       <section className="embedGrid" aria-label="Contact options">
-        <div className="embedCard" id="contactForm">
+        <div className="embedCard reveal" id="contactForm">
           <div className="embedHeader">
             <h2 className="embedTitle">Contact form</h2>
             <p className="embedHint">Best for specifics</p>
@@ -48,7 +48,7 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="embedCard" id="booking">
+        <div className="embedCard reveal" id="booking">
           <div className="embedHeader">
             <h2 className="embedTitle">Calendar</h2>
             <p className="embedHint">Best for a demo</p>
@@ -65,7 +65,7 @@ function ContactPage() {
         </div>
       </section>
 
-      <div className="actionsRow" aria-label="Quick actions">
+      <div className="actionsRow reveal" aria-label="Quick actions">
         <a className="btn btnGhost" href="#contactForm">
           Jump to form
         </a>
@@ -73,6 +73,24 @@ function ContactPage() {
           Jump to calendar
         </a>
       </div>
+
+      <section className="contactInfo reveal" aria-label="What happens next">
+        <h2 className="infoHeading">What happens next</h2>
+        <div className="infoGrid">
+          <div className="infoCard">
+            <h3 className="infoTitle">Fast reply</h3>
+            <p className="infoBody">You’ll hear back quickly. If you book, we’ll meet at the time you choose.</p>
+          </div>
+          <div className="infoCard">
+            <h3 className="infoTitle">Clear next steps</h3>
+            <p className="infoBody">We’ll map your goals, recommend the right bundle, and outline a simple rollout plan.</p>
+          </div>
+          <div className="infoCard">
+            <h3 className="infoTitle">No pressure</h3>
+            <p className="infoBody">Ask questions, get a walkthrough, and decide when you’re ready.</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -82,7 +100,8 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
   }, [view]);
 
   useEffect(() => {
@@ -91,6 +110,33 @@ export default function App() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const nodes = Array.from(document.querySelectorAll(".reveal"));
+    if (nodes.length === 0) return;
+
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduced) {
+      nodes.forEach((node) => node.classList.add("in"));
+      return;
+    }
+
+    nodes.forEach((node) => node.classList.remove("in"));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -12% 0px" }
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
+  }, [view]);
 
   const viewMeta = useMemo(() => {
     if (view === "contact") return { title: "Contact", anchor: "#contactForm" };
@@ -103,7 +149,14 @@ export default function App() {
       <header className={`siteHeader ${scrolled ? "isScrolled" : ""}`}>
         <div className="container">
           <div className="headerPill headerInner">
-            <a className="brand" href="#" onClick={(e) => e.preventDefault()}>
+            <a
+              className="brand"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setView("services");
+              }}
+            >
               <span className="brandMark" aria-hidden="true" />
               BMON
             </a>

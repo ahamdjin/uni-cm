@@ -144,7 +144,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       )}
 
       {/* HERO */}
-      <section style={{ textAlign: "center", padding: "76px 24px 40px", maxWidth: 900, margin: "0 auto" }}>
+      <section className="reveal" style={{ textAlign: "center", padding: "76px 24px 40px", maxWidth: 900, margin: "0 auto" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: C.dark, marginBottom: 26, fontWeight: 750 }}>
           <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
           AI marketing ops for local businesses
@@ -174,7 +174,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* TRUST */}
-      <section style={{ maxWidth: 980, margin: "0 auto 72px", padding: "0 24px", textAlign: "center" }}>
+      <section className="reveal" style={{ maxWidth: 980, margin: "0 auto 72px", padding: "0 24px", textAlign: "center" }}>
         <p style={{ margin: "0 0 18px", color: C.muted, fontSize: 14, fontWeight: 650 }}>
           Trusted by local businesses across health, home services, and retail
         </p>
@@ -199,7 +199,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* STATS */}
-      <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
+      <section className="reveal" style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
           { num: "3.2Ã—", label: "More reviews", color: C.accent },
           { num: "24/7", label: "Chatbot coverage", color: C.accent2 },
@@ -213,7 +213,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={{ maxWidth: 1120, margin: "0 auto 60px", padding: "0 24px" }}>
+      <section id="services" className="reveal" style={{ maxWidth: 1120, margin: "0 auto 60px", padding: "0 24px" }}>
         <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 10, letterSpacing: "-0.03em" }}>
           Simply connect your profiles and watch BMON work
         </h2>
@@ -275,7 +275,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* BUNDLE BUILDER */}
-      <section id="bundle" style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px" }}>
+      <section id="bundle" className="reveal" style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px" }}>
         <div style={{
           background: C.card,
           borderRadius: 28,
@@ -383,7 +383,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ maxWidth: 1120, margin: "0 auto 100px", padding: "0 24px" }}>
+      <section id="contact" className="reveal" style={{ maxWidth: 1120, margin: "0 auto 100px", padding: "0 24px" }}>
         <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 34px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: C.dark, marginBottom: 16, fontWeight: 750 }}>
             <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
@@ -501,7 +501,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* TESTIMONIAL */}
-      <section style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
+      <section className="reveal" style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 16 }}>
           {[1,2,3,4,5].map(i => (
             <svg key={i} width="20" height="20" viewBox="0 0 20 20" fill="#FBBF24">
@@ -518,7 +518,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       </section>
 
       {/* CTA */}
-      <section style={{
+      <section className="reveal" style={{
         width: "min(900px, calc(100% - 48px))",
         margin: "0 auto 80px",
         padding: "60px 40px",
