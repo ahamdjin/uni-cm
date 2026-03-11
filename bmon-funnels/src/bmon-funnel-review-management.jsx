@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
 const COLORS = {
   bg: "transparent",
@@ -90,7 +90,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
           { num: "4.9★", label: "Avg client rating" },
-          { num: "3.2×", label: "More reviews in 90 days" },
+          { num: "3.2Ã—", label: "More reviews in 90 days" },
           { num: "87%", label: "Response rate" },
         ].map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>
@@ -271,3 +271,4 @@ export default function BMONReviewFunnel({ embedded = false }) {
     </div>
   );
 }
+

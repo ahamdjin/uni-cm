@@ -1,60 +1,151 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 import BMONServicesFunnel from "./bmon-funnel-services-itemized.jsx";
 import BMONReviewFunnel from "./bmon-funnel-review-management.jsx";
 
+function ContactPage() {
+  return (
+    <div className="container page">
+      <section className="pageHero">
+        <div className="pill">
+          <span className="pillDot" aria-hidden="true" />
+          Talk to BMON
+        </div>
+        <h1 className="pageTitle">
+          Book a demo or send us a{" "}
+          <span style={{ background: "linear-gradient(135deg, var(--accent), var(--accent-2))", WebkitBackgroundClip: "text", color: "transparent" }}>
+            message
+          </span>
+        </h1>
+        <p className="pageSubtitle">Pick the fastest option. The form is great for details; booking is best if you want a quick walkthrough.</p>
+      </section>
+
+      <section className="embedGrid" aria-label="Contact options">
+        <div className="embedCard" id="contactForm">
+          <div className="embedHeader">
+            <h2 className="embedTitle">Contact form</h2>
+            <p className="embedHint">Best for specifics</p>
+          </div>
+          <div className="embedFrameWrap" style={{ height: 764 }}>
+            <iframe
+              src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
+              className="embedFrame"
+              id="inline-WyPVoGvcUoMU57sslr9r"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="BMON - Contact Us Form"
+              data-height="764"
+              data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r"
+              data-form-id="WyPVoGvcUoMU57sslr9r"
+              title="BMON - Contact Us Form"
+            />
+          </div>
+        </div>
+
+        <div className="embedCard" id="booking">
+          <div className="embedHeader">
+            <h2 className="embedTitle">Calendar</h2>
+            <p className="embedHint">Best for a demo</p>
+          </div>
+          <div className="embedFrameWrap" style={{ height: 764 }}>
+            <iframe
+              src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
+              className="embedFrame"
+              scrolling="no"
+              id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
+              title="BMON - Booking Calendar"
+            />
+          </div>
+        </div>
+      </section>
+
+      <div className="actionsRow" aria-label="Quick actions">
+        <a className="btn btnGhost" href="#contactForm">
+          Jump to form
+        </a>
+        <a className="btn btnPrimary" href="#booking">
+          Jump to calendar
+        </a>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [view, setView] = useState("services");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [view]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const viewMeta = useMemo(() => {
+    if (view === "contact") return { title: "Contact", anchor: "#contactForm" };
     if (view === "reviews") return { title: "Review Management", anchor: "#pricing" };
     return { title: "Services Bundle", anchor: "#bundle" };
   }, [view]);
 
   return (
     <>
-      <header className="siteHeader">
-        <div className="container headerInner">
-          <a className="brand" href="#" onClick={(e) => e.preventDefault()}>
-            <span className="brandMark" aria-hidden="true" />
-            BMON
-          </a>
-
-          <nav className="navTabs" aria-label="Preview">
-            <button
-              type="button"
-              className={`tabBtn ${view === "services" ? "tabBtnActive" : ""}`}
-              onClick={() => setView("services")}
-            >
-              All Services
-            </button>
-            <button
-              type="button"
-              className={`tabBtn ${view === "reviews" ? "tabBtnActive" : ""}`}
-              onClick={() => setView("reviews")}
-            >
-              Review Management
-            </button>
-          </nav>
-
-          <div className="headerActions">
-            <a className="btn btnGhost" href={viewMeta.anchor}>
-              Jump to {view === "services" ? "Bundle" : "Pricing"}
+      <header className={`siteHeader ${scrolled ? "isScrolled" : ""}`}>
+        <div className="container">
+          <div className="headerPill headerInner">
+            <a className="brand" href="#" onClick={(e) => e.preventDefault()}>
+              <span className="brandMark" aria-hidden="true" />
+              BMON
             </a>
-            <a className="btn btnPrimary" href={viewMeta.anchor}>
-              {view === "services" ? "Build a Bundle" : "Start Free Trial"}
-            </a>
+
+            <nav className="navTabs" aria-label="Preview">
+              <button
+                type="button"
+                className={`tabBtn ${view === "services" ? "tabBtnActive" : ""}`}
+                onClick={() => setView("services")}
+              >
+                Services
+              </button>
+              <button
+                type="button"
+                className={`tabBtn ${view === "reviews" ? "tabBtnActive" : ""}`}
+                onClick={() => setView("reviews")}
+              >
+                Reviews
+              </button>
+              <button
+                type="button"
+                className={`tabBtn ${view === "contact" ? "tabBtnActive" : ""}`}
+                onClick={() => setView("contact")}
+              >
+                Contact
+              </button>
+            </nav>
+
+            <div className="headerActions">
+              <a className="btn btnGhost" href={view === "contact" ? "#contactForm" : viewMeta.anchor}>
+                {view === "services" ? "Bundle" : view === "reviews" ? "Pricing" : "Form"}
+              </a>
+              <a className="btn btnPrimary" href={view === "contact" ? "#booking" : viewMeta.anchor}>
+                {view === "services" ? "Build a Bundle" : view === "reviews" ? "Start Free Trial" : "Book a Demo"}
+              </a>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="main">
-        {view === "services" ? <BMONServicesFunnel embedded /> : <BMONReviewFunnel embedded />}
+        {view === "services" ? <BMONServicesFunnel embedded /> : view === "reviews" ? <BMONReviewFunnel embedded /> : <ContactPage />}
       </main>
 
       <footer className="siteFooter">
@@ -73,3 +164,4 @@ export default function App() {
     </>
   );
 }
+

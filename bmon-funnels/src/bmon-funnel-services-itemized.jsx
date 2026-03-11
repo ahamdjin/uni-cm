@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 
 const C = {
   bg: "transparent",
@@ -105,6 +105,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
 
 export default function BMONServicesFunnel({ embedded = false }) {
   const [selectedServices, setSelectedServices] = useState(["reviews"]);
+  const [contactTab, setContactTab] = useState("form");
 
   const toggleService = (id) => {
     setSelectedServices(prev =>
@@ -200,7 +201,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
       {/* STATS */}
       <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
-          { num: "3.2×", label: "More reviews", color: C.accent },
+          { num: "3.2Ã—", label: "More reviews", color: C.accent },
           { num: "24/7", label: "Chatbot coverage", color: C.accent2 },
           { num: "47%", label: "More leads", color: C.sky },
         ].map((s, i) => (
@@ -381,6 +382,124 @@ export default function BMONServicesFunnel({ embedded = false }) {
         </div>
       </section>
 
+      {/* CONTACT */}
+      <section id="contact" style={{ maxWidth: 1120, margin: "0 auto 100px", padding: "0 24px" }}>
+        <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 34px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: C.dark, marginBottom: 16, fontWeight: 750 }}>
+            <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
+            Talk to BMON
+          </div>
+          <h2 style={{ fontSize: 40, fontWeight: 950, margin: "0 0 10px", letterSpacing: "-0.03em" }}>
+            Book a demo or send a message
+          </h2>
+          <p style={{ margin: 0, color: C.muted, lineHeight: 1.7 }}>
+            Use the form for details, or grab a time on the calendar for a quick walkthrough.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
+          <div style={{ display: "inline-flex", gap: 6, padding: 6, borderRadius: 999, background: "rgba(11, 16, 32, 0.04)", border: `1px solid ${C.border}` }}>
+            <button
+              type="button"
+              onClick={() => setContactTab("form")}
+              style={{
+                border: "1px solid transparent",
+                borderRadius: 999,
+                padding: "10px 14px",
+                fontWeight: 800,
+                fontSize: 13,
+                cursor: "pointer",
+                background: contactTab === "form" ? "rgba(255,255,255,0.92)" : "transparent",
+                color: contactTab === "form" ? C.dark : "rgba(11, 16, 32, 0.68)",
+                boxShadow: contactTab === "form" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
+              }}
+            >
+              Contact Form
+            </button>
+            <button
+              type="button"
+              onClick={() => setContactTab("calendar")}
+              style={{
+                border: "1px solid transparent",
+                borderRadius: 999,
+                padding: "10px 14px",
+                fontWeight: 800,
+                fontSize: 13,
+                cursor: "pointer",
+                background: contactTab === "calendar" ? "rgba(255,255,255,0.92)" : "transparent",
+                color: contactTab === "calendar" ? C.dark : "rgba(11, 16, 32, 0.68)",
+                boxShadow: contactTab === "calendar" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
+              }}
+            >
+              Calendar
+            </button>
+          </div>
+        </div>
+
+        <div
+          style={{
+            background: C.card,
+            border: `1px solid ${C.border}`,
+            borderRadius: 28,
+            padding: 18,
+            boxShadow: "var(--shadow-sm)",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, padding: "6px 6px 14px", flexWrap: "wrap" }}>
+            <div style={{ fontWeight: 900, letterSpacing: "-0.01em" }}>{contactTab === "form" ? "BMON - Contact Us Form" : "Book a Demo"}</div>
+            <div style={{ fontSize: 13, color: C.muted }}>{contactTab === "form" ? "Best for specifics" : "Best for a walkthrough"}</div>
+          </div>
+
+          <div style={{ width: "min(680px, 100%)", margin: "0 auto", borderRadius: 28, overflow: "hidden", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.72)" }}>
+            {contactTab === "form" ? (
+              <div style={{ height: 764 }}>
+                <iframe
+                  src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
+                  style={{ width: "100%", height: "100%", border: "none" }}
+                  id="inline-WyPVoGvcUoMU57sslr9r"
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="alwaysShow"
+                  data-trigger-value=""
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="BMON - Contact Us Form"
+                  data-height="764"
+                  data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r"
+                  data-form-id="WyPVoGvcUoMU57sslr9r"
+                  title="BMON - Contact Us Form"
+                />
+              </div>
+            ) : (
+              <div style={{ height: 764 }}>
+                <iframe
+                  src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
+                  style={{ width: "100%", height: "100%", border: "none", overflow: "hidden" }}
+                  scrolling="no"
+                  id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
+                  title="BMON - Booking Calendar"
+                />
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap", marginTop: 18 }}>
+            <a href="#bundle" style={{ textDecoration: "none" }}>
+              <button type="button" style={{ background: "transparent", border: `1px solid ${C.border}`, borderRadius: 999, padding: "10px 14px", fontWeight: 850, fontSize: 13, cursor: "pointer", color: "rgba(11, 16, 32, 0.82)" }}>
+                Build a bundle
+              </button>
+            </a>
+            <a href="#services" style={{ textDecoration: "none" }}>
+              <button type="button" style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, border: "none", borderRadius: 999, padding: "10px 14px", fontWeight: 900, fontSize: 13, cursor: "pointer", color: "#fff", boxShadow: "0 16px 40px rgba(79, 70, 229, 0.22)" }}>
+                Leave a review
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* TESTIMONIAL */}
       <section style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 16 }}>
@@ -400,14 +519,12 @@ export default function BMONServicesFunnel({ embedded = false }) {
 
       {/* CTA */}
       <section style={{
-        maxWidth: 900,
+        width: "min(900px, calc(100% - 48px))",
         margin: "0 auto 80px",
         padding: "60px 40px",
         background: `linear-gradient(135deg, rgba(11, 16, 32, 0.92), rgba(11, 16, 32, 0.78))`,
         borderRadius: 24,
         textAlign: "center",
-        marginLeft: 24,
-        marginRight: 24,
         border: "1px solid rgba(255,255,255,0.12)",
       }}>
         <h2 style={{ fontSize: 34, fontWeight: 950, color: "#fff", marginTop: 0, marginBottom: 14, letterSpacing: "-0.03em" }}>
@@ -431,3 +548,4 @@ export default function BMONServicesFunnel({ embedded = false }) {
     </div>
   );
 }
+
