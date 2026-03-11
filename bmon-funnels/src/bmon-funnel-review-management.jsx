@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 const COLORS = {
-  bg: "#0A0A0F",
-  card: "#12121A",
-  cardHover: "#1A1A25",
-  accent: "#00E5A0",
-  accentDim: "#00C488",
-  text: "#E8E8ED",
-  textMuted: "#8A8A9A",
-  border: "#1E1E2A",
-  highlight: "rgba(0, 229, 160, 0.08)",
+  bg: "transparent",
+  card: "var(--surface)",
+  cardHover: "rgba(255, 255, 255, 0.92)",
+  accent: "var(--accent)",
+  accent2: "var(--accent-2)",
+  text: "var(--text)",
+  textMuted: "var(--muted)",
+  border: "var(--border)",
+  highlight: "var(--accent-soft)",
 };
 
 const StarIcon = () => (
@@ -31,68 +31,82 @@ const ArrowIcon = () => (
   </svg>
 );
 
-export default function BMONReviewFunnel() {
+export default function BMONReviewFunnel({ embedded = false }) {
   const [annual, setAnnual] = useState(false);
   const price = annual ? 197 : 247;
 
   return (
-    <div style={{ fontFamily: "'DM Sans', 'Manrope', sans-serif", background: COLORS.bg, color: COLORS.text, minHeight: "100vh" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <div style={{ fontFamily: "var(--font-sans)", background: COLORS.bg, color: COLORS.text, minHeight: embedded ? "auto" : "100vh" }}>
 
       {/* NAV */}
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 40px", maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ fontSize: 28, fontWeight: 700, letterSpacing: "-0.5px" }}>
-          <span style={{ color: COLORS.accent }}>B</span>MON
-        </div>
-        <div style={{ display: "flex", gap: 32, alignItems: "center", fontSize: 14, color: COLORS.textMuted }}>
-          <a href="#how" style={{ color: "inherit", textDecoration: "none" }}>How It Works</a>
-          <a href="#pricing" style={{ color: "inherit", textDecoration: "none" }}>Pricing</a>
-          <button style={{ background: COLORS.accent, color: COLORS.bg, border: "none", padding: "10px 24px", borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>
-            Get Started
-          </button>
-        </div>
-      </nav>
+      {!embedded && (
+        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 24px", maxWidth: 1120, margin: "0 auto" }}>
+          <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.02em" }}>
+            <span style={{ color: COLORS.accent }}>B</span>MON
+          </div>
+          <div style={{ display: "flex", gap: 18, alignItems: "center", fontSize: 14, color: COLORS.textMuted }}>
+            <a href="#how">How it works</a>
+            <a href="#pricing">Pricing</a>
+            <button
+              type="button"
+              style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "10px 16px", borderRadius: 999, fontWeight: 850, fontSize: 13, cursor: "pointer" }}
+            >
+              Start free trial
+            </button>
+          </div>
+        </nav>
+      )}
 
       {/* HERO */}
-      <section style={{ textAlign: "center", padding: "80px 24px 60px", maxWidth: 800, margin: "0 auto" }}>
-        <div style={{ display: "inline-block", background: COLORS.highlight, border: `1px solid ${COLORS.accent}33`, borderRadius: 100, padding: "6px 20px", fontSize: 13, color: COLORS.accent, marginBottom: 28, fontWeight: 500 }}>
-          Trusted by 50+ local businesses
+      <section style={{ textAlign: "center", padding: "76px 24px 52px", maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, var(--accent-soft), var(--accent-soft-2))`, border: `1px solid ${COLORS.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: COLORS.text, marginBottom: 26, fontWeight: 750 }}>
+          <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})` }} aria-hidden="true" />
+          Review management that compounds monthly
         </div>
-        <h1 style={{ fontFamily: "'Instrument Serif', serif", fontSize: "clamp(40px, 6vw, 64px)", lineHeight: 1.1, fontWeight: 400, margin: "0 0 24px" }}>
-          Turn your reviews into your
-          <span style={{ color: COLORS.accent, fontStyle: "italic" }}> #1 sales channel</span>
+        <h1 style={{ fontSize: "clamp(42px, 6vw, 66px)", lineHeight: 1.06, fontWeight: 950, margin: "0 0 18px", letterSpacing: "-0.04em" }}>
+          Turn your reviews into your{" "}
+          <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            #1 sales channel
+          </span>
         </h1>
-        <p style={{ fontSize: 18, color: COLORS.textMuted, lineHeight: 1.7, maxWidth: 560, margin: "0 auto 40px" }}>
-          BMON automates review collection, crafts on-brand AI responses, and boosts your Google ranking — so new customers find and choose you.
+        <p style={{ fontSize: 18, color: COLORS.textMuted, lineHeight: 1.75, maxWidth: 640, margin: "0 auto 34px" }}>
+          BMON automates review collection, crafts on-brand AI responses, and boosts your Google ranking—so new customers find and choose you.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <button style={{ background: COLORS.accent, color: COLORS.bg, border: "none", padding: "14px 36px", borderRadius: 10, fontWeight: 700, fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
-            Start Free Trial <ArrowIcon />
-          </button>
-          <button style={{ background: "transparent", color: COLORS.text, border: `1px solid ${COLORS.border}`, padding: "14px 36px", borderRadius: 10, fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
-            Book a Demo
-          </button>
+          <a href="#pricing" style={{ textDecoration: "none" }}>
+            <button style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "14px 22px", borderRadius: 999, fontWeight: 900, fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}>
+              Start free trial <ArrowIcon />
+            </button>
+          </a>
+          <a href="#how" style={{ textDecoration: "none" }}>
+            <button style={{ background: "rgba(255,255,255,0.7)", color: COLORS.text, border: `1px solid ${COLORS.border}`, padding: "14px 22px", borderRadius: 999, fontWeight: 850, fontSize: 15, cursor: "pointer" }}>
+              How it works
+            </button>
+          </a>
         </div>
       </section>
 
       {/* SOCIAL PROOF BAR */}
-      <section style={{ maxWidth: 700, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap", padding: "0 24px" }}>
+      <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
           { num: "4.9★", label: "Avg client rating" },
-          { num: "3.2x", label: "More reviews in 90 days" },
+          { num: "3.2×", label: "More reviews in 90 days" },
           { num: "87%", label: "Response rate" },
         ].map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 32, fontWeight: 700, color: COLORS.accent }}>{s.num}</div>
-            <div style={{ fontSize: 13, color: COLORS.textMuted, marginTop: 4 }}>{s.label}</div>
+            <div style={{ fontSize: 34, fontWeight: 950, color: COLORS.accent, letterSpacing: "-0.03em" }}>{s.num}</div>
+            <div style={{ fontSize: 13, color: COLORS.textMuted, marginTop: 4, fontWeight: 650 }}>{s.label}</div>
           </div>
         ))}
       </section>
 
       {/* HOW IT WORKS */}
       <section id="how" style={{ maxWidth: 1000, margin: "0 auto 100px", padding: "0 24px" }}>
-        <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, textAlign: "center", fontWeight: 400, marginBottom: 60 }}>
-          Simple. Automated. <span style={{ color: COLORS.accent, fontStyle: "italic" }}>Powerful.</span>
+        <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 54, letterSpacing: "-0.03em" }}>
+          Simple. Automated.{" "}
+          <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            Powerful.
+          </span>
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
           {[
@@ -101,10 +115,10 @@ export default function BMONReviewFunnel() {
             { step: "03", title: "Respond", desc: "AI writes on-brand responses to every review — positive or negative — within minutes." },
             { step: "04", title: "Grow", desc: "Watch your star rating climb, your local SEO improve, and new customers roll in." },
           ].map((item, i) => (
-            <div key={i} style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 16, padding: "36px 28px", position: "relative", overflow: "hidden" }}>
-              <div style={{ fontSize: 48, fontWeight: 700, color: `${COLORS.accent}15`, position: "absolute", top: 16, right: 20, fontFamily: "'Instrument Serif', serif" }}>{item.step}</div>
-              <h3 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12, marginTop: 0 }}>{item.title}</h3>
-              <p style={{ fontSize: 14, color: COLORS.textMuted, lineHeight: 1.7, margin: 0 }}>{item.desc}</p>
+            <div key={i} style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 24, padding: "36px 28px", position: "relative", overflow: "hidden", boxShadow: "var(--shadow-sm)", backdropFilter: "blur(10px)" }}>
+              <div style={{ fontSize: 44, fontWeight: 950, color: "rgba(79, 70, 229, 0.14)", position: "absolute", top: 14, right: 18, letterSpacing: "-0.02em" }}>{item.step}</div>
+              <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 12, marginTop: 0, letterSpacing: "-0.02em" }}>{item.title}</h3>
+              <p style={{ fontSize: 14, color: COLORS.textMuted, lineHeight: 1.75, margin: 0 }}>{item.desc}</p>
             </div>
           ))}
         </div>
@@ -112,10 +126,16 @@ export default function BMONReviewFunnel() {
 
       {/* WHAT'S INCLUDED */}
       <section style={{ maxWidth: 800, margin: "0 auto 100px", padding: "0 24px" }}>
-        <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, textAlign: "center", fontWeight: 400, marginBottom: 16 }}>
-          Everything you need to <span style={{ color: COLORS.accent, fontStyle: "italic" }}>dominate</span> reviews
+        <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 12, letterSpacing: "-0.03em" }}>
+          Everything you need to{" "}
+          <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            dominate
+          </span>{" "}
+          reviews
         </h2>
-        <p style={{ textAlign: "center", color: COLORS.textMuted, marginBottom: 48, fontSize: 16 }}>One plan. One price. No hidden fees.</p>
+        <p style={{ textAlign: "center", color: COLORS.textMuted, marginBottom: 48, fontSize: 16, lineHeight: 1.7 }}>
+          One plan. One price. No hidden fees.
+        </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
           {[
             "Automated review request campaigns (Email + SMS)",
@@ -139,20 +159,25 @@ export default function BMONReviewFunnel() {
 
       {/* PRICING */}
       <section id="pricing" style={{ maxWidth: 540, margin: "0 auto 100px", padding: "0 24px", textAlign: "center" }}>
-        <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 40, fontWeight: 400, marginBottom: 8 }}>
-          One price. <span style={{ color: COLORS.accent, fontStyle: "italic" }}>Zero surprises.</span>
+        <h2 style={{ fontSize: 40, fontWeight: 950, marginBottom: 10, letterSpacing: "-0.03em" }}>
+          One price.{" "}
+          <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            Zero surprises.
+          </span>
         </h2>
-        <p style={{ color: COLORS.textMuted, marginBottom: 32 }}>Simple pricing that grows with you.</p>
+        <p style={{ color: COLORS.textMuted, marginBottom: 32, lineHeight: 1.7 }}>Simple pricing that grows with you.</p>
 
         {/* Toggle */}
         <div style={{ display: "flex", justifyContent: "center", gap: 12, alignItems: "center", marginBottom: 40 }}>
           <span style={{ fontSize: 14, color: !annual ? COLORS.text : COLORS.textMuted, fontWeight: !annual ? 600 : 400 }}>Monthly</span>
-          <div
+          <button
+            type="button"
+            aria-pressed={annual}
             onClick={() => setAnnual(!annual)}
-            style={{ width: 52, height: 28, borderRadius: 14, background: annual ? COLORS.accent : COLORS.border, cursor: "pointer", position: "relative", transition: "background 0.3s" }}
+            style={{ width: 56, height: 30, borderRadius: 999, background: annual ? `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})` : "rgba(11, 16, 32, 0.14)", cursor: "pointer", position: "relative", transition: "background 220ms ease", border: "none", padding: 0 }}
           >
-            <div style={{ width: 22, height: 22, borderRadius: 11, background: "#fff", position: "absolute", top: 3, left: annual ? 27 : 3, transition: "left 0.3s" }} />
-          </div>
+            <div style={{ width: 24, height: 24, borderRadius: 999, background: "#fff", position: "absolute", top: 3, left: annual ? 29 : 3, transition: "left 220ms ease", boxShadow: "0 12px 30px rgba(11, 16, 32, 0.18)" }} />
+          </button>
           <span style={{ fontSize: 14, color: annual ? COLORS.text : COLORS.textMuted, fontWeight: annual ? 600 : 400 }}>
             Annual <span style={{ color: COLORS.accent, fontSize: 12 }}>Save 20%</span>
           </span>
@@ -162,30 +187,32 @@ export default function BMONReviewFunnel() {
         <div style={{
           background: `linear-gradient(135deg, ${COLORS.card}, ${COLORS.cardHover})`,
           border: `2px solid ${COLORS.accent}`,
-          borderRadius: 24,
+          borderRadius: 28,
           padding: "48px 40px",
           position: "relative",
-          overflow: "hidden"
+          overflow: "hidden",
+          boxShadow: "var(--shadow-sm)",
+          backdropFilter: "blur(12px)",
         }}>
-          <div style={{ position: "absolute", top: 0, right: 0, background: COLORS.accent, color: COLORS.bg, padding: "6px 20px", borderRadius: "0 0 0 12px", fontSize: 12, fontWeight: 700, textTransform: "uppercase" }}>
+          <div style={{ position: "absolute", top: 0, right: 0, background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", padding: "6px 18px", borderRadius: "0 0 0 14px", fontSize: 12, fontWeight: 850, textTransform: "uppercase", letterSpacing: "0.6px" }}>
             Most Popular
           </div>
-          <h3 style={{ fontSize: 18, fontWeight: 600, marginTop: 0, marginBottom: 4 }}>Review Management Pro</h3>
+          <h3 style={{ fontSize: 18, fontWeight: 900, marginTop: 0, marginBottom: 4, letterSpacing: "-0.01em" }}>Review Management Pro</h3>
           <p style={{ color: COLORS.textMuted, fontSize: 14, marginBottom: 32 }}>Per location / month</p>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 4, marginBottom: 32 }}>
             <span style={{ fontSize: 20, color: COLORS.textMuted }}>$</span>
-            <span style={{ fontSize: 64, fontWeight: 700, lineHeight: 1 }}>{price}</span>
+            <span style={{ fontSize: 64, fontWeight: 950, lineHeight: 1, letterSpacing: "-0.03em" }}>{price}</span>
             <span style={{ fontSize: 16, color: COLORS.textMuted }}>/mo</span>
           </div>
           <button style={{
             width: "100%",
-            background: COLORS.accent,
-            color: COLORS.bg,
+            background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`,
+            color: "#fff",
             border: "none",
             padding: "16px",
-            borderRadius: 12,
-            fontWeight: 700,
-            fontSize: 16,
+            borderRadius: 999,
+            fontWeight: 950,
+            fontSize: 15,
             cursor: "pointer",
             marginBottom: 8,
           }}>
@@ -200,7 +227,7 @@ export default function BMONReviewFunnel() {
         <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 20 }}>
           {[1, 2, 3, 4, 5].map(i => <StarIcon key={i} />)}
         </div>
-        <blockquote style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontStyle: "italic", lineHeight: 1.5, margin: "0 0 24px", fontWeight: 400 }}>
+        <blockquote style={{ fontSize: 22, lineHeight: 1.6, margin: "0 0 22px", fontWeight: 650, letterSpacing: "-0.01em" }}>
           "We went from 23 Google reviews to 147 in four months. BMON basically runs our reputation on autopilot."
         </blockquote>
         <div style={{ fontSize: 14, color: COLORS.textMuted }}>
@@ -213,29 +240,34 @@ export default function BMONReviewFunnel() {
         maxWidth: 900,
         margin: "0 auto 80px",
         padding: "60px 40px",
-        background: `linear-gradient(135deg, ${COLORS.accent}15, ${COLORS.accent}05)`,
-        border: `1px solid ${COLORS.accent}33`,
+        background: "linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(124, 58, 237, 0.08))",
+        border: "1px solid rgba(79, 70, 229, 0.18)",
         borderRadius: 24,
         textAlign: "center",
         marginLeft: 24,
         marginRight: 24,
       }}>
-        <h2 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 36, fontWeight: 400, marginTop: 0, marginBottom: 16 }}>
-          Ready to turn reviews into <span style={{ color: COLORS.accent, fontStyle: "italic" }}>revenue?</span>
+        <h2 style={{ fontSize: 36, fontWeight: 950, marginTop: 0, marginBottom: 14, letterSpacing: "-0.03em" }}>
+          Ready to turn reviews into{" "}
+          <span style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            revenue?
+          </span>
         </h2>
-        <p style={{ color: COLORS.textMuted, marginBottom: 32 }}>Start your free trial today. Setup takes under 5 minutes.</p>
-        <button style={{ background: COLORS.accent, color: COLORS.bg, border: "none", padding: "16px 48px", borderRadius: 12, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>
+        <p style={{ color: COLORS.textMuted, marginBottom: 32, lineHeight: 1.7 }}>Start your free trial today. Setup takes under 5 minutes.</p>
+        <button style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, fontWeight: 950, fontSize: 15, cursor: "pointer", boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}>
           Get Started Free
         </button>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "40px 24px", textAlign: "center" }}>
-        <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 12 }}>
-          <span style={{ color: COLORS.accent }}>B</span>MON
-        </div>
-        <p style={{ fontSize: 13, color: COLORS.textMuted, margin: 0 }}>© 2026 BMON. All rights reserved.</p>
-      </footer>
+      {!embedded && (
+        <footer style={{ borderTop: `1px solid ${COLORS.border}`, padding: "40px 24px", textAlign: "center" }}>
+          <div style={{ fontSize: 20, fontWeight: 900, marginBottom: 12, letterSpacing: "-0.02em" }}>
+            <span style={{ color: COLORS.accent }}>B</span>MON
+          </div>
+          <p style={{ fontSize: 13, color: COLORS.textMuted, margin: 0 }}>© {new Date().getFullYear()} BMON. All rights reserved.</p>
+        </footer>
+      )}
     </div>
   );
 }

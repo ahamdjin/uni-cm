@@ -1,17 +1,18 @@
 import { useState } from "react";
 
 const C = {
-  bg: "#FAFAF8",
-  card: "#FFFFFF",
-  dark: "#0D0D0D",
-  accent: "#2563EB",
-  accentLight: "#DBEAFE",
-  green: "#10B981",
-  purple: "#7C3AED",
-  orange: "#F59E0B",
-  muted: "#6B7280",
-  border: "#E5E7EB",
-  lightBg: "#F3F4F6",
+  bg: "transparent",
+  card: "var(--surface)",
+  cardStrong: "var(--surface-strong)",
+  dark: "var(--text)",
+  accent: "var(--accent)",
+  accent2: "var(--accent-2)",
+  accentLight: "var(--accent-soft)",
+  accentLight2: "var(--accent-soft-2)",
+  sky: "#0ea5e9",
+  skySoft: "rgba(14, 165, 233, 0.14)",
+  muted: "var(--muted)",
+  border: "var(--border)",
 };
 
 const Check = ({ color = C.accent }) => (
@@ -34,21 +35,29 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
       onMouseLeave={() => setHovered(false)}
       style={{
         background: C.card,
-        borderRadius: 20,
+        borderRadius: 24,
         padding: "36px 32px",
         border: popular ? `2px solid ${color}` : `1px solid ${C.border}`,
         position: "relative",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered ? "0 20px 60px rgba(0,0,0,0.08)" : "0 2px 12px rgba(0,0,0,0.04)",
-        transition: "all 0.3s ease",
+        boxShadow: hovered ? "var(--shadow)" : "var(--shadow-sm)",
+        transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
         display: "flex",
         flexDirection: "column",
+        backdropFilter: "blur(10px)",
       }}
     >
       {popular && (
         <div style={{
           position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)",
-          background: color, color: "#fff", padding: "4px 18px", borderRadius: 100, fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.5px",
+          background: `linear-gradient(135deg, ${color}, ${C.accent2})`,
+          color: "#fff",
+          padding: "6px 16px",
+          borderRadius: 999,
+          fontSize: 12,
+          fontWeight: 800,
+          textTransform: "uppercase",
+          letterSpacing: "0.6px",
         }}>
           Core Service
         </div>
@@ -56,11 +65,11 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
       <div style={{ width: 48, height: 48, borderRadius: 14, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, fontSize: 22 }}>
         {icon}
       </div>
-      <h3 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 8px", color: C.dark }}>{title}</h3>
+      <h3 style={{ fontSize: 22, fontWeight: 850, margin: "0 0 8px", color: C.dark, letterSpacing: "-0.02em" }}>{title}</h3>
       <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.6, margin: "0 0 24px", flex: 1 }}>{desc}</p>
       <div style={{ display: "flex", alignItems: "baseline", gap: 2, marginBottom: 24 }}>
         <span style={{ fontSize: 14, color: C.muted }}>$</span>
-        <span style={{ fontSize: 42, fontWeight: 800, color: C.dark, lineHeight: 1 }}>{price}</span>
+        <span style={{ fontSize: 44, fontWeight: 900, color: C.dark, lineHeight: 1, letterSpacing: "-0.03em" }}>{price}</span>
         <span style={{ fontSize: 14, color: C.muted }}>/mo</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
@@ -73,19 +82,20 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
       </div>
       <button style={{
         width: "100%",
-        background: popular ? color : "transparent",
+        background: popular ? `linear-gradient(135deg, ${color}, ${C.accent2})` : "transparent",
         color: popular ? "#fff" : color,
-        border: popular ? "none" : `2px solid ${color}`,
-        padding: "14px",
-        borderRadius: 12,
-        fontWeight: 700,
-        fontSize: 15,
+        border: popular ? "none" : `1px solid ${color}`,
+        padding: "14px 16px",
+        borderRadius: 999,
+        fontWeight: 850,
+        fontSize: 14,
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         gap: 8,
         marginTop: "auto",
+        boxShadow: popular ? "0 16px 48px rgba(79, 70, 229, 0.22)" : "none",
       }}>
         Get Started <Arrow />
       </button>
@@ -93,7 +103,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
   );
 };
 
-export default function BMONServicesFunnel() {
+export default function BMONServicesFunnel({ embedded = false }) {
   const [selectedServices, setSelectedServices] = useState(["reviews"]);
 
   const toggleService = (id) => {
@@ -113,67 +123,102 @@ export default function BMONServicesFunnel() {
   const finalPrice = Math.round(total * (1 - bundleDiscount));
 
   return (
-    <div style={{ fontFamily: "'DM Sans', 'Manrope', sans-serif", background: C.bg, color: C.dark, minHeight: "100vh" }}>
-      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
-
-      {/* NAV */}
-      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 40px", maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-1px" }}>
-          <span style={{ color: C.accent }}>B</span>MON
-        </div>
-        <div style={{ display: "flex", gap: 32, alignItems: "center", fontSize: 14, color: C.muted }}>
-          <a href="#services" style={{ color: "inherit", textDecoration: "none" }}>Services</a>
-          <a href="#bundle" style={{ color: "inherit", textDecoration: "none" }}>Bundle & Save</a>
-          <button style={{ background: C.dark, color: "#fff", border: "none", padding: "10px 24px", borderRadius: 8, fontWeight: 600, fontSize: 14, cursor: "pointer" }}>
-            Book a Call
-          </button>
-        </div>
-      </nav>
+    <div style={{ fontFamily: "var(--font-sans)", background: C.bg, color: C.dark, minHeight: embedded ? "auto" : "100vh" }}>
+      {!embedded && (
+        <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 24px", maxWidth: 1120, margin: "0 auto" }}>
+          <div style={{ fontSize: 22, fontWeight: 900, letterSpacing: "-0.02em" }}>
+            <span style={{ color: C.accent }}>B</span>MON
+          </div>
+          <div style={{ display: "flex", gap: 18, alignItems: "center", fontSize: 14, color: C.muted }}>
+            <a href="#services">Services</a>
+            <a href="#bundle">Bundle</a>
+            <button
+              type="button"
+              style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "10px 16px", borderRadius: 999, fontWeight: 850, fontSize: 13, cursor: "pointer" }}
+            >
+              Start free trial
+            </button>
+          </div>
+        </nav>
+      )}
 
       {/* HERO */}
-      <section style={{ textAlign: "center", padding: "80px 24px 40px", maxWidth: 820, margin: "0 auto" }}>
-        <div style={{ display: "inline-block", background: C.accentLight, borderRadius: 100, padding: "6px 18px", fontSize: 13, color: C.accent, marginBottom: 28, fontWeight: 600 }}>
-          AI-Powered Growth for Local Businesses
+      <section style={{ textAlign: "center", padding: "76px 24px 40px", maxWidth: 900, margin: "0 auto" }}>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: C.dark, marginBottom: 26, fontWeight: 750 }}>
+          <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
+          AI marketing ops for local businesses
         </div>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(38px, 5.5vw, 58px)", lineHeight: 1.15, fontWeight: 700, margin: "0 0 24px", color: C.dark }}>
-          Your complete digital presence,{" "}
-          <span style={{ fontStyle: "italic", color: C.accent }}>handled.</span>
+        <h1 style={{ fontSize: "clamp(42px, 6vw, 68px)", lineHeight: 1.06, fontWeight: 950, margin: "0 0 18px", color: C.dark, letterSpacing: "-0.04em" }}>
+          Attract{" "}
+          <span style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
+            new customers
+          </span>
+          <br /> and bring them back more often
         </h1>
-        <p style={{ fontSize: 18, color: C.muted, lineHeight: 1.7, maxWidth: 580, margin: "0 auto 40px" }}>
-          Pick what you need — review management, a smart website, or an AI chatbot. Bundle them together and save up to 15%.
+        <p style={{ fontSize: 18, color: C.muted, lineHeight: 1.75, maxWidth: 640, margin: "0 auto 34px" }}>
+          Pick what you need—review management, a smart website, or an AI chatbot. Bundle them together and save up to 15%.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#services" style={{ textDecoration: "none" }}>
-            <button style={{ background: C.accent, color: "#fff", border: "none", padding: "14px 36px", borderRadius: 10, fontWeight: 700, fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
+            <button style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "14px 22px", borderRadius: 999, fontWeight: 900, fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}>
               See Services <Arrow />
             </button>
           </a>
-          <button style={{ background: "transparent", color: C.dark, border: `1px solid ${C.border}`, padding: "14px 36px", borderRadius: 10, fontWeight: 600, fontSize: 16, cursor: "pointer" }}>
-            Book a Demo
-          </button>
+          <a href="#bundle" style={{ textDecoration: "none" }}>
+            <button style={{ background: "rgba(255,255,255,0.7)", color: C.dark, border: `1px solid ${C.border}`, padding: "14px 22px", borderRadius: 999, fontWeight: 850, fontSize: 15, cursor: "pointer" }}>
+              Build a bundle
+            </button>
+          </a>
+        </div>
+      </section>
+
+      {/* TRUST */}
+      <section style={{ maxWidth: 980, margin: "0 auto 72px", padding: "0 24px", textAlign: "center" }}>
+        <p style={{ margin: "0 0 18px", color: C.muted, fontSize: 14, fontWeight: 650 }}>
+          Trusted by local businesses across health, home services, and retail
+        </p>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, opacity: 0.75 }}>
+          {["Park Dental", "Evergreen HVAC", "Coastal Spa", "Northside Fitness", "Bella Salon"].map((name) => (
+            <div
+              key={name}
+              style={{
+                padding: "10px 14px",
+                borderRadius: 999,
+                border: `1px solid ${C.border}`,
+                background: "rgba(255,255,255,0.55)",
+                fontSize: 13,
+                fontWeight: 800,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {name}
+            </div>
+          ))}
         </div>
       </section>
 
       {/* STATS */}
-      <section style={{ maxWidth: 750, margin: "40px auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
+      <section style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
-          { num: "3.2x", label: "More reviews", color: C.accent },
-          { num: "24/7", label: "AI chatbot coverage", color: C.purple },
-          { num: "47%", label: "More leads from web", color: C.green },
+          { num: "3.2×", label: "More reviews", color: C.accent },
+          { num: "24/7", label: "Chatbot coverage", color: C.accent2 },
+          { num: "47%", label: "More leads", color: C.sky },
         ].map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>
-            <div style={{ fontSize: 34, fontWeight: 800, color: s.color }}>{s.num}</div>
-            <div style={{ fontSize: 13, color: C.muted, marginTop: 4 }}>{s.label}</div>
+            <div style={{ fontSize: 34, fontWeight: 950, color: s.color, letterSpacing: "-0.03em" }}>{s.num}</div>
+            <div style={{ fontSize: 13, color: C.muted, marginTop: 4, fontWeight: 650 }}>{s.label}</div>
           </div>
         ))}
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={{ maxWidth: 1100, margin: "0 auto 60px", padding: "0 24px" }}>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 38, textAlign: "center", fontWeight: 700, marginBottom: 12 }}>
-          Choose your growth stack
+      <section id="services" style={{ maxWidth: 1120, margin: "0 auto 60px", padding: "0 24px" }}>
+        <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 10, letterSpacing: "-0.03em" }}>
+          Simply connect your profiles and watch BMON work
         </h2>
-        <p style={{ textAlign: "center", color: C.muted, marginBottom: 48, fontSize: 16 }}>Each service works on its own — or combine them for maximum impact.</p>
+        <p style={{ textAlign: "center", color: C.muted, marginBottom: 48, fontSize: 16 }}>
+          Each service works on its own—or combine them for maximum impact.
+        </p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
           <ServiceCard
@@ -195,11 +240,11 @@ export default function BMONServicesFunnel() {
           />
           <ServiceCard
             icon="🌐"
-            color={C.green}
-            colorBg="#D1FAE5"
+            color={C.sky}
+            colorBg={C.skySoft}
             title="Smart Website Design"
             price="497"
-            desc="A conversion-optimized, mobile-first website built for local search — managed & updated for you."
+            desc="A conversion-optimized, mobile-first website built for local search—managed & updated for you."
             features={[
               "Custom 5-page responsive website",
               "SEO-optimized for local search",
@@ -211,8 +256,8 @@ export default function BMONServicesFunnel() {
           />
           <ServiceCard
             icon="🤖"
-            color={C.purple}
-            colorBg="#EDE9FE"
+            color={C.accent2}
+            colorBg={C.accentLight2}
             title="AI Chatbot"
             price="197"
             desc="A 24/7 AI assistant trained on your business that captures leads and answers questions instantly."
@@ -232,52 +277,62 @@ export default function BMONServicesFunnel() {
       <section id="bundle" style={{ maxWidth: 700, margin: "0 auto 100px", padding: "0 24px" }}>
         <div style={{
           background: C.card,
-          borderRadius: 24,
+          borderRadius: 28,
           padding: "40px 36px",
           border: `1px solid ${C.border}`,
-          boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+          boxShadow: "var(--shadow-sm)",
+          backdropFilter: "blur(12px)",
         }}>
-          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 700, textAlign: "center", margin: "0 0 8px" }}>
+          <h3 style={{ fontSize: 28, fontWeight: 950, textAlign: "center", margin: "0 0 8px", letterSpacing: "-0.03em" }}>
             Build Your Bundle
           </h3>
-          <p style={{ textAlign: "center", color: C.muted, marginBottom: 32, fontSize: 14 }}>
-            Select 2+ services and save. 3 services = 15% off.
+          <p style={{ textAlign: "center", color: C.muted, marginBottom: 32, fontSize: 14, lineHeight: 1.6 }}>
+            Select 2+ services and save. Pick all 3 for <strong style={{ color: C.dark }}>15% off</strong>.
           </p>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 32 }}>
             {Object.entries(services).map(([id, svc]) => {
               const checked = selectedServices.includes(id);
-              const colors = { reviews: C.accent, website: C.green, chatbot: C.purple };
+              const theme = {
+                reviews: { color: C.accent, bg: "rgba(79, 70, 229, 0.08)" },
+                website: { color: C.sky, bg: "rgba(14, 165, 233, 0.08)" },
+                chatbot: { color: C.accent2, bg: "rgba(124, 58, 237, 0.08)" },
+              }[id];
               return (
-                <div
+                <button
                   key={id}
+                  type="button"
+                  aria-pressed={checked}
                   onClick={() => toggleService(id)}
                   style={{
+                    width: "100%",
+                    textAlign: "left",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    padding: "16px 20px",
-                    borderRadius: 14,
-                    border: checked ? `2px solid ${colors[id]}` : `1px solid ${C.border}`,
-                    background: checked ? `${colors[id]}08` : C.bg,
+                    padding: "16px 18px",
+                    borderRadius: 18,
+                    border: checked ? `2px solid ${theme.color}` : `1px solid ${C.border}`,
+                    background: checked ? theme.bg : "rgba(255,255,255,0.55)",
                     cursor: "pointer",
-                    transition: "all 0.2s",
+                    transition: "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease",
+                    boxShadow: checked ? "0 18px 54px rgba(11, 16, 32, 0.10)" : "none",
                   }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
                     <div style={{
                       width: 22, height: 22, borderRadius: 6,
-                      border: checked ? `2px solid ${colors[id]}` : `2px solid ${C.border}`,
-                      background: checked ? colors[id] : "transparent",
+                      border: checked ? `2px solid ${theme.color}` : `2px solid ${C.border}`,
+                      background: checked ? theme.color : "transparent",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       transition: "all 0.2s",
                     }}>
-                      {checked && <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><polyline points="2 6 5 9 10 3" /></svg>}
+                      {checked && <Check color="#fff" />}
                     </div>
-                    <span style={{ fontWeight: 600, fontSize: 15 }}>{svc.label}</span>
+                    <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: "-0.01em" }}>{svc.label}</span>
                   </div>
-                  <span style={{ fontWeight: 700, fontSize: 15, color: C.muted }}>${svc.price}/mo</span>
-                </div>
+                  <span style={{ fontWeight: 900, fontSize: 14, color: C.muted }}>${svc.price}/mo</span>
+                </button>
               );
             })}
           </div>
@@ -292,8 +347,8 @@ export default function BMONServicesFunnel() {
             )}
             {bundleDiscount > 0 && (
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12, fontSize: 14 }}>
-                <span style={{ color: C.green, fontWeight: 600 }}>Bundle discount ({Math.round(bundleDiscount * 100)}%)</span>
-                <span style={{ color: C.green, fontWeight: 600 }}>-${total - finalPrice}/mo</span>
+                <span style={{ color: C.accent, fontWeight: 800 }}>Bundle discount ({Math.round(bundleDiscount * 100)}%)</span>
+                <span style={{ color: C.accent, fontWeight: 800 }}>-${total - finalPrice}/mo</span>
               </div>
             )}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
@@ -310,14 +365,15 @@ export default function BMONServicesFunnel() {
             style={{
               width: "100%",
               marginTop: 28,
-              background: selectedServices.length > 0 ? C.accent : C.border,
+              background: selectedServices.length > 0 ? `linear-gradient(135deg, ${C.accent}, ${C.accent2})` : C.border,
               color: selectedServices.length > 0 ? "#fff" : C.muted,
               border: "none",
               padding: "16px",
-              borderRadius: 12,
-              fontWeight: 700,
-              fontSize: 16,
+              borderRadius: 999,
+              fontWeight: 950,
+              fontSize: 15,
               cursor: selectedServices.length > 0 ? "pointer" : "not-allowed",
+              boxShadow: selectedServices.length > 0 ? "0 18px 52px rgba(79, 70, 229, 0.22)" : "none",
             }}
           >
             {selectedServices.length === 0 ? "Select a service" : `Start with ${selectedServices.length} service${selectedServices.length > 1 ? "s" : ""}`}
@@ -334,7 +390,7 @@ export default function BMONServicesFunnel() {
             </svg>
           ))}
         </div>
-        <blockquote style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontStyle: "italic", lineHeight: 1.5, margin: "0 0 24px", fontWeight: 400, color: C.dark }}>
+        <blockquote style={{ fontSize: 22, lineHeight: 1.6, margin: "0 0 22px", fontWeight: 650, color: C.dark, letterSpacing: "-0.01em" }}>
           "We bundled all three services and our inbound leads tripled. The AI chatbot alone paid for itself in week one."
         </blockquote>
         <div style={{ fontSize: 14, color: C.muted }}>
@@ -347,28 +403,31 @@ export default function BMONServicesFunnel() {
         maxWidth: 900,
         margin: "0 auto 80px",
         padding: "60px 40px",
-        background: C.dark,
+        background: `linear-gradient(135deg, rgba(11, 16, 32, 0.92), rgba(11, 16, 32, 0.78))`,
         borderRadius: 24,
         textAlign: "center",
         marginLeft: 24,
         marginRight: 24,
+        border: "1px solid rgba(255,255,255,0.12)",
       }}>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 34, fontWeight: 700, color: "#fff", marginTop: 0, marginBottom: 16 }}>
+        <h2 style={{ fontSize: 34, fontWeight: 950, color: "#fff", marginTop: 0, marginBottom: 14, letterSpacing: "-0.03em" }}>
           Ready to grow on autopilot?
         </h2>
-        <p style={{ color: "#9CA3AF", marginBottom: 32, fontSize: 16 }}>Pick one service or grab the full stack. Setup takes under 10 minutes.</p>
-        <button style={{ background: C.accent, color: "#fff", border: "none", padding: "16px 48px", borderRadius: 12, fontWeight: 700, fontSize: 16, cursor: "pointer" }}>
+        <p style={{ color: "#C7CAD4", marginBottom: 32, fontSize: 16 }}>Pick one service or grab the full stack. Setup takes under 10 minutes.</p>
+        <button style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, fontWeight: 950, fontSize: 15, cursor: "pointer" }}>
           Get Started Free
         </button>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: `1px solid ${C.border}`, padding: "40px 24px", textAlign: "center" }}>
-        <div style={{ fontSize: 20, fontWeight: 800, marginBottom: 12, letterSpacing: "-0.5px" }}>
-          <span style={{ color: C.accent }}>B</span>MON
-        </div>
-        <p style={{ fontSize: 13, color: C.muted, margin: 0 }}>© 2026 BMON. All rights reserved.</p>
-      </footer>
+      {!embedded && (
+        <footer style={{ borderTop: `1px solid ${C.border}`, padding: "40px 24px", textAlign: "center" }}>
+          <div style={{ fontSize: 20, fontWeight: 900, marginBottom: 12, letterSpacing: "-0.02em" }}>
+            <span style={{ color: C.accent }}>B</span>MON
+          </div>
+          <p style={{ fontSize: 13, color: C.muted, margin: 0 }}>© {new Date().getFullYear()} BMON. All rights reserved.</p>
+        </footer>
+      )}
     </div>
   );
 }
