@@ -237,15 +237,13 @@ export default function BMONReviewFunnel({ embedded = false }) {
 
       {/* CTA */}
       <section className="reveal" style={{
-        maxWidth: 900,
+        width: "min(900px, calc(100% - 48px))",
         margin: "0 auto 80px",
         padding: "60px 40px",
         background: "linear-gradient(135deg, rgba(79, 70, 229, 0.12), rgba(124, 58, 237, 0.08))",
         border: "1px solid rgba(79, 70, 229, 0.18)",
         borderRadius: 24,
         textAlign: "center",
-        marginLeft: 24,
-        marginRight: 24,
       }}>
         <h2 style={{ fontSize: 36, fontWeight: 950, marginTop: 0, marginBottom: 14, letterSpacing: "-0.03em" }}>
           Ready to turn reviews into{" "}

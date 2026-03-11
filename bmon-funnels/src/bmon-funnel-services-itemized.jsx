@@ -453,35 +453,31 @@ export default function BMONServicesFunnel({ embedded = false }) {
 
           <div style={{ width: "min(680px, 100%)", margin: "0 auto", borderRadius: 28, overflow: "hidden", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.72)" }}>
             {contactTab === "form" ? (
-              <div style={{ height: 764 }}>
-                <iframe
-                  src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
-                  style={{ width: "100%", height: "100%", border: "none" }}
-                  id="inline-WyPVoGvcUoMU57sslr9r"
-                  data-layout="{'id':'INLINE'}"
-                  data-trigger-type="alwaysShow"
-                  data-trigger-value=""
-                  data-activation-type="alwaysActivated"
-                  data-activation-value=""
-                  data-deactivation-type="neverDeactivate"
-                  data-deactivation-value=""
-                  data-form-name="BMON - Contact Us Form"
-                  data-height="764"
-                  data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r"
-                  data-form-id="WyPVoGvcUoMU57sslr9r"
-                  title="BMON - Contact Us Form"
-                />
-              </div>
+              <iframe
+                src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
+                style={{ width: "100%", height: 764, border: "none", display: "block" }}
+                id="inline-WyPVoGvcUoMU57sslr9r"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="BMON - Contact Us Form"
+                data-height="764"
+                data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r"
+                data-form-id="WyPVoGvcUoMU57sslr9r"
+                title="BMON - Contact Us Form"
+              />
             ) : (
-              <div style={{ height: 764 }}>
-                <iframe
-                  src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
-                  style={{ width: "100%", height: "100%", border: "none", overflow: "hidden" }}
-                  scrolling="no"
-                  id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
-                  title="BMON - Booking Calendar"
-                />
-              </div>
+              <iframe
+                src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
+                style={{ width: "100%", height: 860, border: "none", overflow: "hidden", display: "block" }}
+                scrolling="no"
+                id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
+                title="BMON - Booking Calendar"
+              />
             )}
           </div>
 

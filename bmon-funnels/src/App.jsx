@@ -27,10 +27,11 @@ function ContactPage() {
             <h2 className="embedTitle">Contact form</h2>
             <p className="embedHint">Best for specifics</p>
           </div>
-          <div className="embedFrameWrap" style={{ height: 764 }}>
+          <div className="embedFrameWrap">
             <iframe
               src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
               className="embedFrame"
+              style={{ height: 764 }}
               id="inline-WyPVoGvcUoMU57sslr9r"
               data-layout="{'id':'INLINE'}"
               data-trigger-type="alwaysShow"
@@ -53,10 +54,11 @@ function ContactPage() {
             <h2 className="embedTitle">Calendar</h2>
             <p className="embedHint">Best for a demo</p>
           </div>
-          <div className="embedFrameWrap" style={{ height: 764 }}>
+          <div className="embedFrameWrap">
             <iframe
               src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
               className="embedFrame"
+              style={{ height: 860 }}
               scrolling="no"
               id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
               title="BMON - Booking Calendar"
