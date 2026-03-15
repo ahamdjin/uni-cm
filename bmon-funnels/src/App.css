@@ -232,22 +232,19 @@
 }
 
 .partnerTickerItem {
-  min-width: 180px;
-  height: 88px;
+  min-width: 132px;
+  height: 84px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px 24px;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(12px);
+  padding: 0 22px;
+  flex-shrink: 0;
 }
 
 .partnerTickerItem img {
-  width: 100%;
-  height: 48px;
+  width: auto;
+  height: 56px;
+  max-width: 190px;
   object-fit: contain;
   display: block;
 }
@@ -376,30 +373,72 @@
 }
 
 .siteFooter {
-  border-top: 1px solid var(--border);
   margin-top: 56px;
-  padding: 28px 0 44px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(12px);
+  padding: 0 0 44px;
+  background: transparent;
 }
 
-.footerInner {
+.footerShell {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 24px;
   flex-wrap: wrap;
-  color: rgba(11, 16, 32, 0.62);
+  padding: 28px 28px 24px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(11, 16, 32, 0.96), rgba(11, 16, 32, 0.84));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 26px 72px rgba(11, 16, 32, 0.22);
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.footerLogo {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.footerTag {
+  margin: 4px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footerMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.footerLegal {
+  color: rgba(255, 255, 255, 0.62);
   font-size: 13px;
 }
 
 .footerLinks {
   display: flex;
-  gap: 14px;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.footerLinks a {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .footerLinks a:hover {
-  color: rgba(11, 16, 32, 0.85);
+  color: #fff;
 }
 
 @media (max-width: 760px) {
@@ -451,14 +490,13 @@
   }
 
   .partnerTickerItem {
-    min-width: 146px;
-    height: 72px;
-    padding: 14px 18px;
-    border-radius: 20px;
+    min-width: 118px;
+    height: 68px;
+    padding: 0 16px;
   }
 
   .partnerTickerItem img {
-    height: 38px;
+    height: 46px;
   }
 
   .embedGrid {
@@ -467,6 +505,23 @@
 
   .infoGrid {
     grid-template-columns: 1fr;
+  }
+
+  .footerShell {
+    padding: 24px 22px 22px;
+  }
+
+  .footerBrand,
+  .footerMeta {
+    width: 100%;
+  }
+
+  .footerMeta {
+    align-items: flex-start;
+  }
+
+  .footerLinks {
+    justify-content: flex-start;
   }
 }
 

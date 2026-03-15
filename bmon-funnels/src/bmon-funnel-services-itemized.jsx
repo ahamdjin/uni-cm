@@ -17,42 +17,83 @@ const C = {
 };
 
 const TICKER_LOGOS = [
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b73308ad027640b1076bf6.png",
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b733080c9f1e15be1b5462.png",
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b733085b89c7512cabf323.svg",
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b7330887f0f27b361b6e92.svg",
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b7330887f0f265961b6e91.svg",
-  "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b73308eaf081e9f88a8012.webp",
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b73308ad027640b1076bf6.png", width: 152 },
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b733080c9f1e15be1b5462.png", width: 158 },
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b733085b89c7512cabf323.svg", width: 186 },
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b7330887f0f27b361b6e92.svg", width: 178 },
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b7330887f0f265961b6e91.svg", width: 178 },
+  { src: "https://assets.cdn.filesafe.space/nPiNK9DityBBCQSZkAy8/media/69b73308eaf081e9f88a8012.webp", width: 154 },
 ];
+
+function WebsiteIcon({ color }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="15" rx="3" />
+      <line x1="3" y1="9" x2="21" y2="9" />
+      <line x1="8" y1="20" x2="16" y2="20" />
+    </svg>
+  );
+}
+
+function AgentIcon({ color }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 4v3" />
+      <rect x="5" y="8" width="14" height="10" rx="4" />
+      <path d="M9 13h.01" />
+      <path d="M15 13h.01" />
+      <path d="M8 19l-2 2" />
+      <path d="M16 19l2 2" />
+    </svg>
+  );
+}
+
+function SeoIcon({ color }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="6" />
+      <path d="M20 20l-4.2-4.2" />
+      <path d="M8.5 11.5l1.5 1.5 3-3" />
+    </svg>
+  );
+}
+
+function ReviewIcon({ color }) {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 17.5l-4.114 2.163.786-4.58-3.328-3.243 4.598-.668L12 7l2.058 4.172 4.598.668-3.328 3.243.786 4.58z" />
+    </svg>
+  );
+}
 
 const SERVICE_DEFINITIONS = [
   {
     id: "website",
-    icon: "W",
+    icon: <WebsiteIcon color={C.sky} />,
     color: C.sky,
     colorBg: C.skySoft,
     title: "Smart Website",
     price: 497,
-    desc: "A polished, conversion focused website built to make you look established, capture leads, and turn visits into real conversations.",
+    desc: "A polished business website designed to build trust fast, capture leads cleanly, and turn visits into real conversations.",
     features: [
       "Custom website tailored to your business",
-      "SEO ready structure for local search",
+      "Local search ready site structure",
       "Monthly content and design updates",
-      "Speed optimized for mobile and desktop",
+      "Fast mobile and desktop performance",
       "Lead capture forms and call tracking",
       "AI contact form included",
     ],
   },
   {
     id: "chatbot",
-    icon: "AI",
+    icon: <AgentIcon color={C.accent2} />,
     color: C.accent2,
     colorBg: C.accentLight2,
     title: "AI Chatbot and Voice Agent",
     price: 197,
-    desc: "An always on AI chatbot and voice agent that answers questions, captures leads, and books appointments without delay.",
+    desc: "An always on AI assistant that handles chat and voice conversations, captures leads, and books appointments without delay.",
     features: [
-      "Trained on your business, services, and FAQs",
+      "AI assistant trained on your business",
       "24/7 chatbot and voice agent coverage",
       "Instant lead capture and qualification",
       "Appointment booking integration",
@@ -62,24 +103,24 @@ const SERVICE_DEFINITIONS = [
   },
   {
     id: "seo",
-    icon: "SEO",
+    icon: <SeoIcon color={C.emerald} />,
     color: C.emerald,
     colorBg: C.emeraldSoft,
     title: "SEO",
     price: 997,
-    desc: "Rank on top of Google when your target keywords are searched and turn organic visibility into steady inbound business.",
+    desc: "Rank higher when your ideal keywords are searched and turn stronger Google visibility into steady inbound business.",
     features: [
-      "Organic ranking on Google for priority terms",
-      "Target exact keywords for your business",
-      "Monthly optimization to hold top search positions",
-      "Higher Google rankings create compounding growth",
-      "Stop wasting money on short term campaigns",
-      "Secure stronger keyword and local SEO visibility",
+      "Organic ranking strategy for Google",
+      "Target keyword mapping for your business",
+      "Monthly optimization and reporting",
+      "Local SEO and top position focus",
+      "Search visibility that compounds over time",
+      "Lower dependency on paid campaigns",
     ],
   },
   {
     id: "reviews",
-    icon: "R",
+    icon: <ReviewIcon color={C.accent} />,
     color: C.accent,
     colorBg: C.accentLight,
     title: "Review Management",
@@ -88,11 +129,11 @@ const SERVICE_DEFINITIONS = [
     desc: "Automate review collection, respond faster, and turn stronger reputation signals into more local demand.",
     features: [
       "Automated review requests by email and SMS",
-      "Automated responses to new reviews in your brand voice",
+      "Automated responses in your brand voice",
       "Google Business Profile optimization",
       "Review monitoring and negative alerts",
-      "Filter bad reviews privately and guide 5 star reviews to public listings",
-      "Free scan card for instant review capture",
+      "Private bad review filtering workflow",
+      "Instant review scan card for customers",
     ],
   },
 ];
@@ -152,7 +193,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
           Core Service
         </div>
       )}
-      <div style={{ width: 48, height: 48, borderRadius: 14, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, fontSize: 15, fontWeight: 900, letterSpacing: "-0.04em" }}>
+      <div style={{ width: 48, height: 48, borderRadius: 14, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
         {icon}
       </div>
       <h3 style={{ fontSize: 22, fontWeight: 850, margin: "0 0 8px", color: C.dark, letterSpacing: "-0.02em" }}>{title}</h3>
@@ -245,9 +286,9 @@ export default function BMONServicesFunnel({ embedded = false }) {
           <div className="partnerTickerTrack">
             {[0, 1].map((copyIndex) => (
               <div className="partnerTickerGroup" key={copyIndex} aria-hidden={copyIndex === 1}>
-                {TICKER_LOGOS.map((src, index) => (
+                {TICKER_LOGOS.map((logo, index) => (
                   <div className="partnerTickerItem" key={`${copyIndex}-${index}`}>
-                    <img src={src} alt="" loading={copyIndex === 0 ? "eager" : "lazy"} decoding="async" />
+                    <img src={logo.src} alt="" loading={copyIndex === 0 ? "eager" : "lazy"} decoding="async" style={{ width: logo.width }} />
                   </div>
                 ))}
               </div>

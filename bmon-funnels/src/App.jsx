@@ -204,15 +204,27 @@ export default function App() {
       </main>
 
       <footer className="siteFooter">
-        <div className="container footerInner">
-          <div>(c) {new Date().getFullYear()} BMON. Preview build.</div>
-          <div className="footerLinks">
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              Terms
-            </a>
-            <a href="#" onClick={(e) => e.preventDefault()}>
-              Privacy
-            </a>
+        <div className="container">
+          <div className="footerShell">
+            <div className="footerBrand">
+              <span className="brandMark" aria-hidden="true" />
+              <div>
+                <div className="footerLogo">BMON</div>
+                <p className="footerTag">Your complete digital presence, handled.</p>
+              </div>
+            </div>
+
+            <div className="footerMeta">
+              <div className="footerLegal">(c) {new Date().getFullYear()} BMON. All rights reserved.</div>
+              <div className="footerLinks">
+                <a href="https://bmon.ai/terms-condition" target="_blank" rel="noreferrer">
+                  Terms & Conditions
+                </a>
+                <a href="https://bmon.ai/privacy-policy" target="_blank" rel="noreferrer">
+                  Privacy Policy
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
