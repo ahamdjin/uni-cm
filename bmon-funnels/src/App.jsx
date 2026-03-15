@@ -54,12 +54,12 @@ function ContactPage() {
             <h2 className="embedTitle">Calendar</h2>
             <p className="embedHint">Best for a demo</p>
           </div>
-          <div className="embedFrameWrap">
+          <div className="embedFrameWrap embedFrameWrapBooking">
             <iframe
               src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
-              className="embedFrame"
-              style={{ height: 860 }}
-              scrolling="no"
+              className="embedFrame embedFrameBooking"
+              style={{ height: 1080 }}
+              scrolling="yes"
               id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
               title="BMON - Booking Calendar"
             />
@@ -100,6 +100,10 @@ function ContactPage() {
 export default function App() {
   const [view, setView] = useState("services");
   const [scrolled, setScrolled] = useState(false);
+
+  const switchView = (nextView) => {
+    setView(nextView);
+  };
 
   useEffect(() => {
     const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
@@ -167,21 +171,21 @@ export default function App() {
               <button
                 type="button"
                 className={`tabBtn ${view === "services" ? "tabBtnActive" : ""}`}
-                onClick={() => setView("services")}
+                onClick={() => switchView("services")}
               >
                 Services
               </button>
               <button
                 type="button"
                 className={`tabBtn ${view === "reviews" ? "tabBtnActive" : ""}`}
-                onClick={() => setView("reviews")}
+                onClick={() => switchView("reviews")}
               >
                 Reviews
               </button>
               <button
                 type="button"
                 className={`tabBtn ${view === "contact" ? "tabBtnActive" : ""}`}
-                onClick={() => setView("contact")}
+                onClick={() => switchView("contact")}
               >
                 Contact
               </button>
@@ -214,9 +218,24 @@ export default function App() {
               </div>
             </div>
 
-            <div className="footerMeta">
-              <div className="footerLegal">(c) {new Date().getFullYear()} BMON. All rights reserved.</div>
-              <div className="footerLinks">
+            <div className="footerSection">
+              <div className="footerSectionLabel">Main</div>
+              <div className="footerLinks footerLinksColumn">
+                <button type="button" className="footerLinkButton" onClick={() => switchView("services")}>
+                  Services
+                </button>
+                <button type="button" className="footerLinkButton" onClick={() => switchView("contact")}>
+                  Contact
+                </button>
+                <button type="button" className="footerLinkButton" onClick={() => switchView("reviews")}>
+                  Reviews
+                </button>
+              </div>
+            </div>
+
+            <div className="footerSection">
+              <div className="footerSectionLabel">Learn</div>
+              <div className="footerLinks footerLinksColumn">
                 <a href="https://bmon.ai/terms-condition" target="_blank" rel="noreferrer">
                   Terms & Conditions
                 </a>
@@ -225,6 +244,10 @@ export default function App() {
                 </a>
               </div>
             </div>
+          </div>
+
+          <div className="footerBottom">
+            <div className="footerLegal">© Copyright {new Date().getFullYear()}, All Rights Reserved</div>
           </div>
         </div>
       </footer>

@@ -493,6 +493,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
                 background: contactTab === "form" ? "rgba(255,255,255,0.92)" : "transparent",
                 color: contactTab === "form" ? C.dark : "rgba(11, 16, 32, 0.68)",
                 boxShadow: contactTab === "form" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
+                transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)",
               }}
             >
               Contact Form
@@ -510,6 +511,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
                 background: contactTab === "calendar" ? "rgba(255,255,255,0.92)" : "transparent",
                 color: contactTab === "calendar" ? C.dark : "rgba(11, 16, 32, 0.68)",
                 boxShadow: contactTab === "calendar" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
+                transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)",
               }}
             >
               Calendar
@@ -532,11 +534,12 @@ export default function BMONServicesFunnel({ embedded = false }) {
             <div style={{ fontSize: 13, color: C.muted }}>{contactTab === "form" ? "Best for specifics" : "Best for a walkthrough"}</div>
           </div>
 
-          <div style={{ width: "min(680px, 100%)", margin: "0 auto", borderRadius: 28, overflow: "hidden", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.72)" }}>
+          <div className={`embedFrameWrap embedFrameWrapWide ${contactTab === "calendar" ? "embedFrameWrapBooking" : ""}`}>
             {contactTab === "form" ? (
               <iframe
                 src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
-                style={{ width: "100%", height: 764, border: "none", display: "block" }}
+                className="embedFrame"
+                style={{ height: 764 }}
                 id="inline-WyPVoGvcUoMU57sslr9r"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
@@ -554,8 +557,9 @@ export default function BMONServicesFunnel({ embedded = false }) {
             ) : (
               <iframe
                 src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
-                style={{ width: "100%", height: 860, border: "none", overflow: "hidden", display: "block" }}
-                scrolling="no"
+                className="embedFrame embedFrameBooking"
+                style={{ height: 1080 }}
+                scrolling="yes"
                 id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
                 title="BMON - Booking Calendar"
               />
