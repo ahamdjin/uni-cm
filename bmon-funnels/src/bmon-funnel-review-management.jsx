@@ -61,7 +61,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       <section className="reveal" style={{ textAlign: "center", padding: "76px 24px 52px", maxWidth: 900, margin: "0 auto" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, var(--accent-soft), var(--accent-soft-2))`, border: `1px solid ${COLORS.border}`, borderRadius: 999, padding: "7px 14px", fontSize: 13, color: COLORS.text, marginBottom: 26, fontWeight: 750 }}>
           <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})` }} aria-hidden="true" />
-          Review management that compounds monthly
+          Review management built for stronger public ratings
         </div>
         <h1 style={{ fontSize: "clamp(42px, 6vw, 66px)", lineHeight: 1.06, fontWeight: 950, margin: "0 0 18px", letterSpacing: "-0.04em" }}>
           Turn your reviews into your{" "}
@@ -70,7 +70,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           </span>
         </h1>
         <p style={{ fontSize: 18, color: COLORS.textMuted, lineHeight: 1.75, maxWidth: 640, margin: "0 auto 34px" }}>
-          BMON automates review collection, crafts on-brand AI responses, and boosts your Google ranking, so new customers find and choose you.
+          BMON automates review requests, routes unhappy customers into a private feedback flow, and sends automated replies to new reviews so your public profile stays stronger.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#pricing" style={{ textDecoration: "none" }}>
@@ -110,10 +110,10 @@ export default function BMONReviewFunnel({ embedded = false }) {
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 24 }}>
           {[
-            { step: "01", title: "Connect", desc: "Link your Google Business Profile in 60 seconds. We sync everything automatically." },
-            { step: "02", title: "Collect", desc: "Smart email & SMS campaigns request reviews from happy customers at the perfect moment." },
-            { step: "03", title: "Respond", desc: "AI writes on-brand responses to every review (positive or negative) within minutes." },
-            { step: "04", title: "Grow", desc: "Watch your star rating climb, your local SEO improve, and new customers roll in." },
+            { step: "01", title: "Connect", desc: "Link your Google Business Profile and turn on review requests in a few minutes." },
+            { step: "02", title: "Request", desc: "Automated email and SMS campaigns ask for feedback right after a customer visit." },
+            { step: "03", title: "Filter", desc: "Unhappy customers are redirected into a private feedback flow while happy customers are guided to leave a public review." },
+            { step: "04", title: "Respond", desc: "Automated replies go out to new reviews quickly, keeping your profile active and your reputation managed." },
           ].map((item, i) => (
             <div key={i} style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 24, padding: "36px 28px", position: "relative", overflow: "hidden", boxShadow: "var(--shadow-sm)", backdropFilter: "blur(10px)" }}>
               <div style={{ fontSize: 44, fontWeight: 950, color: "rgba(79, 70, 229, 0.14)", position: "absolute", top: 14, right: 18, letterSpacing: "-0.02em" }}>{item.step}</div>
@@ -134,20 +134,16 @@ export default function BMONReviewFunnel({ embedded = false }) {
           reviews
         </h2>
         <p style={{ textAlign: "center", color: COLORS.textMuted, marginBottom: 48, fontSize: 16, lineHeight: 1.7 }}>
-          One plan. One price. No hidden fees.
+          The exact tools behind the review management offer.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 20 }}>
           {[
-            "Automated review request campaigns (Email + SMS)",
-            "AI-powered review responses in your brand voice",
+            "Automated review requests by email and SMS",
+            "Automated responses to new reviews",
             "Google Business Profile optimization",
-            "Review monitoring across platforms",
-            "Negative review alerts & escalation",
-            "Monthly performance reports & analytics",
-            "Review widget for your website",
-            "Competitor review benchmarking",
-            "Dedicated onboarding specialist",
-            "Priority support via chat & email",
+            "Review monitoring and negative alerts",
+            "Private bad review filtering workflow",
+            "Instant review scan card for customers",
           ].map((f, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 0", borderBottom: `1px solid ${COLORS.border}` }}>
               <CheckIcon />
@@ -218,7 +214,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           }}>
             Start 14-Day Free Trial
           </button>
-          <p style={{ fontSize: 12, color: COLORS.textMuted, margin: 0 }}>No credit card required</p>
+          <p style={{ fontSize: 12, color: COLORS.textMuted, margin: 0 }}>Built for businesses that need stronger reviews without manual follow-up.</p>
         </div>
       </section>
 
