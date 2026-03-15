@@ -81,15 +81,15 @@ function ContactPage() {
         <div className="infoGrid">
           <div className="infoCard">
             <h3 className="infoTitle">Fast reply</h3>
-            <p className="infoBody">You’ll hear back quickly. If you book, we’ll meet at the time you choose.</p>
+            <p className="infoBody">You'll hear back quickly. If you book, we'll meet at the time you choose.</p>
           </div>
           <div className="infoCard">
             <h3 className="infoTitle">Clear next steps</h3>
-            <p className="infoBody">We’ll map your goals, recommend the right bundle, and outline a simple rollout plan.</p>
+            <p className="infoBody">We'll map your goals, recommend the right bundle, and outline a simple rollout plan.</p>
           </div>
           <div className="infoCard">
             <h3 className="infoTitle">No pressure</h3>
-            <p className="infoBody">Ask questions, get a walkthrough, and decide when you’re ready.</p>
+            <p className="infoBody">Ask questions, get a walkthrough, and decide when you're ready.</p>
           </div>
         </div>
       </section>
@@ -205,7 +205,7 @@ export default function App() {
 
       <footer className="siteFooter">
         <div className="container footerInner">
-          <div>© {new Date().getFullYear()} BMON. Preview build.</div>
+          <div>(c) {new Date().getFullYear()} BMON. Preview build.</div>
           <div className="footerLinks">
             <a href="#" onClick={(e) => e.preventDefault()}>
               Terms

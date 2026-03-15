@@ -70,7 +70,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           </span>
         </h1>
         <p style={{ fontSize: 18, color: COLORS.textMuted, lineHeight: 1.75, maxWidth: 640, margin: "0 auto 34px" }}>
-          BMON automates review collection, crafts on-brand AI responses, and boosts your Google ranking—so new customers find and choose you.
+          BMON automates review collection, crafts on-brand AI responses, and boosts your Google ranking, so new customers find and choose you.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#pricing" style={{ textDecoration: "none" }}>
@@ -90,7 +90,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
       <section className="reveal" style={{ maxWidth: 820, margin: "0 auto 80px", display: "flex", justifyContent: "center", gap: 56, flexWrap: "wrap", padding: "0 24px" }}>
         {[
           { num: "4.9★", label: "Avg client rating" },
-          { num: "3.2Ã—", label: "More reviews in 90 days" },
+          { num: "3.2x", label: "More reviews in 90 days" },
           { num: "87%", label: "Response rate" },
         ].map((s, i) => (
           <div key={i} style={{ textAlign: "center" }}>
@@ -112,7 +112,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           {[
             { step: "01", title: "Connect", desc: "Link your Google Business Profile in 60 seconds. We sync everything automatically." },
             { step: "02", title: "Collect", desc: "Smart email & SMS campaigns request reviews from happy customers at the perfect moment." },
-            { step: "03", title: "Respond", desc: "AI writes on-brand responses to every review — positive or negative — within minutes." },
+            { step: "03", title: "Respond", desc: "AI writes on-brand responses to every review (positive or negative) within minutes." },
             { step: "04", title: "Grow", desc: "Watch your star rating climb, your local SEO improve, and new customers roll in." },
           ].map((item, i) => (
             <div key={i} style={{ background: COLORS.card, border: `1px solid ${COLORS.border}`, borderRadius: 24, padding: "36px 28px", position: "relative", overflow: "hidden", boxShadow: "var(--shadow-sm)", backdropFilter: "blur(10px)" }}>
@@ -263,7 +263,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           <div style={{ fontSize: 20, fontWeight: 900, marginBottom: 12, letterSpacing: "-0.02em" }}>
             <span style={{ color: COLORS.accent }}>B</span>MON
           </div>
-          <p style={{ fontSize: 13, color: COLORS.textMuted, margin: 0 }}>© {new Date().getFullYear()} BMON. All rights reserved.</p>
+          <p style={{ fontSize: 13, color: COLORS.textMuted, margin: 0 }}>(c) {new Date().getFullYear()} BMON. All rights reserved.</p>
         </footer>
       )}
     </div>

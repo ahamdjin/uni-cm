@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:ghl": "npm run build && node scripts/make-ghl-embed.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
