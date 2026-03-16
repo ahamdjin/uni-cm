@@ -498,27 +498,126 @@
 
 @media (max-width: 760px) {
   .container {
-    width: calc(100% - 32px);
+    width: min(560px, calc(100% - 20px));
+  }
+
+  .siteHeader,
+  .siteHeader.isScrolled {
+    top: 10px;
+    padding: 0;
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .headerInner {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 0;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .headerPill {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 30px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.22)),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(124, 58, 237, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    box-shadow:
+      0 18px 48px rgba(11, 16, 32, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(24px) saturate(155%);
+    -webkit-backdrop-filter: blur(24px) saturate(155%);
+  }
+
+  .headerPill::before,
+  .headerPill::after {
+    content: "";
+    position: absolute;
+    inset: auto;
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .headerPill::before {
+    top: -34%;
+    left: -8%;
+    width: 56%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0) 70%);
+    filter: blur(12px);
+    opacity: 0.8;
+  }
+
+  .headerPill::after {
+    right: -16%;
+    bottom: -42%;
+    width: 58%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.22), rgba(79, 70, 229, 0) 72%);
+    filter: blur(18px);
+    opacity: 0.82;
+  }
+
+  .headerPill > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .siteHeader.isScrolled .headerPill {
+    max-width: none;
+    margin: 0;
+    padding: 12px;
+    border-radius: 24px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(255, 255, 255, 0.34)),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.36), rgba(79, 70, 229, 0.1));
+    border-color: rgba(255, 255, 255, 0.56);
+    box-shadow:
+      0 20px 52px rgba(11, 16, 32, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform: translateY(0) scale(0.98);
   }
 
   .brand {
     width: 100%;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 2px 2px 0;
+    font-size: 19px;
+  }
+
+  .brandMark {
+    width: 34px;
+    height: 34px;
+    border-radius: 14px;
+    box-shadow: 0 14px 36px rgba(79, 70, 229, 0.22);
   }
 
   .navTabs {
     width: 100%;
-    justify-content: center;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-content: stretch;
+    gap: 6px;
+    padding: 8px;
+    border-radius: 20px;
+    overflow: visible;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background: rgba(255, 255, 255, 0.34);
+    border-color: rgba(255, 255, 255, 0.38);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.76),
+      inset 0 -1px 0 rgba(79, 70, 229, 0.06);
   }
 
   .navTabs::-webkit-scrollbar {
@@ -526,17 +625,50 @@
   }
 
   .tabBtn {
-    padding: 8px 10px;
+    min-height: 44px;
+    padding: 10px 8px;
     white-space: nowrap;
+    border-radius: 16px;
+    font-size: 12.5px;
+    letter-spacing: -0.01em;
+  }
+
+  .tabBtnActive {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(255, 255, 255, 0.58);
+    box-shadow:
+      0 10px 24px rgba(79, 70, 229, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 
   .headerActions {
     width: 100%;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .btn {
-    padding: 9px 12px;
+    padding: 11px 12px;
+  }
+
+  .headerActions .btn {
+    width: 100%;
+    min-height: 46px;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+  }
+
+  .headerActions .btnGhost {
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.38);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.56);
+  }
+
+  .headerActions .btnPrimary {
+    box-shadow: 0 16px 36px rgba(79, 70, 229, 0.24);
   }
 
   .partnerTicker {
@@ -575,6 +707,25 @@
   .footerBrand,
   .footerSection {
     width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .headerPill {
+    border-radius: 26px;
+  }
+
+  .siteHeader.isScrolled .headerPill {
+    border-radius: 22px;
+  }
+
+  .tabBtn {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+
+  .headerActions {
+    grid-template-columns: 1fr;
   }
 }
 
