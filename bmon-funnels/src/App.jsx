@@ -26,91 +26,94 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
       html,
       body {
         margin: 0;
+        width: 100%;
         min-height: 100%;
+        height: 100%;
         font-family: "Figtree", system-ui, sans-serif;
-        background:
-          radial-gradient(circle at top, rgba(124, 58, 237, 0.12), transparent 34%),
-          linear-gradient(180deg, #f7f5ff 0%, #ffffff 48%, #f6f8ff 100%);
         color: #0b1020;
+        overflow: hidden;
       }
 
       body {
         position: relative;
-        padding: 16px;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: linear-gradient(135deg, #6d4aff, #9a57ff);
-      }
-
-      .surface {
-        position: relative;
-        min-height: calc(100vh - 32px);
-        padding: 18px;
-        border-radius: 32px;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 247, 255, 0.82));
-        border: 1px solid rgba(79, 70, 229, 0.12);
-        box-shadow: 0 22px 56px rgba(79, 70, 229, 0.08);
+        background:
+          radial-gradient(circle at top, rgba(124, 58, 237, 0.14), transparent 34%),
+          linear-gradient(180deg, #f7f5ff 0%, #ffffff 46%, #f6f8ff 100%);
         overflow: hidden;
       }
 
-      .surface::before {
+      .deviceViewport {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 34%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 248, 255, 0.92));
+        overflow: hidden;
+      }
+
+      .deviceViewport::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 36%);
+        background:
+          radial-gradient(circle at top, rgba(109, 74, 255, 0.12), transparent 30%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
         pointer-events: none;
+        z-index: 0;
       }
 
-      .badge {
+      .deviceViewport::after {
+        content: "";
         position: relative;
-        z-index: 1;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 13px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.76);
-        border: 1px solid rgba(79, 70, 229, 0.14);
-        box-shadow: 0 10px 24px rgba(79, 70, 229, 0.06);
-        color: #5b3df5;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-      }
-
-      .note {
-        position: relative;
-        z-index: 1;
-        max-width: 198px;
-        margin: 16px 0 0;
-        color: rgba(11, 16, 32, 0.64);
-        font-size: 13px;
-        line-height: 1.65;
-      }
-
-      .widget {
-        position: absolute;
-        inset: 0;
+        display: block;
+        height: 100%;
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.6),
+          inset 0 -24px 48px rgba(79, 70, 229, 0.06);
+        pointer-events: none;
+        z-index: 0;
       }
 
       [data-chat-widget] {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      body > chat-widget {
+        position: absolute !important;
+        inset: 0 !important;
+        display: block !important;
+        width: 100% !important;
         height: 100%;
-        min-height: calc(100vh - 32px);
+        overflow: hidden !important;
+        z-index: 2;
+      }
+
+      body > chat-widget * {
+        box-sizing: border-box;
+      }
+
+      body > chat-widget iframe,
+      body > chat-widget [role="dialog"],
+      body > chat-widget [role="main"] {
+        max-width: 100% !important;
+      }
+
+      body > chat-widget button,
+      body > chat-widget a,
+      body > chat-widget input,
+      body > chat-widget textarea {
+        touch-action: manipulation;
       }
     </style>
   </head>
   <body>
-    <section class="surface">
-      <div class="badge"><span class="dot"></span>AI Voice Demo</div>
-      <p class="note">Tap the purple bubble, then choose Live Chat or Voice.</p>
+    <div class="deviceViewport">
       <div class="widget">
         <div data-chat-widget data-widget-id="697f299eaa41f43fae1deb51" data-location-id="nPiNK9DityBBCQSZkAy8"></div>
       </div>
-    </section>
+    </div>
     <script
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"

@@ -947,6 +947,7 @@
   border-radius: 36px;
   background: linear-gradient(180deg, rgba(30, 24, 69, 0.98), rgba(17, 18, 32, 0.98));
   box-shadow: 0 28px 68px rgba(17, 18, 32, 0.22);
+  overflow: hidden;
 }
 
 .voicePhoneTopBar {
