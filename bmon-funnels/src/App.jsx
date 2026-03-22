@@ -35,34 +35,8 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
       }
 
       body {
-        padding: 18px 16px 20px;
-      }
-
-      .stack {
-        display: grid;
-        gap: 14px;
-        min-height: calc(100vh - 38px);
-      }
-
-      .hero {
-        padding: 18px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.86);
-        border: 1px solid rgba(79, 70, 229, 0.14);
-        box-shadow: 0 18px 42px rgba(79, 70, 229, 0.08);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        background: rgba(79, 70, 229, 0.08);
-        color: #5b3df5;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: -0.01em;
+        position: relative;
+        padding: 16px;
       }
 
       .dot {
@@ -72,54 +46,71 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
         background: linear-gradient(135deg, #6d4aff, #9a57ff);
       }
 
-      h1 {
-        margin: 14px 0 8px;
-        font-size: 21px;
-        line-height: 1.08;
-        font-weight: 600;
-        letter-spacing: -0.04em;
-      }
-
-      p {
-        margin: 0;
-        color: rgba(11, 16, 32, 0.68);
-        font-size: 13px;
-        line-height: 1.68;
-      }
-
       .surface {
-        min-height: 470px;
-        border-radius: 28px;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid rgba(79, 70, 229, 0.14);
-        box-shadow: 0 22px 56px rgba(79, 70, 229, 0.1);
+        position: relative;
+        min-height: calc(100vh - 32px);
+        padding: 18px;
+        border-radius: 32px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 247, 255, 0.82));
+        border: 1px solid rgba(79, 70, 229, 0.12);
+        box-shadow: 0 22px 56px rgba(79, 70, 229, 0.08);
         overflow: hidden;
       }
 
+      .surface::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 36%);
+        pointer-events: none;
+      }
+
+      .badge {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(79, 70, 229, 0.14);
+        box-shadow: 0 10px 24px rgba(79, 70, 229, 0.06);
+        color: #5b3df5;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .note {
+        position: relative;
+        z-index: 1;
+        max-width: 176px;
+        margin: 16px 0 0;
+        color: rgba(11, 16, 32, 0.64);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
       .widget {
-        height: 100%;
-        padding: 10px;
+        position: absolute;
+        inset: 0;
       }
 
       [data-chat-widget] {
         height: 100%;
-        min-height: 450px;
+        min-height: calc(100vh - 32px);
       }
     </style>
   </head>
   <body>
-    <div class="stack">
-      <section class="hero">
-        <div class="eyebrow"><span class="dot"></span>Try AI Voice</div>
-        <h1>Talk to a sample BMON assistant.</h1>
-        <p>This preview uses the live widget inside a clean phone-style shell so the interaction stays focused.</p>
-      </section>
-      <section class="surface">
-        <div class="widget">
-          <div data-chat-widget data-widget-id="697f299eaa41f43fae1deb51" data-location-id="nPiNK9DityBBCQSZkAy8"></div>
-        </div>
-      </section>
-    </div>
+    <section class="surface">
+      <div class="badge"><span class="dot"></span>AI Voice Demo</div>
+      <p class="note">Tap the purple bubble to open the assistant.</p>
+      <div class="widget">
+        <div data-chat-widget data-widget-id="697f299eaa41f43fae1deb51" data-location-id="nPiNK9DityBBCQSZkAy8"></div>
+      </div>
+    </section>
     <script
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
@@ -236,7 +227,7 @@ function VoicePage({ onNavigate }) {
           </span>
         </h1>
         <p className="pageSubtitle">
-          This sample page shows how the BMON AI Voice experience can sit inside a phone-style widget and alongside a live website preview without making the page feel crowded.
+          A single phone preview. Clear guidance. No extra panels competing for attention.
         </p>
         <div className="actionsRow voiceHeroActions" aria-label="AI voice actions">
           <a className="btn btnPrimary" href="#voiceDemo">
@@ -248,24 +239,52 @@ function VoicePage({ onNavigate }) {
         </div>
       </section>
 
-      <section className="voiceDemoSection reveal" id="voiceDemo" aria-label="AI voice live demo">
-        <div className="voiceSectionIntro">
+      <section className="voiceShowcase reveal" id="voiceDemo" aria-label="AI voice live demo">
+        <div className="voiceShowcaseContent">
           <div className="voiceSectionEyebrow">Preview</div>
-          <h2 className="voiceSectionTitle">One experience, adapted for mobile and web.</h2>
+          <h2 className="voiceSectionTitle">Try the assistant the same way a visitor would.</h2>
           <p className="voiceSectionBody">
-            The phone mockup runs the provided widget. The browser frame shows where the same experience can live inside a real site surface.
+            The phone runs the live widget. Tap the floating bubble, ask a question, and feel the interaction without a second embed or a crowded layout.
           </p>
+          <div className="voiceGuideList" aria-label="How to use the demo">
+            <article className="voiceGuideItem">
+              <span className="voiceGuideNumber">01</span>
+              <div>
+                <h3 className="voiceGuideTitle">Open the bubble</h3>
+                <p className="voiceGuideBody">Tap the highlighted bubble in the lower-right corner of the phone.</p>
+              </div>
+            </article>
+            <article className="voiceGuideItem">
+              <span className="voiceGuideNumber">02</span>
+              <div>
+                <h3 className="voiceGuideTitle">Ask a real question</h3>
+                <p className="voiceGuideBody">Try pricing, bundles, bookings, or a common support question.</p>
+              </div>
+            </article>
+            <article className="voiceGuideItem">
+              <span className="voiceGuideNumber">03</span>
+              <div>
+                <h3 className="voiceGuideTitle">See the handoff</h3>
+                <p className="voiceGuideBody">The goal is a clean first interaction that moves people toward contact or booking.</p>
+              </div>
+            </article>
+          </div>
+
+          <div className="actionsRow voiceShowcaseActions" aria-label="AI voice actions">
+            <button type="button" className="btn btnGhost" onClick={() => onNavigate("contact", "#booking")}>
+              Book a live demo
+            </button>
+            <button type="button" className="btn btnPrimary" onClick={() => onNavigate("services")}>
+              Back to services
+            </button>
+          </div>
         </div>
 
-        <div className="voicePreviewGrid">
-          <article className="voicePreviewCard">
-            <div className="voicePreviewHeader">
-              <div>
-                <p className="voicePreviewLabel">Mobile widget</p>
-                <h3 className="voicePreviewTitle">Inside a phone-style shell</h3>
-              </div>
-              <span className="voicePreviewMeta">Live widget</span>
-            </div>
+        <div className="voiceShowcaseMedia">
+          <div className="voicePhoneStage">
+            <div className="voiceGuideCallout">Tap the bubble to start</div>
+            <span className="voiceGuideLine" aria-hidden="true" />
+            <span className="voiceGuidePulse" aria-hidden="true" />
 
             <div className="voicePhoneFrame">
               <div className="voicePhoneTopBar" aria-hidden="true">
@@ -279,77 +298,6 @@ function VoicePage({ onNavigate }) {
                 sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
               />
             </div>
-          </article>
-
-          <article className="voicePreviewCard">
-            <div className="voicePreviewHeader">
-              <div>
-                <p className="voicePreviewLabel">Website preview</p>
-                <h3 className="voicePreviewTitle">Where it can live on your site</h3>
-              </div>
-              <span className="voicePreviewMeta">Example: bmon.ai</span>
-            </div>
-
-            <div className="voiceBrowserFrame">
-              <div className="voiceBrowserChrome">
-                <div className="voiceBrowserDots" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="voiceBrowserAddress">https://bmon.ai/</div>
-              </div>
-              <div className="voiceWebsiteStage">
-                <iframe
-                  src="https://bmon.ai/"
-                  className="voiceWebsiteFrame"
-                  title="Sample website preview"
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                />
-                <div className="voiceWebsiteBadge">AI Voice can live here</div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="voiceDetailSection reveal" aria-label="AI voice details">
-        <div className="voiceSectionIntro">
-          <div className="voiceSectionEyebrow">Why it works</div>
-          <h2 className="voiceSectionTitle">Minimal on the page, useful in the conversation.</h2>
-        </div>
-
-        <div className="voiceFeatureGrid">
-          <article className="voiceFeatureCard">
-            <h3 className="voiceFeatureTitle">Always available</h3>
-            <p className="voiceFeatureBody">The assistant answers instantly, even when your team is offline, so interest does not cool off between visits and callbacks.</p>
-          </article>
-          <article className="voiceFeatureCard">
-            <h3 className="voiceFeatureTitle">Qualifies intent</h3>
-            <p className="voiceFeatureBody">It can collect the right details, route simple questions, and keep low-friction conversations moving toward a real lead.</p>
-          </article>
-          <article className="voiceFeatureCard">
-            <h3 className="voiceFeatureTitle">Fits both layouts</h3>
-            <p className="voiceFeatureBody">The same experience can sit inside a compact phone view or a website section without making the surrounding design feel heavy.</p>
-          </article>
-        </div>
-      </section>
-
-      <section className="voiceCtaSection reveal" aria-label="AI voice call to action">
-        <div className="voiceCtaCard">
-          <div>
-            <div className="voiceSectionEyebrow">Next step</div>
-            <h2 className="voiceCtaTitle">Want this adapted to your own site and call flow?</h2>
-            <p className="voiceCtaBody">We can wire the widget, shape the prompts, and tailor the experience to your business without making the page feel over-designed.</p>
-          </div>
-          <div className="actionsRow voiceCtaActions">
-            <button type="button" className="btn btnPrimary" onClick={() => onNavigate("contact", "#contactForm")}>
-              Start with contact
-            </button>
-            <button type="button" className="btn btnGhost" onClick={() => onNavigate("contact", "#booking")}>
-              Book a demo
-            </button>
           </div>
         </div>
       </section>
@@ -461,10 +409,10 @@ export default function App() {
   );
 
   const secondaryAction = useMemo(() => {
-    if (view === "reviews") return { label: "See Pricing", anchor: "#pricing" };
-    if (view === "contact") return { label: "Book a Demo", anchor: "#booking" };
-    if (view === "voice") return { label: "Live Preview", anchor: "#voiceDemo" };
-    return { label: "Build a Bundle", anchor: "#bundle" };
+    if (view === "reviews") return { label: "See Pricing", view: "reviews", anchor: "#pricing" };
+    if (view === "contact") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
+    if (view === "voice") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
+    return { label: "Build a Bundle", view: "services", anchor: "#bundle" };
   }, [view]);
 
   const renderNavTabs = (className = "") => (
@@ -484,7 +432,7 @@ export default function App() {
 
   const renderHeaderActions = (className = "") => (
     <div className={`headerActions ${className}`.trim()}>
-      <button type="button" className="btn btnGhost" onClick={() => navigateTo(view, secondaryAction.anchor)}>
+      <button type="button" className="btn btnGhost" onClick={() => navigateTo(secondaryAction.view, secondaryAction.anchor)}>
         {secondaryAction.label}
       </button>
       <button type="button" className="btn btnPrimary" onClick={() => navigateTo("voice", "#voiceDemo")}>
@@ -529,12 +477,14 @@ export default function App() {
               </button>
             </div>
 
-            <div className="headerMobilePanel">
-              <div className="headerMobileInner">
-                {renderNavTabs("navTabsMobile")}
-                {renderHeaderActions("headerActionsMobile")}
+            {mobileMenuOpen ? (
+              <div className="headerMobilePanel">
+                <div className="headerMobileInner">
+                  {renderNavTabs("navTabsMobile")}
+                  {renderHeaderActions("headerActionsMobile")}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </header>
