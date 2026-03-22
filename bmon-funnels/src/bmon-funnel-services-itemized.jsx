@@ -140,13 +140,38 @@ const SERVICE_DEFINITIONS = [
 
 const SERVICE_LOOKUP = Object.fromEntries(SERVICE_DEFINITIONS.map((service) => [service.id, service]));
 
-const FEATURED_SERVICE = {
-  label: "Local SEO",
-  title: "Rank higher on Google",
-  description:
-    "Get discovered and chosen by consumers searching for the products or services you offer by improving your Local SEO.",
-  mediaSrc: "https://player.vimeo.com/video/1109368878?muted=1&autoplay=1&autopause=0&controls=0&loop=1&app_id=122963",
-};
+const FEATURED_SERVICE_MEDIA_SRC = "https://player.vimeo.com/video/1109368878?muted=1&autoplay=1&autopause=0&controls=0&loop=1&app_id=122963";
+
+const FEATURED_SERVICES = [
+  {
+    id: "website",
+    label: "Smart Website",
+    title: "A cleaner first impression for every visit",
+    description:
+      "A polished website that explains the offer quickly, feels credible on mobile, and moves more visitors toward a call or form.",
+  },
+  {
+    id: "chatbot",
+    label: "AI Chatbot + Voice",
+    title: "Answer leads the moment they reach out",
+    description:
+      "Chat and voice coverage that responds instantly, qualifies intent, and keeps conversations moving even after hours.",
+  },
+  {
+    id: "seo",
+    label: "Local SEO",
+    title: "Show up when nearby buyers start searching",
+    description:
+      "A steadier local search presence built to help the right customers find you first and convert with more confidence.",
+  },
+  {
+    id: "reviews",
+    label: "Review Management",
+    title: "Turn good service into visible trust",
+    description:
+      "Automated review flows that increase positive signals, protect reputation, and make choosing your business feel easier.",
+  },
+];
 
 const Check = ({ color = C.accent }) => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -162,32 +187,37 @@ const Arrow = () => (
 
 const FeaturedServiceShowcase = () => {
   return (
-    <section className="featuredServiceSection reveal" aria-label="Featured service">
-      <div className="featuredServiceCard">
-        <div className="featuredServiceMedia">
-          <div className="featuredServiceFrameShell">
+    <section className="featuredServiceSection reveal" aria-label="Service highlights">
+      <div className="featuredServiceSectionIntro">
+        <div className="featuredServiceSectionEyebrow">Service highlights</div>
+        <h2 className="featuredServiceSectionTitle">A lighter look at each part of the stack.</h2>
+      </div>
+
+      {FEATURED_SERVICES.map((service, index) => (
+        <article key={service.id} className={`featuredServiceRow${index % 2 === 1 ? " isReversed" : ""}`}>
+          <div className="featuredServiceMedia">
             <iframe
-              src={FEATURED_SERVICE.mediaSrc}
+              src={FEATURED_SERVICE_MEDIA_SRC}
               className="featuredServiceFrame"
-              title="BMON Local SEO preview"
+              title={`BMON ${service.label} preview`}
               loading="lazy"
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
-        </div>
 
-        <div className="featuredServiceContent">
-          <div className="featuredServiceEyebrow">{FEATURED_SERVICE.label}</div>
-          <h2 className="featuredServiceTitle">{FEATURED_SERVICE.title}</h2>
-          <p className="featuredServiceDescription">{FEATURED_SERVICE.description}</p>
-          <div className="featuredServiceActions">
-            <a className="featuredServiceLink" href="#services">
-              Learn More
-            </a>
+          <div className="featuredServiceContent">
+            <div className="featuredServiceEyebrow">{service.label}</div>
+            <h3 className="featuredServiceTitle">{service.title}</h3>
+            <p className="featuredServiceDescription">{service.description}</p>
+            <div className="featuredServiceActions">
+              <a className="featuredServiceLink" href="#services">
+                Learn More
+              </a>
+            </div>
           </div>
-        </div>
-      </div>
+        </article>
+      ))}
     </section>
   );
 };
