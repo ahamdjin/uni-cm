@@ -85,7 +85,7 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
       .note {
         position: relative;
         z-index: 1;
-        max-width: 176px;
+        max-width: 198px;
         margin: 16px 0 0;
         color: rgba(11, 16, 32, 0.64);
         font-size: 13px;
@@ -106,7 +106,7 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
   <body>
     <section class="surface">
       <div class="badge"><span class="dot"></span>AI Voice Demo</div>
-      <p class="note">Tap the purple bubble to open the assistant.</p>
+      <p class="note">Tap the purple bubble, then choose Live Chat or Voice.</p>
       <div class="widget">
         <div data-chat-widget data-widget-id="697f299eaa41f43fae1deb51" data-location-id="nPiNK9DityBBCQSZkAy8"></div>
       </div>
@@ -227,7 +227,7 @@ function VoicePage({ onNavigate }) {
           </span>
         </h1>
         <p className="pageSubtitle">
-          A single phone preview. Clear guidance. No extra panels competing for attention.
+          Tap the bubble, choose Live Chat or Voice, and start the conversation in one clean flow.
         </p>
         <div className="actionsRow voiceHeroActions" aria-label="AI voice actions">
           <a className="btn btnPrimary" href="#voiceDemo">
@@ -242,10 +242,33 @@ function VoicePage({ onNavigate }) {
       <section className="voiceShowcase reveal" id="voiceDemo" aria-label="AI voice live demo">
         <div className="voiceShowcaseContent">
           <div className="voiceSectionEyebrow">Preview</div>
-          <h2 className="voiceSectionTitle">Try the assistant the same way a visitor would.</h2>
+          <h2 className="voiceSectionTitle">Try the exact flow a visitor sees first.</h2>
           <p className="voiceSectionBody">
-            The phone runs the live widget. Tap the floating bubble, ask a question, and feel the interaction without a second embed or a crowded layout.
+            The phone runs the live widget. Visitors tap the bubble, choose Live Chat or Voice, and continue in the same interface without leaving the page.
           </p>
+          <div className="voiceChoicePanel" aria-label="Available demo choices">
+            <div className="voiceChoiceIntro">First screen choices</div>
+            <div className="voiceChoiceGrid">
+              <article className="voiceChoiceCard">
+                <span className="voiceChoiceIcon" aria-hidden="true">
+                  C
+                </span>
+                <div>
+                  <h3 className="voiceChoiceTitle">Live Chat</h3>
+                  <p className="voiceChoiceBody">Best when someone wants to type and get quick answers.</p>
+                </div>
+              </article>
+              <article className="voiceChoiceCard">
+                <span className="voiceChoiceIcon" aria-hidden="true">
+                  V
+                </span>
+                <div>
+                  <h3 className="voiceChoiceTitle">AI Voice</h3>
+                  <p className="voiceChoiceBody">Best when someone wants a more natural talk-through.</p>
+                </div>
+              </article>
+            </div>
+          </div>
           <div className="voiceGuideList" aria-label="How to use the demo">
             <article className="voiceGuideItem">
               <span className="voiceGuideNumber">01</span>
@@ -257,15 +280,15 @@ function VoicePage({ onNavigate }) {
             <article className="voiceGuideItem">
               <span className="voiceGuideNumber">02</span>
               <div>
-                <h3 className="voiceGuideTitle">Ask a real question</h3>
-                <p className="voiceGuideBody">Try pricing, bundles, bookings, or a common support question.</p>
+                <h3 className="voiceGuideTitle">Choose Live Chat or Voice</h3>
+                <p className="voiceGuideBody">The first screen lets the visitor decide which conversation style they want.</p>
               </div>
             </article>
             <article className="voiceGuideItem">
               <span className="voiceGuideNumber">03</span>
               <div>
-                <h3 className="voiceGuideTitle">See the handoff</h3>
-                <p className="voiceGuideBody">The goal is a clean first interaction that moves people toward contact or booking.</p>
+                <h3 className="voiceGuideTitle">Start the conversation</h3>
+                <p className="voiceGuideBody">Try pricing, bundles, bookings, or a common support question once the path opens.</p>
               </div>
             </article>
           </div>
@@ -282,7 +305,7 @@ function VoicePage({ onNavigate }) {
 
         <div className="voiceShowcaseMedia">
           <div className="voicePhoneStage">
-            <div className="voiceGuideCallout">Tap the bubble to start</div>
+            <div className="voiceGuideCallout">Tap bubble, then choose Voice or Chat</div>
             <span className="voiceGuideLine" aria-hidden="true" />
             <span className="voiceGuidePulse" aria-hidden="true" />
 
