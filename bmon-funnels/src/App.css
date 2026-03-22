@@ -278,6 +278,352 @@
   }
 }
 
+.serviceStorySection {
+  max-width: 1120px;
+  margin: 0 auto 88px;
+  padding: 0 24px;
+}
+
+.serviceStoryIntro {
+  max-width: 760px;
+  margin: 0 auto 38px;
+  text-align: center;
+}
+
+.serviceStoryGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.serviceStoryRow {
+  --story-accent: var(--accent);
+  --story-accent-soft: var(--accent-soft);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+  gap: 28px;
+  align-items: center;
+  padding: 30px;
+  overflow: hidden;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.84), transparent 42%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.62));
+  box-shadow: 0 20px 60px rgba(11, 16, 32, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.serviceStoryRow::after {
+  content: "";
+  position: absolute;
+  inset: auto -8% -32% auto;
+  width: 240px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--story-accent-soft), transparent 70%);
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.serviceStoryRow.isReverse .serviceStoryCopy {
+  order: 2;
+}
+
+.serviceStoryRow.isReverse .serviceStoryVisualWrap {
+  order: 1;
+}
+
+.serviceStoryCopy {
+  position: relative;
+  z-index: 1;
+}
+
+.serviceStoryEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  color: rgba(11, 16, 32, 0.78);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
+
+.serviceStoryEyebrowIcon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: 1px solid rgba(11, 16, 32, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.serviceStoryTitle {
+  margin: 0 0 12px;
+  font-size: clamp(28px, 3.3vw, 38px);
+  line-height: 1.1;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+}
+
+.serviceStoryDescription {
+  margin: 0 0 22px;
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.serviceStoryPoints {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.serviceStoryPoint {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: rgba(11, 16, 32, 0.88);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.serviceStoryPointDot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--story-accent), var(--accent-2));
+  box-shadow: 0 0 0 6px var(--story-accent-soft);
+}
+
+.serviceStoryFootnote {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  color: rgba(11, 16, 32, 0.7);
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.serviceStoryFootnoteStrong {
+  color: var(--story-accent);
+}
+
+.serviceStoryVisualWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.serviceStoryVisualWrap::before {
+  content: "";
+  position: absolute;
+  inset: 12% 10%;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--story-accent-soft), transparent 72%);
+  filter: blur(18px);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.serviceStoryVisual {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 410px);
+  border-radius: 28px;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.74)),
+    linear-gradient(135deg, var(--story-accent-soft), transparent 80%);
+  box-shadow:
+    0 28px 80px rgba(11, 16, 32, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  overflow: hidden;
+}
+
+.serviceStoryVisual::after {
+  content: "";
+  position: absolute;
+  inset: auto -18% -36% 42%;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, var(--story-accent-soft), transparent 70%);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.serviceStoryVisualInner {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+}
+
+.serviceStoryChrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.serviceStoryChromeDots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.serviceStoryChromeDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(11, 16, 32, 0.12);
+}
+
+.serviceStoryChromeLabel {
+  color: rgba(11, 16, 32, 0.54);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.serviceStoryMetric {
+  margin-bottom: 14px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(11, 16, 32, 0.035);
+  border: 1px solid rgba(11, 16, 32, 0.05);
+}
+
+.serviceStoryMetricValue {
+  margin: 0;
+  color: var(--text);
+  font-size: 36px;
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.serviceStoryMetricLabel {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.serviceStoryMiniCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.serviceStoryMiniCard {
+  padding: 14px 14px 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(11, 16, 32, 0.06);
+}
+
+.serviceStoryMiniCardLabel {
+  margin: 0 0 8px;
+  color: rgba(11, 16, 32, 0.54);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.serviceStoryMiniCardValue {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.serviceStoryTrack {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(11, 16, 32, 0.08);
+}
+
+.serviceStoryTrackFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--story-accent), var(--accent-2));
+  animation: serviceStoryPulse 5.2s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+.serviceStoryChip {
+  position: absolute;
+  z-index: 2;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  box-shadow: 0 18px 44px rgba(11, 16, 32, 0.12);
+  color: var(--story-accent);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: serviceStoryFloat 6.5s ease-in-out infinite;
+}
+
+.serviceStoryChipTop {
+  top: 18px;
+  right: 10px;
+}
+
+.serviceStoryChipBottom {
+  left: 6px;
+  bottom: 24px;
+  animation-delay: -2.4s;
+}
+
+@keyframes serviceStoryFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes serviceStoryPulse {
+  0%,
+  100% {
+    transform: scaleX(0.92);
+    opacity: 0.94;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
 .embedGrid {
   display: flex;
   flex-wrap: wrap;
@@ -686,6 +1032,62 @@
     height: 46px;
   }
 
+  .serviceStorySection {
+    margin-bottom: 72px;
+    padding: 0 20px;
+  }
+
+  .serviceStoryIntro {
+    margin-bottom: 28px;
+  }
+
+  .serviceStoryGrid {
+    gap: 18px;
+  }
+
+  .serviceStoryRow,
+  .serviceStoryRow.isReverse {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 22px 18px;
+    border-radius: 26px;
+  }
+
+  .serviceStoryRow.isReverse .serviceStoryCopy,
+  .serviceStoryRow.isReverse .serviceStoryVisualWrap {
+    order: initial;
+  }
+
+  .serviceStoryTitle {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+
+  .serviceStoryDescription {
+    font-size: 15px;
+  }
+
+  .serviceStoryVisualWrap {
+    min-height: 260px;
+  }
+
+  .serviceStoryVisual {
+    width: min(100%, 100%);
+  }
+
+  .serviceStoryMiniCards {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceStoryChipTop {
+    top: 8px;
+    right: 4px;
+  }
+
+  .serviceStoryChipBottom {
+    left: 2px;
+    bottom: 12px;
+  }
+
   .embedGrid {
     flex-direction: column;
   }
@@ -741,6 +1143,11 @@
   }
 
   .partnerTickerTrack {
+    animation: none;
+  }
+
+  .serviceStoryChip,
+  .serviceStoryTrackFill {
     animation: none;
   }
 

@@ -140,6 +140,89 @@ const SERVICE_DEFINITIONS = [
 
 const SERVICE_LOOKUP = Object.fromEntries(SERVICE_DEFINITIONS.map((service) => [service.id, service]));
 
+const SERVICE_STORIES = [
+  {
+    serviceId: "website",
+    title: "Give every visitor a cleaner path to trust and book",
+    description:
+      "A subtle, polished website experience that makes the business feel credible in seconds and pushes people toward the next step without friction.",
+    bullets: [
+      "Conversion-first layouts that guide visitors toward calls, forms, and bookings.",
+      "Mobile-ready sections that stay clear, fast, and easy to skim.",
+      "Trust builders like clear offers, proof points, and local intent messaging.",
+    ],
+    footnote: "Built to feel premium, not busy.",
+    emphasis: "Website-first",
+    metricValue: "95+",
+    metricLabel: "Performance-ready experience with cleaner calls to action.",
+    chips: ["Fast mobile", "Lead-ready"],
+    cards: [
+      { label: "Lead Capture", value: "Forms + call routing", fill: "88%" },
+      { label: "Clarity", value: "Offer-led pages", fill: "82%" },
+    ],
+  },
+  {
+    serviceId: "chatbot",
+    title: "Keep conversations moving when your team is offline",
+    description:
+      "An AI-assisted layer that answers questions, handles first-touch qualification, and keeps warm leads from leaking out after hours.",
+    bullets: [
+      "Always-on chat and voice coverage for missed calls and inbound questions.",
+      "Qualification flows that collect intent before handing off to your team.",
+      "Booking-ready prompts that turn interest into real appointments faster.",
+    ],
+    footnote: "Subtle automation, visible lift.",
+    emphasis: "24/7 coverage",
+    metricValue: "24/7",
+    metricLabel: "Reply coverage designed to reduce missed opportunities.",
+    chips: ["Voice + chat", "Instant handoff"],
+    cards: [
+      { label: "Response Time", value: "Near-instant replies", fill: "94%" },
+      { label: "Qualification", value: "Lead intent captured", fill: "86%" },
+    ],
+  },
+  {
+    serviceId: "seo",
+    title: "Show up earlier when high-intent searches happen",
+    description:
+      "SEO work focused on the moments that matter: the exact searches where local buyers are ready to compare, call, or book.",
+    bullets: [
+      "Keyword and location mapping tied to real services and buyer intent.",
+      "On-page structure that supports stronger local visibility over time.",
+      "Monthly optimization that compounds instead of resetting every campaign.",
+    ],
+    footnote: "Compounding visibility beats rented traffic.",
+    emphasis: "Search momentum",
+    metricValue: "Page 1",
+    metricLabel: "Local search motion built around the terms that actually convert.",
+    chips: ["Local intent", "Search lift"],
+    cards: [
+      { label: "Visibility", value: "Map + organic growth", fill: "84%" },
+      { label: "Coverage", value: "Service keywords mapped", fill: "78%" },
+    ],
+  },
+  {
+    serviceId: "reviews",
+    title: "Turn happy customers into a stronger reputation flywheel",
+    description:
+      "Review management that feels effortless on the front end while quietly improving star rating, response speed, and local trust signals in the background.",
+    bullets: [
+      "Automated review requests after the right moments in the customer journey.",
+      "Private catch-and-resolve flows before frustration becomes public.",
+      "Faster brand-safe responses that keep your profile looking active and cared for.",
+    ],
+    footnote: "The easiest trust signal to compound.",
+    emphasis: "Review flywheel",
+    metricValue: "3.2x",
+    metricLabel: "More review momentum with less manual follow-up.",
+    chips: ["Request flow", "Auto replies"],
+    cards: [
+      { label: "Volume", value: "More reviews over time", fill: "89%" },
+      { label: "Response", value: "Faster reputation control", fill: "85%" },
+    ],
+  },
+];
+
 const Check = ({ color = C.accent }) => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="3.5 9 7 12.5 14.5 5.5" />
@@ -151,6 +234,81 @@ const Arrow = () => (
     <line x1="3" y1="8" x2="13" y2="8" /><polyline points="9 4 13 8 9 12" />
   </svg>
 );
+
+const ServiceStory = ({ story, reverse }) => {
+  const service = SERVICE_LOOKUP[story.serviceId];
+
+  return (
+    <article
+      className={`serviceStoryRow reveal ${reverse ? "isReverse" : ""}`}
+      style={{
+        "--story-accent": service.color,
+        "--story-accent-soft": service.colorBg,
+      }}
+    >
+      <div className="serviceStoryCopy">
+        <div className="serviceStoryEyebrow">
+          <span className="serviceStoryEyebrowIcon" style={{ background: service.colorBg }}>
+            {service.icon}
+          </span>
+          <span>{service.title}</span>
+        </div>
+
+        <h3 className="serviceStoryTitle">{story.title}</h3>
+        <p className="serviceStoryDescription">{story.description}</p>
+
+        <ul className="serviceStoryPoints">
+          {story.bullets.map((bullet) => (
+            <li key={bullet} className="serviceStoryPoint">
+              <span className="serviceStoryPointDot" aria-hidden="true" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="serviceStoryFootnote">
+          <span className="serviceStoryFootnoteStrong">{story.emphasis}</span>
+          <span>{story.footnote}</span>
+        </div>
+      </div>
+
+      <div className="serviceStoryVisualWrap" aria-hidden="true">
+        <div className="serviceStoryChip serviceStoryChipTop">{story.chips[0]}</div>
+        <div className="serviceStoryChip serviceStoryChipBottom">{story.chips[1]}</div>
+
+        <div className="serviceStoryVisual">
+          <div className="serviceStoryVisualInner">
+            <div className="serviceStoryChrome">
+              <div className="serviceStoryChromeDots">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="serviceStoryChromeLabel">{story.emphasis}</div>
+            </div>
+
+            <div className="serviceStoryMetric">
+              <p className="serviceStoryMetricValue">{story.metricValue}</p>
+              <p className="serviceStoryMetricLabel">{story.metricLabel}</p>
+            </div>
+
+            <div className="serviceStoryMiniCards">
+              {story.cards.map((card) => (
+                <div className="serviceStoryMiniCard" key={card.label}>
+                  <p className="serviceStoryMiniCardLabel">{card.label}</p>
+                  <p className="serviceStoryMiniCardValue">{card.value}</p>
+                  <div className="serviceStoryTrack">
+                    <span className="serviceStoryTrackFill" style={{ width: card.fill }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
 
 const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popular }) => {
   const [hovered, setHovered] = useState(false);
@@ -321,6 +479,23 @@ export default function BMONServicesFunnel({ embedded = false }) {
             <div style={{ fontSize: 13, color: C.muted, marginTop: 4, fontWeight: 650 }}>{stat.label}</div>
           </div>
         ))}
+      </section>
+
+      <section className="serviceStorySection" aria-label="How each service helps">
+        <div className="serviceStoryIntro reveal">
+          <h2 style={{ fontSize: 40, textAlign: "center", fontWeight: 950, marginBottom: 10, letterSpacing: "-0.03em" }}>
+            See how each part of the stack works
+          </h2>
+          <p style={{ textAlign: "center", color: C.muted, margin: 0, fontSize: 16, lineHeight: 1.75 }}>
+            Each service gets a focused visual explanation so people understand the value quickly without digging through a wall of text.
+          </p>
+        </div>
+
+        <div className="serviceStoryGrid">
+          {SERVICE_STORIES.map((story, index) => (
+            <ServiceStory key={story.serviceId} story={story} reverse={index % 2 === 1} />
+          ))}
+        </div>
       </section>
 
       <section id="services" className="reveal" style={{ maxWidth: 1120, margin: "0 auto 60px", padding: "0 24px" }}>
