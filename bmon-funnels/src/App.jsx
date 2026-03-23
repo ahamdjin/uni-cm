@@ -36,18 +36,14 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
 
       body {
         position: relative;
-        background:
-          radial-gradient(circle at top, rgba(124, 58, 237, 0.14), transparent 34%),
-          linear-gradient(180deg, #f7f5ff 0%, #ffffff 46%, #f6f8ff 100%);
+        background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 48%, #f7f9fc 100%);
         overflow: hidden;
       }
 
       .deviceViewport {
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 34%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 248, 255, 0.92));
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 248, 252, 0.98));
         overflow: hidden;
       }
 
@@ -55,21 +51,16 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
         content: "";
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(circle at top, rgba(109, 74, 255, 0.12), transparent 30%),
-          linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0));
         pointer-events: none;
         z-index: 0;
       }
 
       .deviceViewport::after {
         content: "";
-        position: relative;
-        display: block;
-        height: 100%;
-        box-shadow:
-          inset 0 1px 0 rgba(255, 255, 255, 0.6),
-          inset 0 -24px 48px rgba(79, 70, 229, 0.06);
+        position: absolute;
+        inset: 0;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
         pointer-events: none;
         z-index: 0;
       }
@@ -118,6 +109,28 @@ const VOICE_WIDGET_DOC = String.raw`<!doctype html>
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
       data-widget-id="697f299eaa41f43fae1deb51">
+    </script>
+    <script>
+      (() => {
+        const applyWidgetSizing = () => {
+          const host = document.querySelector("chat-widget");
+          if (!host) return false;
+
+          const widgetWidth = Math.min(340, Math.max(280, window.innerWidth - 24));
+          host.style.setProperty("--chat-widget-width", widgetWidth + "px");
+
+          return true;
+        };
+
+        const observer = new MutationObserver(() => {
+          applyWidgetSizing();
+        });
+
+        observer.observe(document.body, { childList: true });
+        window.addEventListener("resize", applyWidgetSizing);
+        window.addEventListener("load", applyWidgetSizing, { once: true });
+        applyWidgetSizing();
+      })();
     </script>
   </body>
 </html>`;
@@ -249,58 +262,46 @@ function VoicePage({ onNavigate }) {
           <p className="voiceSectionBody">
             The phone runs the live widget. Visitors tap the bubble, choose Live Chat or Voice, and continue in the same interface without leaving the page.
           </p>
-          <div className="voiceChoicePanel" aria-label="Available demo choices">
-            <div className="voiceChoiceIntro">First screen choices</div>
-            <div className="voiceChoiceGrid">
-              <article className="voiceChoiceCard">
-                <span className="voiceChoiceIcon" aria-hidden="true">
-                  C
-                </span>
-                <div>
-                  <h3 className="voiceChoiceTitle">Live Chat</h3>
-                  <p className="voiceChoiceBody">Best when someone wants to type and get quick answers.</p>
-                </div>
+          <div className="voiceDemoCard" aria-label="What the demo shows">
+            <div>
+              <div className="voiceDemoCardEyebrow">What the demo proves</div>
+              <p className="voiceDemoCardBody">
+                Visitors stay in one clean flow, choose how they want to talk, and move straight into the conversation.
+              </p>
+            </div>
+
+            <div className="voiceModeRow" aria-label="Conversation modes">
+              <article className="voiceModeChip">
+                <span className="voiceModeChipLabel">Live Chat</span>
+                <span className="voiceModeChipText">Type-first answers for quick questions and simple objections.</span>
               </article>
-              <article className="voiceChoiceCard">
-                <span className="voiceChoiceIcon" aria-hidden="true">
-                  V
-                </span>
-                <div>
-                  <h3 className="voiceChoiceTitle">AI Voice</h3>
-                  <p className="voiceChoiceBody">Best when someone wants a more natural talk-through.</p>
-                </div>
+              <article className="voiceModeChip">
+                <span className="voiceModeChipLabel">AI Voice</span>
+                <span className="voiceModeChipText">Natural talk-through for higher-intent visitors who want more context.</span>
               </article>
             </div>
-          </div>
-          <div className="voiceGuideList" aria-label="How to use the demo">
-            <article className="voiceGuideItem">
-              <span className="voiceGuideNumber">01</span>
-              <div>
-                <h3 className="voiceGuideTitle">Open the bubble</h3>
-                <p className="voiceGuideBody">Tap the highlighted bubble in the lower-right corner of the phone.</p>
+
+            <div className="voiceDemoPoints" aria-label="How the flow works">
+              <div className="voiceDemoPoint">
+                <span className="voiceDemoPointNumber">01</span>
+                <span className="voiceDemoPointText">Open the bubble in the lower-right corner.</span>
               </div>
-            </article>
-            <article className="voiceGuideItem">
-              <span className="voiceGuideNumber">02</span>
-              <div>
-                <h3 className="voiceGuideTitle">Choose Live Chat or Voice</h3>
-                <p className="voiceGuideBody">The first screen lets the visitor decide which conversation style they want.</p>
+              <div className="voiceDemoPoint">
+                <span className="voiceDemoPointNumber">02</span>
+                <span className="voiceDemoPointText">Choose Live Chat or Voice on the first screen.</span>
               </div>
-            </article>
-            <article className="voiceGuideItem">
-              <span className="voiceGuideNumber">03</span>
-              <div>
-                <h3 className="voiceGuideTitle">Start the conversation</h3>
-                <p className="voiceGuideBody">Try pricing, bundles, bookings, or a common support question once the path opens.</p>
+              <div className="voiceDemoPoint">
+                <span className="voiceDemoPointNumber">03</span>
+                <span className="voiceDemoPointText">Ask about pricing, bundles, bookings, or support right away.</span>
               </div>
-            </article>
+            </div>
           </div>
 
           <div className="actionsRow voiceShowcaseActions" aria-label="AI voice actions">
-            <button type="button" className="btn btnGhost" onClick={() => onNavigate("contact", "#booking")}>
+            <button type="button" className="btn btnPrimary" onClick={() => onNavigate("contact", "#booking")}>
               Book a live demo
             </button>
-            <button type="button" className="btn btnPrimary" onClick={() => onNavigate("services")}>
+            <button type="button" className="btn btnGhost" onClick={() => onNavigate("services")}>
               Back to services
             </button>
           </div>
@@ -308,13 +309,10 @@ function VoicePage({ onNavigate }) {
 
         <div className="voiceShowcaseMedia">
           <div className="voicePhoneStage">
-            <div className="voiceGuideCallout">Tap bubble, then choose Voice or Chat</div>
-            <span className="voiceGuideLine" aria-hidden="true" />
-            <span className="voiceGuidePulse" aria-hidden="true" />
-
+            <div className="voicePhoneBadge">Live mobile preview</div>
             <div className="voicePhoneFrame">
-              <div className="voicePhoneTopBar" aria-hidden="true">
-                <span className="voicePhoneSpeaker" />
+              <div className="voicePhoneHardware" aria-hidden="true">
+                <span className="voicePhoneNotch" />
               </div>
               <iframe
                 className="voicePhoneScreen"
@@ -324,6 +322,7 @@ function VoicePage({ onNavigate }) {
                 sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
               />
             </div>
+            <p className="voicePhoneCaption">Tap the bubble inside the screen to start with Chat or Voice.</p>
           </div>
         </div>
       </section>

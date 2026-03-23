@@ -27,8 +27,10 @@ const inlineHtml = distIndexHtml
   .replace(cssMatch[0], `<style>\n${css}\n</style>`)
   .replace(jsMatch[0], `<script type="module">\n${js}\n</script>`)
 
-const snippetLinks = [...inlineHtml.matchAll(/<link[^>]+href="https:\/\/fonts\.(googleapis|gstatic)\.com[^"]*"[^>]*>/gi)]
-  .map((match) => match[0])
+const snippetLinks = [...new Set(
+  [...distIndexHtml.matchAll(/<link[^>]+href="https:\/\/fonts\.(googleapis|gstatic)\.com[^"]*"[^>]*>/gi)]
+    .map((match) => match[0]),
+)]
   .join('\n')
 
 const formEmbedMatch = inlineHtml.match(/<script[^>]+src="https:\/\/link\.bmon\.ai\/js\/form_embed\.js"[^>]*><\/script>/i)
