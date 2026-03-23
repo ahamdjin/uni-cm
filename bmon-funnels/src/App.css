@@ -736,8 +736,8 @@
 
 .voiceShowcase {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
-  gap: clamp(48px, 7vw, 96px);
+  grid-template-columns: minmax(0, 1.04fr) minmax(300px, 388px);
+  gap: clamp(40px, 6vw, 88px);
   align-items: center;
 }
 
@@ -886,8 +886,8 @@
 
 .voicePhoneStage {
   position: relative;
-  width: min(100%, 380px);
-  padding-top: 28px;
+  width: min(100%, 356px);
+  padding-top: 32px;
 }
 
 .voiceGuideCallout {
@@ -941,10 +941,10 @@
 
 .voicePhoneFrame {
   position: relative;
-  width: min(100%, 352px);
+  width: min(100%, 328px);
   margin: 0 auto;
-  padding: 18px 16px 16px;
-  border-radius: 36px;
+  padding: 16px 14px 14px;
+  border-radius: 34px;
   background: linear-gradient(180deg, rgba(30, 24, 69, 0.98), rgba(17, 18, 32, 0.98));
   box-shadow: 0 28px 68px rgba(17, 18, 32, 0.22);
   overflow: hidden;
@@ -965,10 +965,10 @@
 
 .voicePhoneScreen {
   width: 100%;
-  height: 640px;
+  height: 620px;
   border: 0;
   display: block;
-  border-radius: 28px;
+  border-radius: 26px;
   background: #ffffff;
 }
 

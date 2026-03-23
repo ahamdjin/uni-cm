@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { openSignup } from "./bmon-links.js";
 
 const C = {
   bg: "transparent",
@@ -307,6 +308,8 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         ))}
       </div>
       <button
+        type="button"
+        onClick={openSignup}
         style={{
           width: "100%",
           background: popular ? `linear-gradient(135deg, ${color}, ${C.accent2})` : "transparent",
@@ -354,6 +357,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
             <a href="#bundle" style={{ ...TYPE.navLink, color: C.muted, textDecoration: "none" }}>Bundle</a>
             <button
               type="button"
+              onClick={openSignup}
               style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "11px 18px", borderRadius: 999, ...TYPE.buttonSm, cursor: "pointer", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.16)" }}
             >
               Start free trial
@@ -540,6 +544,8 @@ export default function BMONServicesFunnel({ embedded = false }) {
           </div>
 
           <button
+            type="button"
+            onClick={openSignup}
             disabled={selectedServices.length === 0}
             style={{
               width: "100%",
@@ -710,7 +716,11 @@ export default function BMONServicesFunnel({ embedded = false }) {
           Ready to grow on autopilot?
         </h2>
         <p style={{ color: "#C7CAD4", margin: "0 auto 36px", fontSize: 17, lineHeight: 1.8, maxWidth: 560 }}>Pick one service or activate the full 4 service stack. Setup takes under 10 minutes.</p>
-        <button style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, ...TYPE.button, cursor: "pointer", boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}>
+        <button
+          type="button"
+          onClick={openSignup}
+          style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, ...TYPE.button, cursor: "pointer", boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}
+        >
           Get Started Free
         </button>
       </section>

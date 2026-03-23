@@ -1,4 +1,5 @@
 ﻿import { useState } from "react";
+import { SIGNUP_URL, openSignup } from "./bmon-links.js";
 
 const COLORS = {
   bg: "transparent",
@@ -49,6 +50,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
             <a href="#pricing">Pricing</a>
             <button
               type="button"
+              onClick={openSignup}
               style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "10px 16px", borderRadius: 999, fontWeight: 850, fontSize: 13, cursor: "pointer" }}
             >
               Start free trial
@@ -73,7 +75,7 @@ export default function BMONReviewFunnel({ embedded = false }) {
           BMON automates review requests, routes unhappy customers into a private feedback flow, and sends automated replies to new reviews so your public profile stays stronger.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <a href="#pricing" style={{ textDecoration: "none" }}>
+          <a href={SIGNUP_URL} style={{ textDecoration: "none" }}>
             <button style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "14px 22px", borderRadius: 999, fontWeight: 900, fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}>
               Start free trial <ArrowIcon />
             </button>
@@ -200,18 +202,22 @@ export default function BMONReviewFunnel({ embedded = false }) {
             <span style={{ fontSize: 64, fontWeight: 950, lineHeight: 1, letterSpacing: "-0.03em" }}>{price}</span>
             <span style={{ fontSize: 16, color: COLORS.textMuted }}>/mo</span>
           </div>
-          <button style={{
-            width: "100%",
-            background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`,
-            color: "#fff",
-            border: "none",
-            padding: "16px",
-            borderRadius: 999,
-            fontWeight: 950,
-            fontSize: 15,
-            cursor: "pointer",
-            marginBottom: 8,
-          }}>
+          <button
+            type="button"
+            onClick={openSignup}
+            style={{
+              width: "100%",
+              background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`,
+              color: "#fff",
+              border: "none",
+              padding: "16px",
+              borderRadius: 999,
+              fontWeight: 950,
+              fontSize: 15,
+              cursor: "pointer",
+              marginBottom: 8,
+            }}
+          >
             Start 14-Day Free Trial
           </button>
           <p style={{ fontSize: 12, color: COLORS.textMuted, margin: 0 }}>Built for businesses that need stronger reviews without manual follow-up.</p>
@@ -248,7 +254,11 @@ export default function BMONReviewFunnel({ embedded = false }) {
           </span>
         </h2>
         <p style={{ color: COLORS.textMuted, marginBottom: 32, lineHeight: 1.7 }}>Start your free trial today. Setup takes under 5 minutes.</p>
-        <button style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, fontWeight: 950, fontSize: 15, cursor: "pointer", boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}>
+        <button
+          type="button"
+          onClick={openSignup}
+          style={{ background: `linear-gradient(135deg, ${COLORS.accent}, ${COLORS.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, fontWeight: 950, fontSize: 15, cursor: "pointer", boxShadow: "0 18px 52px rgba(79, 70, 229, 0.22)" }}
+        >
           Get Started Free
         </button>
       </section>
