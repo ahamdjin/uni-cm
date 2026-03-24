@@ -33,29 +33,60 @@ const snippetLinks = [...new Set(
 )]
   .join('\n')
 
-const formEmbedMatch = inlineHtml.match(/<script[^>]+src="https:\/\/link\.bmon\.ai\/js\/form_embed\.js"[^>]*><\/script>/i)
-const formEmbedScript = formEmbedMatch?.[0] ?? '<script defer src="https://link.bmon.ai/js/form_embed.js"></script>'
+const formEmbedMatch = inlineHtml.match(/<script[^>]+src="https:\/\/link\.(?:bmon\.ai|msgsndr\.com)\/js\/form_embed\.js"[^>]*><\/script>/i)
+const defaultFormEmbedScript = formEmbedMatch?.[0] ?? '<script defer src="https://link.bmon.ai/js/form_embed.js"></script>'
+const businessInfoFormEmbedScript = '<script defer src="https://link.msgsndr.com/js/form_embed.js"></script>'
 
 const rootMatch = inlineHtml.match(/<div\s+id="([^"]+)"\s*><\/div>/i)
 const rootId = rootMatch?.[1] ?? 'bmon-funnels-root'
 
-const snippetHtml = [
-  '<!--',
-  '  GoHighLevel embed snippet (generated).',
-  '  Paste into a Custom HTML element OR split into header/footer custom code as needed.',
-  '-->',
-  snippetLinks,
-  `<div id="${rootId}"></div>`,
-  `<style>\n${css}\n</style>`,
-  `<script type="module">\n${js}\n</script>`,
-  formEmbedScript,
-  '',
-].filter(Boolean).join('\n')
+function injectBeforeModuleScript(html, snippet) {
+  if (!snippet) return html
+  return html.replace(/<script type="module">/i, `${snippet}\n<script type="module">`)
+}
+
+function injectBeforeBodyClose(html, snippet) {
+  if (!snippet) return html
+  return html.replace(/<\/body>/i, `${snippet}\n</body>`)
+}
+
+function buildOutputs({ entryPage = null, formEmbedScript }) {
+  const routeBootstrap = entryPage
+    ? `<script>window.__BMON_ENTRY_PAGE__ = ${JSON.stringify(entryPage)};</script>`
+    : ''
+
+  const outputHtml = injectBeforeBodyClose(injectBeforeModuleScript(inlineHtml, routeBootstrap), formEmbedScript)
+
+  const snippetHtml = [
+    '<!--',
+    '  GoHighLevel embed snippet (generated).',
+    '  Paste into a Custom HTML element OR split into header/footer custom code as needed.',
+    '-->',
+    snippetLinks,
+    `<div id="${rootId}"></div>`,
+    routeBootstrap,
+    `<style>\n${css}\n</style>`,
+    `<script type="module">\n${js}\n</script>`,
+    formEmbedScript,
+    '',
+  ]
+    .filter(Boolean)
+    .join('\n')
+
+  return { outputHtml, snippetHtml }
+}
+
+const mainOutputs = buildOutputs({ formEmbedScript: defaultFormEmbedScript })
+const businessInfoOutputs = buildOutputs({
+  entryPage: 'business-info',
+  formEmbedScript: businessInfoFormEmbedScript,
+})
 
 await Promise.all([
-  writeFile(path.join(distDir, 'ghl-embed.html'), inlineHtml, 'utf8'),
-  writeFile(path.join(distDir, 'ghl-snippet.html'), snippetHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-embed.html'), mainOutputs.outputHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-snippet.html'), mainOutputs.snippetHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-business-info-embed.html'), businessInfoOutputs.outputHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-business-info-snippet.html'), businessInfoOutputs.snippetHtml, 'utf8'),
 ])
 
-// eslint-disable-next-line no-console
-console.log('Wrote dist/ghl-embed.html and dist/ghl-snippet.html')
+console.log('Wrote dist/ghl-embed.html, dist/ghl-snippet.html, dist/ghl-business-info-embed.html, and dist/ghl-business-info-snippet.html')

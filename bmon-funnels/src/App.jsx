@@ -1,9 +1,52 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 import BMONServicesFunnel from "./bmon-funnel-services-itemized.jsx";
+import BusinessInfoPage from "./business-info-page.jsx";
 
 const TOP_MARKER = "__TOP__";
+const BUSINESS_INFO_PAGE = "business-info";
+const HOME_BASE_URL = "https://bmon.ai/home";
+const CONTACT_HASHES = new Set(["#contactForm", "#booking"]);
+const HOME_SECTION_LINKS = {
+  brand: `${HOME_BASE_URL}#homeTop`,
+  home: `${HOME_BASE_URL}#homeTop`,
+  voice: `${HOME_BASE_URL}#voiceDemo`,
+  contact: `${HOME_BASE_URL}#contactForm`,
+  booking: `${HOME_BASE_URL}#booking`,
+  bundle: `${HOME_BASE_URL}#bundle`,
+};
+
+function getCurrentHash() {
+  if (typeof window === "undefined") return "";
+  return window.__BMON_INITIAL_HASH__ || window.location.hash || "";
+}
+
+function resolveEntryPage() {
+  if (typeof window === "undefined") return "home";
+
+  const forcedPage = window.__BMON_ENTRY_PAGE__;
+  if (forcedPage === BUSINESS_INFO_PAGE) return BUSINESS_INFO_PAGE;
+
+  const pathname = (window.location.pathname || "/").toLowerCase().replace(/\/+$/, "") || "/";
+  if (pathname.endsWith(`/${BUSINESS_INFO_PAGE}`)) return BUSINESS_INFO_PAGE;
+
+  return "home";
+}
+
+function resolveInitialView(entryPage) {
+  if (entryPage === BUSINESS_INFO_PAGE) return "services";
+
+  const hash = getCurrentHash();
+  if (hash === "#voiceDemo") return "voice";
+  if (CONTACT_HASHES.has(hash)) return "contact";
+  return "services";
+}
+
+function resolveInitialAnchor() {
+  const hash = getCurrentHash();
+  return hash || null;
+}
 
 const VOICE_WIDGET_DOC = String.raw`<!doctype html>
 <html lang="en">
@@ -330,14 +373,16 @@ function VoicePage({ onNavigate }) {
 }
 
 export default function App() {
-  const [view, setView] = useState("services");
+  const entryPage = useMemo(() => resolveEntryPage(), []);
+  const isBusinessInfoPage = entryPage === BUSINESS_INFO_PAGE;
+  const [view, setView] = useState(() => resolveInitialView(entryPage));
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [pendingAnchor, setPendingAnchor] = useState(null);
+  const [pendingAnchor, setPendingAnchor] = useState(() => resolveInitialAnchor());
 
   const prefersReducedMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-  const scrollToAnchor = (anchor) => {
+  const scrollToAnchor = useCallback((anchor) => {
     const behavior = prefersReducedMotion() ? "auto" : "smooth";
 
     if (!anchor || anchor === TOP_MARKER) {
@@ -354,7 +399,7 @@ export default function App() {
     const headerHeight = document.querySelector(".siteHeader")?.getBoundingClientRect()?.height ?? 86;
     const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 22;
     window.scrollTo({ top: Math.max(0, top), behavior });
-  };
+  }, []);
 
   const navigateTo = (nextView, anchor = TOP_MARKER) => {
     setMobileMenuOpen(false);
@@ -393,7 +438,7 @@ export default function App() {
     }, 40);
 
     return () => window.clearTimeout(timer);
-  }, [pendingAnchor, view]);
+  }, [pendingAnchor, scrollToAnchor, view]);
 
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll(".reveal"));
@@ -423,42 +468,73 @@ export default function App() {
   }, [view]);
 
   const navItems = useMemo(
-    () => [
-      { id: "services", label: "Home" },
-      { id: "contact", label: "Contact" },
-    ],
-    []
+    () =>
+      isBusinessInfoPage
+        ? [
+            { id: "home", label: "Home", href: HOME_SECTION_LINKS.home },
+            { id: "voice", label: "AI Voice", href: HOME_SECTION_LINKS.voice },
+            { id: "contact", label: "Contact", href: HOME_SECTION_LINKS.contact },
+          ]
+        : [
+            { id: "services", label: "Home" },
+            { id: "contact", label: "Contact" },
+          ],
+    [isBusinessInfoPage]
   );
 
   const secondaryAction = useMemo(() => {
+    if (isBusinessInfoPage) return { label: "See bundles", href: HOME_SECTION_LINKS.bundle };
     if (view === "contact") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
     if (view === "voice") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
     return { label: "Build a Bundle", view: "services", anchor: "#bundle" };
-  }, [view]);
+  }, [isBusinessInfoPage, view]);
+
+  const primaryAction = useMemo(() => {
+    if (isBusinessInfoPage) return { label: "Jump to form", href: "#businessInfoForm" };
+    return { label: "Try AI Voice", view: "voice", anchor: "#voiceDemo" };
+  }, [isBusinessInfoPage]);
 
   const renderNavTabs = (className = "") => (
     <nav className={`navTabs ${className}`.trim()} aria-label="Preview">
       {navItems.map((item) => (
-        <button
-          key={item.id}
-          type="button"
-          className={`tabBtn ${view === item.id ? "tabBtnActive" : ""}`}
-          onClick={() => navigateTo(item.id)}
-        >
-          {item.label}
-        </button>
+        item.href ? (
+          <a key={item.id} className="tabBtn" href={item.href} onClick={() => setMobileMenuOpen(false)}>
+            {item.label}
+          </a>
+        ) : (
+          <button
+            key={item.id}
+            type="button"
+            className={`tabBtn ${view === item.id ? "tabBtnActive" : ""}`}
+            onClick={() => navigateTo(item.id)}
+          >
+            {item.label}
+          </button>
+        )
       ))}
     </nav>
   );
 
   const renderHeaderActions = (className = "") => (
     <div className={`headerActions ${className}`.trim()}>
-      <button type="button" className="btn btnGhost" onClick={() => navigateTo(secondaryAction.view, secondaryAction.anchor)}>
-        {secondaryAction.label}
-      </button>
-      <button type="button" className="btn btnPrimary" onClick={() => navigateTo("voice", "#voiceDemo")}>
-        Try AI Voice
-      </button>
+      {"href" in secondaryAction ? (
+        <a className="btn btnGhost" href={secondaryAction.href} onClick={() => setMobileMenuOpen(false)}>
+          {secondaryAction.label}
+        </a>
+      ) : (
+        <button type="button" className="btn btnGhost" onClick={() => navigateTo(secondaryAction.view, secondaryAction.anchor)}>
+          {secondaryAction.label}
+        </button>
+      )}
+      {"href" in primaryAction ? (
+        <a className="btn btnPrimary" href={primaryAction.href} onClick={() => setMobileMenuOpen(false)}>
+          {primaryAction.label}
+        </a>
+      ) : (
+        <button type="button" className="btn btnPrimary" onClick={() => navigateTo(primaryAction.view, primaryAction.anchor)}>
+          {primaryAction.label}
+        </button>
+      )}
     </div>
   );
 
@@ -470,11 +546,15 @@ export default function App() {
             <div className="headerBar">
               <a
                 className="brand"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigateTo("services");
-                }}
+                href={isBusinessInfoPage ? HOME_SECTION_LINKS.brand : "#"}
+                onClick={
+                  isBusinessInfoPage
+                    ? () => setMobileMenuOpen(false)
+                    : (e) => {
+                        e.preventDefault();
+                        navigateTo("services");
+                      }
+                }
               >
                 <span className="brandMark" aria-hidden="true" />
                 BMON
@@ -511,8 +591,12 @@ export default function App() {
       </header>
 
       <main className="main">
-        {view === "services" ? (
-          <BMONServicesFunnel embedded />
+        {isBusinessInfoPage ? (
+          <BusinessInfoPage />
+        ) : view === "services" ? (
+          <div id="homeTop">
+            <BMONServicesFunnel embedded />
+          </div>
         ) : view === "voice" ? (
           <VoicePage onNavigate={navigateTo} />
         ) : (
@@ -534,15 +618,25 @@ export default function App() {
             <div className="footerSection">
               <div className="footerSectionLabel">Main</div>
               <div className="footerLinks footerLinksColumn">
-                <button type="button" className="footerLinkButton" onClick={() => navigateTo("services")}>
-                  Home
-                </button>
-                <button type="button" className="footerLinkButton" onClick={() => navigateTo("voice")}>
-                  AI Voice
-                </button>
-                <button type="button" className="footerLinkButton" onClick={() => navigateTo("contact")}>
-                  Contact
-                </button>
+                {isBusinessInfoPage ? (
+                  <>
+                    <a href={HOME_SECTION_LINKS.home}>Home</a>
+                    <a href={HOME_SECTION_LINKS.voice}>AI Voice</a>
+                    <a href={HOME_SECTION_LINKS.contact}>Contact</a>
+                  </>
+                ) : (
+                  <>
+                    <button type="button" className="footerLinkButton" onClick={() => navigateTo("services")}>
+                      Home
+                    </button>
+                    <button type="button" className="footerLinkButton" onClick={() => navigateTo("voice")}>
+                      AI Voice
+                    </button>
+                    <button type="button" className="footerLinkButton" onClick={() => navigateTo("contact")}>
+                      Contact
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 
