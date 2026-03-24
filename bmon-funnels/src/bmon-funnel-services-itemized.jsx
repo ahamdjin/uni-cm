@@ -274,10 +274,11 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
             ? "0 26px 72px rgba(11, 16, 32, 0.10)"
             : "0 18px 48px rgba(11, 16, 32, 0.08)",
         transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
-        display: "flex",
-        flexDirection: "column",
+        display: "grid",
+        gridTemplateRows: "auto minmax(64px, auto) minmax(96px, auto) auto 1fr auto",
         backdropFilter: "blur(12px)",
         zIndex: popular ? 1 : 0,
+        height: "100%",
       }}
     >
       {popular && (
@@ -311,7 +312,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         <span style={{ ...TYPE.price, color: C.dark }}>{price}</span>
         <span style={TYPE.bodySm}>/mo</span>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 32 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 32, alignSelf: "start" }}>
         {features.map((feature, index) => (
           <div key={index} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
             <div style={{ marginTop: 2 }}><Check color={color} /></div>
