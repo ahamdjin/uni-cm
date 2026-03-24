@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-const BUSINESS_INFO_FORM_SCRIPT_SRC = "https://link.msgsndr.com/js/form_embed.js";
-const BUSINESS_INFO_FORM_SRC = "https://link.msgsndr.com/widget/form/qqN7VPJ3cq4E9qiIzskv";
+const BUSINESS_INFO_FORM_SCRIPT_SRC = "https://api.leadconnectorhq.com/js/form_embed.js";
+const BUSINESS_INFO_FORM_SRC = "/widget/form/qqN7VPJ3cq4E9qiIzskv";
 
 export default function BusinessInfoPage() {
   useEffect(() => {
@@ -86,7 +86,7 @@ export default function BusinessInfoPage() {
           <div className="embedFrameWrap businessInfoFrameWrap">
             <iframe
               src={BUSINESS_INFO_FORM_SRC}
-              style={{ width: "100%", height: "1180px", border: "none", borderRadius: 3 }}
+              style={{ width: "100%", height: "100%", border: "none", borderRadius: 3 }}
               id="inline-qqN7VPJ3cq4E9qiIzskv"
               data-layout="{'id':'INLINE'}"
               data-trigger-type="alwaysShow"
@@ -96,7 +96,7 @@ export default function BusinessInfoPage() {
               data-deactivation-type="neverDeactivate"
               data-deactivation-value=""
               data-form-name="AI Chat Demo Opt-In (do not delete)"
-              data-height="1180"
+              data-height="820"
               data-layout-iframe-id="inline-qqN7VPJ3cq4E9qiIzskv"
               data-form-id="qqN7VPJ3cq4E9qiIzskv"
               title="AI Chat Demo Opt-In (do not delete)"
