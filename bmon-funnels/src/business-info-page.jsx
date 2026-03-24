@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 const BUSINESS_INFO_FORM_SRC = "https://api.leadconnectorhq.com/widget/form/qqN7VPJ3cq4E9qiIzskv";
 
 function getBusinessInfoFormHeight() {
-  if (typeof window === "undefined") return 980;
+  if (typeof window === "undefined") return 900;
 
   const width = window.innerWidth;
-  if (width <= 480) return 1520;
-  if (width <= 768) return 1320;
-  if (width <= 1080) return 1080;
-  return 980;
+  if (width <= 480) return 1340;
+  if (width <= 768) return 1180;
+  if (width <= 1080) return 980;
+  return 900;
 }
 
 export default function BusinessInfoPage() {
