@@ -250,6 +250,8 @@ const FeaturedServiceShowcase = () => {
 
 const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popular }) => {
   const [hovered, setHovered] = useState(false);
+  const restingTranslateY = popular ? -10 : 0;
+  const hoverTranslateY = popular ? -14 : -2;
 
   return (
     <div
@@ -261,19 +263,26 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         padding: SPACE.cardPadding,
         border: popular ? `2px solid ${color}` : `1px solid ${C.border}`,
         position: "relative",
-        transform: hovered ? "translateY(-2px)" : "translateY(0)",
-        boxShadow: hovered ? "0 26px 72px rgba(11, 16, 32, 0.10)" : "0 18px 48px rgba(11, 16, 32, 0.08)",
+        transform: `translateY(${hovered ? hoverTranslateY : restingTranslateY}px)`,
+        boxShadow: popular
+          ? hovered
+            ? "0 34px 82px rgba(79, 70, 229, 0.20)"
+            : "0 24px 64px rgba(79, 70, 229, 0.14)"
+          : hovered
+            ? "0 26px 72px rgba(11, 16, 32, 0.10)"
+            : "0 18px 48px rgba(11, 16, 32, 0.08)",
         transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
         display: "flex",
         flexDirection: "column",
         backdropFilter: "blur(12px)",
+        zIndex: popular ? 1 : 0,
       }}
     >
       {popular && (
         <div
           style={{
             position: "absolute",
-            top: -12,
+            top: -14,
             left: "50%",
             transform: "translateX(-50%)",
             background: `linear-gradient(135deg, ${color}, ${C.accent2})`,
@@ -673,7 +682,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
             </a>
             <a href="#services" style={{ textDecoration: "none" }}>
               <button type="button" style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, border: "none", borderRadius: 999, padding: "11px 15px", ...TYPE.buttonSm, cursor: "pointer", color: "#fff", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.18)" }}>
-                Leave a review
+                See services
               </button>
             </a>
           </div>

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 import BMONServicesFunnel from "./bmon-funnel-services-itemized.jsx";
-import BMONReviewFunnel from "./bmon-funnel-review-management.jsx";
 
 const TOP_MARKER = "__TOP__";
 
@@ -425,16 +424,13 @@ export default function App() {
 
   const navItems = useMemo(
     () => [
-      { id: "services", label: "Services" },
-      { id: "reviews", label: "Reviews" },
-      { id: "voice", label: "AI Voice" },
+      { id: "services", label: "Home" },
       { id: "contact", label: "Contact" },
     ],
     []
   );
 
   const secondaryAction = useMemo(() => {
-    if (view === "reviews") return { label: "See Pricing", view: "reviews", anchor: "#pricing" };
     if (view === "contact") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
     if (view === "voice") return { label: "Book a Demo", view: "contact", anchor: "#booking" };
     return { label: "Build a Bundle", view: "services", anchor: "#bundle" };
@@ -461,7 +457,7 @@ export default function App() {
         {secondaryAction.label}
       </button>
       <button type="button" className="btn btnPrimary" onClick={() => navigateTo("voice", "#voiceDemo")}>
-        Try AI Voice now
+        Try AI Voice
       </button>
     </div>
   );
@@ -517,8 +513,6 @@ export default function App() {
       <main className="main">
         {view === "services" ? (
           <BMONServicesFunnel embedded />
-        ) : view === "reviews" ? (
-          <BMONReviewFunnel embedded />
         ) : view === "voice" ? (
           <VoicePage onNavigate={navigateTo} />
         ) : (
@@ -541,10 +535,7 @@ export default function App() {
               <div className="footerSectionLabel">Main</div>
               <div className="footerLinks footerLinksColumn">
                 <button type="button" className="footerLinkButton" onClick={() => navigateTo("services")}>
-                  Services
-                </button>
-                <button type="button" className="footerLinkButton" onClick={() => navigateTo("reviews")}>
-                  Reviews
+                  Home
                 </button>
                 <button type="button" className="footerLinkButton" onClick={() => navigateTo("voice")}>
                   AI Voice
