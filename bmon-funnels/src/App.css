@@ -1070,59 +1070,13 @@
   margin-top: 28px;
 }
 
-.businessInfoLayout {
-  display: grid;
-  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.businessInfoSidebar {
-  display: grid;
-  gap: 18px;
-}
-
-.businessInfoInfoCard {
-  padding: 24px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(11, 16, 32, 0.08);
-  box-shadow: 0 18px 46px rgba(11, 16, 32, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.businessInfoInfoTitle {
-  margin: 0 0 12px;
-  color: rgba(11, 16, 32, 0.96);
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.businessInfoInfoText {
-  margin: 0;
-  color: rgba(11, 16, 32, 0.68);
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.businessInfoChecklist {
-  margin: 0;
-  padding-left: 18px;
-  color: rgba(11, 16, 32, 0.72);
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.businessInfoChecklist li + li {
-  margin-top: 8px;
+.businessInfoGrid {
+  justify-content: center;
 }
 
 .businessInfoEmbedCard {
-  flex: initial;
-  width: 100%;
-  max-width: none;
+  flex: 0 1 760px;
+  width: min(760px, 100%);
   padding: 22px;
 }
 
@@ -1333,11 +1287,6 @@
     gap: 72px;
   }
 
-  .businessInfoLayout {
-    grid-template-columns: 1fr;
-  }
-
-  .businessInfoInfoCard,
   .businessInfoEmbedCard {
     padding: 20px;
   }

@@ -6,9 +6,11 @@ function getBusinessInfoFormHeight() {
   if (typeof window === "undefined") return 900;
 
   const width = window.innerWidth;
-  if (width <= 480) return 1340;
-  if (width <= 768) return 1180;
-  if (width <= 1080) return 980;
+  const viewportHeight = window.innerHeight || 900;
+
+  if (width <= 480) return Math.min(1080, Math.max(920, Math.round(viewportHeight * 1.08)));
+  if (width <= 768) return Math.min(1040, Math.max(900, Math.round(viewportHeight * 1.04)));
+  if (width <= 1080) return 940;
   return 900;
 }
 
@@ -55,33 +57,7 @@ export default function BusinessInfoPage() {
         </div>
       </section>
 
-      <section className="businessInfoLayout" aria-label="Business demo setup">
-        <aside className="businessInfoSidebar reveal">
-          <article className="businessInfoInfoCard">
-            <h2 className="businessInfoInfoTitle">What you get</h2>
-            <p className="businessInfoInfoText">
-              A tailored preview of how your website can look and how AI chat and voice can qualify visitors, answer questions, and capture leads.
-            </p>
-          </article>
-
-          <article className="businessInfoInfoCard">
-            <h2 className="businessInfoInfoTitle">Best input to share</h2>
-            <ul className="businessInfoChecklist">
-              <li>Your core service and target area</li>
-              <li>Your current website or Google Business link</li>
-              <li>The offers you want visitors to ask about</li>
-              <li>Any tone, style, or brand constraints</li>
-            </ul>
-          </article>
-
-          <article className="businessInfoInfoCard">
-            <h2 className="businessInfoInfoTitle">Why we ask</h2>
-            <p className="businessInfoInfoText">
-              Better business context produces a better demo. The more accurate the inputs, the closer the site structure, messaging, and AI assistant flow will be to your real business.
-            </p>
-          </article>
-        </aside>
-
+      <section className="embedGrid businessInfoGrid" aria-label="Business demo setup">
         <div className="embedCard businessInfoEmbedCard reveal" id="businessInfoForm">
           <div className="embedHeader">
             <div>
@@ -90,7 +66,7 @@ export default function BusinessInfoPage() {
             </div>
           </div>
 
-          <div className="embedFrameWrap businessInfoFrameWrap" style={{ minHeight: `${formHeight}px` }}>
+          <div className="embedFrameWrap embedFrameWrapWide businessInfoFrameWrap" style={{ minHeight: `${formHeight}px` }}>
             <iframe
               src={BUSINESS_INFO_FORM_SRC}
               style={{ width: "100%", height: `${formHeight}px`, border: "none", borderRadius: 3 }}
@@ -115,6 +91,24 @@ export default function BusinessInfoPage() {
           <p className="businessInfoNote">
             This form is used only to prepare your demo setup. After submission, we use your answers to shape a website preview and the AI voice and chat assistant flow around your business context.
           </p>
+        </div>
+      </section>
+
+      <section className="contactInfo reveal" aria-label="Why this form works best">
+        <h2 className="infoHeading">What to include for the strongest demo</h2>
+        <div className="infoGrid">
+          <div className="infoCard">
+            <h3 className="infoTitle">Business basics</h3>
+            <p className="infoBody">Share your main service, location, and the website or Google Business profile you want us to model.</p>
+          </div>
+          <div className="infoCard">
+            <h3 className="infoTitle">Lead flow context</h3>
+            <p className="infoBody">Tell us which offers, questions, or bookings your visitors usually ask for so the AI flow matches real intent.</p>
+          </div>
+          <div className="infoCard">
+            <h3 className="infoTitle">Brand direction</h3>
+            <p className="infoBody">Include any tone, style, or message constraints so the website and AI assistant feel aligned with your business.</p>
+          </div>
         </div>
       </section>
 
