@@ -278,7 +278,6 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         flexDirection: "column",
         backdropFilter: "blur(12px)",
         zIndex: popular ? 1 : 0,
-        height: "100%",
       }}
     >
       {popular && (
@@ -305,14 +304,14 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
       <div style={{ width: 52, height: 52, borderRadius: 16, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
         {icon}
       </div>
-      <h3 style={{ ...TYPE.cardTitle, margin: "0 0 12px", color: C.dark, minHeight: 58 }}>{title}</h3>
-      <p style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.62, margin: "0 0 26px", minHeight: 68 }}>{desc}</p>
+      <h3 style={{ ...TYPE.cardTitle, margin: "0 0 12px", color: C.dark, minHeight: 64 }}>{title}</h3>
+      <p style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.62, margin: "0 0 24px", minHeight: 96 }}>{desc}</p>
       <div style={{ display: "flex", alignItems: "baseline", gap: 3, marginBottom: 28 }}>
         <span style={TYPE.bodySm}>$</span>
         <span style={{ ...TYPE.price, color: C.dark }}>{price}</span>
         <span style={TYPE.bodySm}>/mo</span>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 36, flex: 1 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 32 }}>
         {features.map((feature, index) => (
           <div key={index} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
             <div style={{ marginTop: 2 }}><Check color={color} /></div>
