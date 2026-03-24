@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const BUSINESS_INFO_FORM_SCRIPT_SRC = "https://api.leadconnectorhq.com/js/form_embed.js";
-const BUSINESS_INFO_FORM_SRC = "/widget/form/qqN7VPJ3cq4E9qiIzskv";
+const BUSINESS_INFO_FORM_SRC = "https://api.leadconnectorhq.com/widget/form/qqN7VPJ3cq4E9qiIzskv?notrack=true";
 
 export default function BusinessInfoPage() {
   useEffect(() => {
