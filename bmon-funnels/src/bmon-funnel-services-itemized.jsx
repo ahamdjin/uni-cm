@@ -75,13 +75,13 @@ const SERVICE_DEFINITIONS = [
     colorBg: C.skySoft,
     title: "Smart Website",
     price: 497,
-    desc: "A polished business website designed to build trust fast, capture leads cleanly, and turn visits into real conversations.",
+    desc: "Built to earn trust fast, capture local leads, and turn more visits into real conversations.",
     features: [
-      "Custom website tailored to your business",
-      "Local search ready site structure",
+      "Custom site for your business",
+      "Local search ready structure",
       "Monthly content and design updates",
-      "Fast mobile and desktop performance",
-      "Lead capture forms and call tracking",
+      "Fast mobile and desktop pages",
+      "Lead forms and call tracking",
       "AI contact form included",
     ],
   },
@@ -92,14 +92,14 @@ const SERVICE_DEFINITIONS = [
     colorBg: C.accentLight2,
     title: "AI Chatbot and Voice Agent",
     price: 197,
-    desc: "An always on AI assistant that handles chat and voice conversations, captures leads, and books appointments without delay.",
+    desc: "Built to answer instantly, capture local leads, and turn missed demand into real conversations.",
     features: [
-      "AI assistant trained on your business",
-      "24/7 chatbot and voice agent coverage",
-      "Instant lead capture and qualification",
-      "Appointment booking integration",
-      "Missed call follow up and call routing",
-      "Multi language support",
+      "AI assistant for your business",
+      "Chat and voice coverage",
+      "Instant lead capture and routing",
+      "Calendar booking integration",
+      "Missed call follow up",
+      "Multi language support included",
     ],
   },
   {
@@ -109,14 +109,14 @@ const SERVICE_DEFINITIONS = [
     colorBg: C.emeraldSoft,
     title: "SEO",
     price: 997,
-    desc: "Rank higher when your ideal keywords are searched and turn stronger Google visibility into steady inbound business.",
+    desc: "Built to rank higher, capture search demand, and turn more clicks into real conversations.",
     features: [
-      "Organic ranking strategy for Google",
-      "Target keyword mapping for your business",
+      "Google ranking growth strategy",
+      "Target keyword mapping",
       "Monthly optimization and reporting",
-      "Local SEO and top position focus",
-      "Search visibility that compounds over time",
-      "Lower dependency on paid campaigns",
+      "Local SEO priority",
+      "Compounding search visibility",
+      "Less reliance on paid ads",
     ],
   },
   {
@@ -127,14 +127,14 @@ const SERVICE_DEFINITIONS = [
     title: "Review Management",
     price: 247,
     popular: true,
-    desc: "Automate review collection, respond faster, and turn stronger reputation signals into more local demand.",
+    desc: "Built to collect reviews faster, protect local trust, and turn reputation into real conversations.",
     features: [
-      "Automated review requests by email and SMS",
-      "Automated responses in your brand voice",
-      "Google Business Profile optimization",
-      "Review monitoring and negative alerts",
-      "Private bad review filtering workflow",
-      "Instant review scan card for customers",
+      "Email and SMS review asks",
+      "Brand voice review replies",
+      "Google profile optimization",
+      "Review monitoring and alerts",
+      "Private complaint recovery flow",
+      "Instant review scan card",
     ],
   },
 ];
@@ -198,6 +198,8 @@ const SPACE = {
   sectionBottom: "clamp(104px, 12vw, 152px)",
   cardPadding: "44px 40px",
 };
+
+const PAGE_MAX_WIDTH = 1180;
 
 const Check = ({ color = C.accent }) => (
   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -276,6 +278,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         flexDirection: "column",
         backdropFilter: "blur(12px)",
         zIndex: popular ? 1 : 0,
+        height: "100%",
       }}
     >
       {popular && (
@@ -293,6 +296,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
+            whiteSpace: "nowrap",
           }}
         >
           Core Service
@@ -301,18 +305,18 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
       <div style={{ width: 52, height: 52, borderRadius: 16, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
         {icon}
       </div>
-      <h3 style={{ ...TYPE.cardTitle, margin: "0 0 12px", color: C.dark }}>{title}</h3>
-      <p style={{ ...TYPE.bodySm, margin: "0 0 30px", flex: 1 }}>{desc}</p>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 3, marginBottom: 30 }}>
+      <h3 style={{ ...TYPE.cardTitle, margin: "0 0 12px", color: C.dark, minHeight: 58 }}>{title}</h3>
+      <p style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.62, margin: "0 0 26px", minHeight: 68 }}>{desc}</p>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 3, marginBottom: 28 }}>
         <span style={TYPE.bodySm}>$</span>
         <span style={{ ...TYPE.price, color: C.dark }}>{price}</span>
         <span style={TYPE.bodySm}>/mo</span>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 36 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 36, flex: 1 }}>
         {features.map((feature, index) => (
           <div key={index} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
             <div style={{ marginTop: 2 }}><Check color={color} /></div>
-            <span style={{ ...TYPE.bodySm, color: C.dark }}>{feature}</span>
+            <span style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.58, color: C.dark }}>{feature}</span>
           </div>
         ))}
       </div>
@@ -432,7 +436,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
 
       <FeaturedServiceShowcase />
 
-      <section id="services" className="reveal" style={{ maxWidth: 1120, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
+      <section id="services" className="reveal" style={{ maxWidth: PAGE_MAX_WIDTH, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
         <h2 style={{ ...TYPE.sectionTitle, textAlign: "center", margin: "0 auto 16px", maxWidth: 680 }}>
           Choose the stack that fits your business
         </h2>
@@ -574,7 +578,7 @@ export default function BMONServicesFunnel({ embedded = false }) {
         </div>
       </section>
 
-      <section id="contact" className="reveal" style={{ maxWidth: 1120, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
+      <section id="contact" className="reveal" style={{ maxWidth: PAGE_MAX_WIDTH, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
         <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "8px 14px", color: C.dark, marginBottom: 18, ...TYPE.eyebrow }}>
             <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
