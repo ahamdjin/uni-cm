@@ -35,7 +35,7 @@ const snippetLinks = [...new Set(
 
 const formEmbedMatch = inlineHtml.match(/<script[^>]+src="https:\/\/(?:link\.(?:bmon\.ai|msgsndr\.com)|api\.leadconnectorhq\.com)\/js\/form_embed\.js"[^>]*><\/script>/i)
 const defaultFormEmbedScript = formEmbedMatch?.[0] ?? '<script defer src="https://link.bmon.ai/js/form_embed.js"></script>'
-const businessInfoFormEmbedScript = '<script defer src="https://api.leadconnectorhq.com/js/form_embed.js"></script>'
+const businessInfoFormEmbedScript = '<script src="https://api.leadconnectorhq.com/js/form_embed.js"></script>'
 
 const rootMatch = inlineHtml.match(/<div\s+id="([^"]+)"\s*><\/div>/i)
 const rootId = rootMatch?.[1] ?? 'bmon-funnels-root'

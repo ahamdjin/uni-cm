@@ -10,8 +10,7 @@ export default function BusinessInfoPage() {
 
     const script = document.createElement("script");
     script.src = BUSINESS_INFO_FORM_SCRIPT_SRC;
-    script.async = true;
-    script.dataset.ghlFormEmbed = "business-info";
+    script.async = false;
     document.body.appendChild(script);
   }, []);
 
