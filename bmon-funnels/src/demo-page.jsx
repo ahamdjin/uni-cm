@@ -72,14 +72,16 @@ export default function DemoPage({ language = "en" }) {
               <div className="voicePhoneHardware" aria-hidden="true">
                 <span className="voicePhoneNotch" />
               </div>
-              <iframe
-                src={DEMO_PREVIEW_SRC}
-                title="BMON live mobile demo"
-                className="voicePhoneScreen"
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allow="clipboard-write; fullscreen"
-              />
+              <div className="demoPhoneViewport">
+                <iframe
+                  src={DEMO_PREVIEW_SRC}
+                  title="BMON live mobile demo"
+                  className="demoPhonePreviewFrame"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="clipboard-write; fullscreen"
+                />
+              </div>
             </div>
             <p className="voicePhoneCaption demoPhoneCaption">{copy.phoneCaption}</p>
           </div>
