@@ -154,6 +154,88 @@
   gap: 12px;
 }
 
+.langToggle {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  min-width: 112px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.54);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.18)),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.52), transparent 44%);
+  box-shadow:
+    0 18px 42px rgba(11, 16, 32, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.langToggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.langToggleThumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.56)),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.78), transparent 54%);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  box-shadow:
+    0 10px 28px rgba(11, 16, 32, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  transform: translateX(0);
+  transition: transform 240ms var(--ease-out), background 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+  z-index: 0;
+}
+
+.langToggleThumb.isKorean {
+  transform: translateX(100%);
+  background:
+    linear-gradient(180deg, rgba(99, 102, 241, 0.26), rgba(255, 255, 255, 0.58)),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.88), transparent 52%);
+}
+
+.langToggleBtn {
+  appearance: none;
+  position: relative;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  color: rgba(11, 16, 32, 0.58);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.langToggleBtn:hover {
+  color: rgba(11, 16, 32, 0.88);
+}
+
+.langToggleBtn.isActive {
+  color: var(--text);
+}
+
 .btn {
   appearance: none;
   display: inline-flex;
@@ -182,6 +264,7 @@
 
 .btn:focus-visible,
 .tabBtn:focus-visible,
+.langToggleBtn:focus-visible,
 .menuToggle:focus-visible,
 .footerLinkButton:focus-visible,
 .footerLinks a:focus-visible {
@@ -1143,6 +1226,14 @@
 
   .headerDesktop {
     display: none;
+  }
+
+  .langToggleMobile {
+    width: 100%;
+  }
+
+  .langToggleMobile .langToggleBtn {
+    min-height: 46px;
   }
 
   .menuToggle {

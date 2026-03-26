@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { openSignup } from "./bmon-links.js";
 
 const C = {
@@ -67,112 +67,109 @@ function ReviewIcon({ color }) {
   );
 }
 
-const SERVICE_DEFINITIONS = [
-  {
-    id: "website",
-    icon: <WebsiteIcon color={C.sky} />,
-    color: C.sky,
-    colorBg: C.skySoft,
-    title: "Smart Website",
-    price: 497,
-    desc: "Built to earn trust fast, capture local leads, and turn more visits into real conversations.",
-    features: [
-      "Custom site for your business",
-      "Local search ready structure",
-      "Monthly content and design updates",
-      "Fast mobile and desktop pages",
-      "Lead forms and call tracking",
-      "AI contact form included",
-    ],
-  },
-  {
-    id: "chatbot",
-    icon: <AgentIcon color={C.accent2} />,
-    color: C.accent2,
-    colorBg: C.accentLight2,
-    title: "AI Chatbot and Voice Agent",
-    price: 197,
-    desc: "Built to answer instantly, capture local leads, and turn missed demand into real conversations.",
-    features: [
-      "AI assistant for your business",
-      "Chat and voice coverage",
-      "Instant lead capture and routing",
-      "Calendar booking integration",
-      "Missed call follow up",
-      "Multi language support included",
-    ],
-  },
-  {
-    id: "seo",
-    icon: <SeoIcon color={C.emerald} />,
-    color: C.emerald,
-    colorBg: C.emeraldSoft,
-    title: "SEO",
-    price: 997,
-    desc: "Built to rank higher, capture search demand, and turn more clicks into real conversations.",
-    features: [
-      "Google ranking growth strategy",
-      "Target keyword mapping",
-      "Monthly optimization and reporting",
-      "Local SEO priority",
-      "Compounding search visibility",
-      "Less reliance on paid ads",
-    ],
-  },
-  {
-    id: "reviews",
-    icon: <ReviewIcon color={C.accent} />,
-    color: C.accent,
-    colorBg: C.accentLight,
-    title: "Review Management",
-    price: 247,
-    popular: true,
-    desc: "Built to collect reviews faster, protect local trust, and turn reputation into real conversations.",
-    features: [
-      "Email and SMS review asks",
-      "Brand voice review replies",
-      "Google profile optimization",
-      "Review monitoring and alerts",
-      "Private complaint recovery flow",
-      "Instant review scan card",
-    ],
-  },
+const SERVICE_META = [
+  { id: "website", icon: <WebsiteIcon color={C.sky} />, color: C.sky, colorBg: C.skySoft, price: 497 },
+  { id: "chatbot", icon: <AgentIcon color={C.accent2} />, color: C.accent2, colorBg: C.accentLight2, price: 197 },
+  { id: "seo", icon: <SeoIcon color={C.emerald} />, color: C.emerald, colorBg: C.emeraldSoft, price: 997 },
+  { id: "reviews", icon: <ReviewIcon color={C.accent} />, color: C.accent, colorBg: C.accentLight, price: 247, popular: true },
 ];
-
-const SERVICE_LOOKUP = Object.fromEntries(SERVICE_DEFINITIONS.map((service) => [service.id, service]));
 
 const FEATURED_SERVICE_MEDIA_SRC = "https://player.vimeo.com/video/1109368878?muted=1&autoplay=1&autopause=0&controls=0&loop=1&app_id=122963";
 
-const FEATURED_SERVICES = [
-  {
-    id: "website",
-    label: "Smart Website",
-    title: "A cleaner first impression for every visit",
-    description:
-      "A polished website that explains the offer quickly, feels credible on mobile, and moves more visitors toward a call or form.",
+const COPY = {
+  en: {
+    nav: { services: "Services", contact: "Contact", order: "Order Now" },
+    hero: {
+      eyebrow: "AI marketing ops for local businesses",
+      titleBefore: "Your complete digital presence,",
+      titleAccent: "handled.",
+      subtitle: "Smart websites, AI chatbot and voice agent coverage, SEO, and review management built to help local businesses get found, convert faster, and grow consistently.",
+      primaryCta: "See Services",
+      secondaryCta: "Order Now",
+    },
+    stats: [
+      { num: "95+", label: "Website performance score", color: C.sky },
+      { num: "24/7", label: "AI response coverage", color: C.accent2 },
+      { num: "Page 1", label: "SEO growth targets", color: C.emerald },
+      { num: "3.2x", label: "More review momentum", color: C.accent },
+    ],
+    featuredIntro: { eyebrow: "Service highlights", title: "A quieter, more spacious view of each service." },
+    featuredServices: [
+      { id: "website", label: "Smart Website", title: "A cleaner first impression for every visit", description: "A polished website that explains the offer quickly, feels credible on mobile, and moves more visitors toward a call or form." },
+      { id: "chatbot", label: "AI Chatbot + Voice", title: "Answer leads the moment they reach out", description: "Chat and voice coverage that responds instantly, qualifies intent, and keeps conversations moving even after hours." },
+      { id: "seo", label: "Local SEO", title: "Show up when nearby buyers start searching", description: "A steadier local search presence built to help the right customers find you first and convert with more confidence." },
+      { id: "reviews", label: "Review Management", title: "Turn good service into visible trust", description: "Automated review flows that increase positive signals, protect reputation, and make choosing your business feel easier." },
+    ],
+    servicesSection: {
+      title: "Choose the stack that fits your business",
+      subtitle: "Start with one service or move straight to the order page for the setup that fits you best.",
+      popularLabel: "Core Service",
+      cards: {
+        website: { title: "Smart Website", desc: "Built to earn trust fast, capture local leads, and turn more visits into real conversations.", features: ["Custom site for your business", "Local search ready structure", "Monthly content and design updates", "Fast mobile and desktop pages", "Lead forms and call tracking", "AI contact form included"] },
+        chatbot: { title: "AI Chatbot and Voice Agent", desc: "Built to answer instantly, capture local leads, and turn missed demand into real conversations.", features: ["AI assistant for your business", "Chat and voice coverage", "Instant lead capture and routing", "Calendar booking integration", "Missed call follow up", "Multi language support included"] },
+        seo: { title: "SEO", desc: "Built to rank higher, capture search demand, and turn more clicks into real conversations.", features: ["Google ranking growth strategy", "Target keyword mapping", "Monthly optimization and reporting", "Local SEO priority", "Compounding search visibility", "Less reliance on paid ads"] },
+        reviews: { title: "Review Management", desc: "Built to collect reviews faster, protect local trust, and turn reputation into real conversations.", features: ["Email and SMS review asks", "Brand voice review replies", "Google profile optimization", "Review monitoring and alerts", "Private complaint recovery flow", "Instant review scan card"] },
+      },
+    },
+    contact: {
+      eyebrow: "Talk to BMON",
+      title: "Book a demo or send a message",
+      subtitle: "Use the form for details, or grab a time on the calendar for a quick walkthrough.",
+      tabs: { form: "Contact Form", calendar: "Calendar" },
+      hints: { form: "Best for specifics", calendar: "Best for a walkthrough" },
+      orderCta: "Order Now",
+      servicesCta: "See services",
+    },
+    testimonial: { quote: '"We activated the full stack and our inbound leads tripled. The AI systems alone paid for themselves in week one."', author: "David Park · Owner, Park Dental Studio" },
+    finalCta: { title: "Ready to grow on autopilot?", body: "Pick the service mix that matches your business and move straight to the order page in minutes.", button: "Order Now" },
   },
-  {
-    id: "chatbot",
-    label: "AI Chatbot + Voice",
-    title: "Answer leads the moment they reach out",
-    description:
-      "Chat and voice coverage that responds instantly, qualifies intent, and keeps conversations moving even after hours.",
+  ko: {
+    nav: { services: "서비스", contact: "문의", order: "주문하기" },
+    hero: {
+      eyebrow: "로컬 비즈니스를 위한 AI 마케팅 운영",
+      titleBefore: "비즈니스의 디지털 존재감을",
+      titleAccent: "한 번에 관리합니다.",
+      subtitle: "스마트 웹사이트, AI 챗봇·보이스 에이전트, SEO, 리뷰 관리까지 한 번에 구축해 더 쉽게 발견되고, 더 빨리 전환되고, 더 꾸준히 성장하도록 설계했습니다.",
+      primaryCta: "서비스 보기",
+      secondaryCta: "주문하기",
+    },
+    stats: [
+      { num: "95+", label: "웹사이트 성능 점수", color: C.sky },
+      { num: "24/7", label: "AI 응답 커버리지", color: C.accent2 },
+      { num: "1페이지", label: "SEO 성장 목표", color: C.emerald },
+      { num: "3.2배", label: "리뷰 증가 속도", color: C.accent },
+    ],
+    featuredIntro: { eyebrow: "서비스 하이라이트", title: "각 서비스를 더 여유 있고 선명하게 보여드립니다." },
+    featuredServices: [
+      { id: "website", label: "스마트 웹사이트", title: "첫 방문부터 더 좋은 인상을 남기세요", description: "제안을 빠르게 설명하고 모바일에서도 신뢰를 주며, 더 많은 방문자를 상담이나 문의로 연결하는 웹사이트입니다." },
+      { id: "chatbot", label: "AI 챗봇 + 보이스", title: "문의가 들어오는 순간 바로 응답하세요", description: "채팅과 보이스가 즉시 반응해 의도를 파악하고, 영업시간 밖에서도 대화를 놓치지 않게 합니다." },
+      { id: "seo", label: "로컬 SEO", title: "근처 고객이 검색할 때 먼저 보이세요", description: "올바른 고객이 먼저 찾고 더 높은 신뢰로 전환할 수 있도록 로컬 검색 노출을 꾸준히 쌓아갑니다." },
+      { id: "reviews", label: "리뷰 관리", title: "좋은 서비스를 눈에 보이는 신뢰로 바꾸세요", description: "리뷰 요청과 관리 흐름을 자동화해 평판을 보호하고, 고객이 더 쉽게 비즈니스를 선택하도록 만듭니다." },
+    ],
+    servicesSection: {
+      title: "비즈니스에 맞는 구성을 선택하세요",
+      subtitle: "한 가지 서비스로 시작하거나, 바로 주문 페이지로 이동해 가장 맞는 구성을 선택하세요.",
+      popularLabel: "핵심 서비스",
+      cards: {
+        website: { title: "스마트 웹사이트", desc: "빠르게 신뢰를 만들고, 로컬 리드를 확보하며, 더 많은 방문을 실제 상담으로 전환하도록 설계했습니다.", features: ["비즈니스 맞춤형 사이트", "로컬 검색에 맞춘 구조", "월간 콘텐츠 및 디자인 업데이트", "빠른 모바일/데스크톱 페이지", "리드 폼과 통화 추적", "AI 문의 폼 포함"] },
+        chatbot: { title: "AI 챗봇 및 보이스 에이전트", desc: "즉시 응답하고, 로컬 리드를 포착하며, 놓친 수요를 실제 상담으로 바꾸도록 설계했습니다.", features: ["비즈니스를 위한 AI 응대", "채팅과 보이스 지원", "즉시 리드 수집 및 라우팅", "캘린더 예약 연동", "부재중 전화 후속 대응", "다국어 지원 포함"] },
+        seo: { title: "SEO", desc: "더 높은 순위에 오르고, 검색 수요를 확보하며, 더 많은 클릭을 실제 상담으로 전환하도록 설계했습니다.", features: ["구글 순위 성장 전략", "타깃 키워드 설계", "월간 최적화 및 리포팅", "로컬 SEO 우선 운영", "누적형 검색 가시성", "유료 광고 의존도 감소"] },
+        reviews: { title: "리뷰 관리", desc: "더 빠르게 리뷰를 모으고, 로컬 신뢰를 지키며, 평판을 실제 상담으로 전환하도록 설계했습니다.", features: ["이메일·문자 리뷰 요청", "브랜드 톤 리뷰 답변", "구글 프로필 최적화", "리뷰 모니터링 및 알림", "불만 고객 복구 흐름", "즉시 리뷰 스캔 카드"] },
+      },
+    },
+    contact: {
+      eyebrow: "BMON 문의",
+      title: "데모를 예약하거나 메시지를 보내세요",
+      subtitle: "상세 문의는 폼, 빠른 상담은 캘린더 예약이 가장 좋습니다.",
+      tabs: { form: "문의 폼", calendar: "캘린더" },
+      hints: { form: "상세 문의에 적합", calendar: "빠른 상담에 적합" },
+      orderCta: "주문하기",
+      servicesCta: "서비스 보기",
+    },
+    testimonial: { quote: '"전체 구성을 적용하자 인바운드 리드가 세 배로 늘었습니다. AI 시스템만으로도 첫 주 안에 비용을 회수했습니다."', author: "David Park · Park Dental Studio 대표" },
+    finalCta: { title: "이제 자동으로 성장할 준비가 되셨나요?", body: "비즈니스에 맞는 구성만 고르고 몇 분 안에 주문 페이지로 바로 이동하세요.", button: "주문하기" },
   },
-  {
-    id: "seo",
-    label: "Local SEO",
-    title: "Show up when nearby buyers start searching",
-    description:
-      "A steadier local search presence built to help the right customers find you first and convert with more confidence.",
-  },
-  {
-    id: "reviews",
-    label: "Review Management",
-    title: "Turn good service into visible trust",
-    description:
-      "Automated review flows that increase positive signals, protect reputation, and make choosing your business feel easier.",
-  },
-];
+};
 
 const TYPE = {
   brand: { fontSize: 20, fontWeight: 700, letterSpacing: "-0.03em" },
@@ -213,15 +210,15 @@ const Arrow = () => (
   </svg>
 );
 
-const FeaturedServiceShowcase = () => {
+function FeaturedServiceShowcase({ copy }) {
   return (
     <section className="featuredServiceSection reveal" aria-label="Service highlights">
       <div className="featuredServiceSectionIntro">
-        <div className="featuredServiceSectionEyebrow">Service highlights</div>
-        <h2 className="featuredServiceSectionTitle">A quieter, more spacious view of each service.</h2>
+        <div className="featuredServiceSectionEyebrow">{copy.featuredIntro.eyebrow}</div>
+        <h2 className="featuredServiceSectionTitle">{copy.featuredIntro.title}</h2>
       </div>
 
-      {FEATURED_SERVICES.map((service, index) => (
+      {copy.featuredServices.map((service, index) => (
         <article key={service.id} className={`featuredServiceRow${index % 2 === 1 ? " isReversed" : ""}`}>
           <div className="featuredServiceMedia">
             <iframe
@@ -239,18 +236,16 @@ const FeaturedServiceShowcase = () => {
             <h3 className="featuredServiceTitle">{service.title}</h3>
             <p className="featuredServiceDescription">{service.description}</p>
             <div className="featuredServiceActions">
-              <a className="featuredServiceLink" href="#services">
-                Learn More
-              </a>
+              <a className="featuredServiceLink" href="#services">{copy.hero.primaryCta}</a>
             </div>
           </div>
         </article>
       ))}
     </section>
   );
-};
+}
 
-const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popular }) => {
+function ServiceCard({ icon, color, colorBg, title, price, desc, features, popular, popularLabel, orderLabel }) {
   const [hovered, setHovered] = useState(false);
   const restingTranslateY = popular ? -10 : 0;
   const hoverTranslateY = popular ? -14 : -2;
@@ -267,12 +262,8 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         position: "relative",
         transform: `translateY(${hovered ? hoverTranslateY : restingTranslateY}px)`,
         boxShadow: popular
-          ? hovered
-            ? "0 34px 82px rgba(79, 70, 229, 0.20)"
-            : "0 24px 64px rgba(79, 70, 229, 0.14)"
-          : hovered
-            ? "0 26px 72px rgba(11, 16, 32, 0.10)"
-            : "0 18px 48px rgba(11, 16, 32, 0.08)",
+          ? hovered ? "0 34px 82px rgba(79, 70, 229, 0.20)" : "0 24px 64px rgba(79, 70, 229, 0.14)"
+          : hovered ? "0 26px 72px rgba(11, 16, 32, 0.10)" : "0 18px 48px rgba(11, 16, 32, 0.08)",
         transition: "transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease",
         display: "grid",
         gridTemplateRows: "auto minmax(64px, auto) minmax(96px, auto) auto 1fr auto",
@@ -281,7 +272,7 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         height: "100%",
       }}
     >
-      {popular && (
+      {popular ? (
         <div
           style={{
             position: "absolute",
@@ -299,12 +290,10 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
             whiteSpace: "nowrap",
           }}
         >
-          Core Service
+          {popularLabel}
         </div>
-      )}
-      <div style={{ width: 52, height: 52, borderRadius: 16, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
-        {icon}
-      </div>
+      ) : null}
+      <div style={{ width: 52, height: 52, borderRadius: 16, background: colorBg, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>{icon}</div>
       <h3 style={{ ...TYPE.cardTitle, margin: "0 0 12px", color: C.dark, minHeight: 64 }}>{title}</h3>
       <p style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.62, margin: "0 0 24px", minHeight: 96 }}>{desc}</p>
       <div style={{ display: "flex", alignItems: "baseline", gap: 3, marginBottom: 28 }}>
@@ -313,8 +302,8 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
         <span style={TYPE.bodySm}>/mo</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 32, alignSelf: "start" }}>
-        {features.map((feature, index) => (
-          <div key={index} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+        {features.map((feature) => (
+          <div key={feature} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
             <div style={{ marginTop: 2 }}><Check color={color} /></div>
             <span style={{ ...TYPE.bodySm, fontSize: 14, lineHeight: 1.58, color: C.dark }}>{feature}</span>
           </div>
@@ -340,59 +329,43 @@ const ServiceCard = ({ icon, color, colorBg, title, price, desc, features, popul
           boxShadow: popular ? "0 16px 42px rgba(79, 70, 229, 0.18)" : "none",
         }}
       >
-        Get Started <Arrow />
+        {orderLabel} <Arrow />
       </button>
     </div>
   );
-};
+}
 
-export default function BMONServicesFunnel({ embedded = false }) {
-  const [selectedServices, setSelectedServices] = useState(["reviews"]);
+export default function BMONServicesFunnel({ embedded = false, language = "en" }) {
   const [contactTab, setContactTab] = useState("form");
-
-  const toggleService = (id) => {
-    setSelectedServices((prev) => (prev.includes(id) ? prev.filter((serviceId) => serviceId !== id) : [...prev, id]));
-  };
-
-  const total = selectedServices.reduce((sum, id) => sum + SERVICE_LOOKUP[id].price, 0);
-  const bundleDiscount = selectedServices.length === 4 ? 0.15 : selectedServices.length >= 2 ? 0.1 : 0;
-  const finalPrice = Math.round(total * (1 - bundleDiscount));
+  const copy = COPY[language] ?? COPY.en;
+  const serviceDefinitions = useMemo(
+    () => SERVICE_META.map((service) => ({ ...service, ...copy.servicesSection.cards[service.id] })),
+    [copy]
+  );
 
   return (
     <div style={{ fontFamily: "var(--font-sans)", background: C.bg, color: C.dark, minHeight: embedded ? "auto" : "100vh" }}>
-      {!embedded && (
+      {!embedded ? (
         <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "24px 24px 0", maxWidth: 1160, margin: "0 auto" }}>
-          <div style={{ ...TYPE.brand, fontSize: 22 }}>
-            <span style={{ color: C.accent }}>B</span>MON
-          </div>
+          <div style={{ ...TYPE.brand, fontSize: 22 }}><span style={{ color: C.accent }}>B</span>MON</div>
           <div style={{ display: "flex", gap: 20, alignItems: "center", color: C.muted }}>
-            <a href="#services" style={{ ...TYPE.navLink, color: C.muted, textDecoration: "none" }}>Services</a>
-            <a href="#bundle" style={{ ...TYPE.navLink, color: C.muted, textDecoration: "none" }}>Bundle</a>
-            <button
-              type="button"
-              onClick={openSignup}
-              style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "11px 18px", borderRadius: 999, ...TYPE.buttonSm, cursor: "pointer", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.16)" }}
-            >
-              Start free trial
-            </button>
+            <a href="#services" style={{ ...TYPE.navLink, color: C.muted, textDecoration: "none" }}>{copy.nav.services}</a>
+            <a href="#contact" style={{ ...TYPE.navLink, color: C.muted, textDecoration: "none" }}>{copy.nav.contact}</a>
+            <button type="button" onClick={openSignup} style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "11px 18px", borderRadius: 999, ...TYPE.buttonSm, cursor: "pointer", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.16)" }}>{copy.nav.order}</button>
           </div>
         </nav>
-      )}
+      ) : null}
 
       <section className="reveal" style={{ textAlign: "center", padding: SPACE.heroPadding, maxWidth: 1080, margin: "0 auto" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "8px 14px", color: C.dark, marginBottom: 30, ...TYPE.eyebrow }}>
           <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
-          AI marketing ops for local businesses
+          {copy.hero.eyebrow}
         </div>
         <h1 style={{ ...TYPE.heroTitle, margin: "0 0 24px", color: C.dark }}>
-          Your complete digital presence,{" "}
-          <span style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>
-            handled.
-          </span>
+          {copy.hero.titleBefore}{" "}
+          <span style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, WebkitBackgroundClip: "text", color: "transparent" }}>{copy.hero.titleAccent}</span>
         </h1>
-        <p style={{ ...TYPE.bodyLg, maxWidth: 760, margin: "0 auto 44px" }}>
-          Smart websites, AI chatbot and voice agent coverage, SEO, and review management built to help local businesses get found, convert faster, and grow consistently.
-        </p>
+        <p style={{ ...TYPE.bodyLg, maxWidth: 760, margin: "0 auto 44px" }}>{copy.hero.subtitle}</p>
         <div className="partnerTicker" aria-label="Showcase logos">
           <div className="partnerTickerTrack">
             {[0, 1].map((copyIndex) => (
@@ -408,173 +381,33 @@ export default function BMONServicesFunnel({ embedded = false }) {
         </div>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#services" style={{ textDecoration: "none" }}>
-            <button style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "15px 24px", borderRadius: 999, ...TYPE.button, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}>
-              See Services <Arrow />
-            </button>
+            <button style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "15px 24px", borderRadius: 999, ...TYPE.button, cursor: "pointer", display: "flex", alignItems: "center", gap: 10, boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}>{copy.hero.primaryCta} <Arrow /></button>
           </a>
-          <a href="#bundle" style={{ textDecoration: "none" }}>
-            <button style={{ background: "rgba(255,255,255,0.72)", color: C.dark, border: `1px solid ${C.border}`, padding: "15px 24px", borderRadius: 999, ...TYPE.button, cursor: "pointer" }}>
-              Build a bundle
-            </button>
+          <a href="https://bmon.ai/order" style={{ textDecoration: "none" }}>
+            <button style={{ background: "rgba(255,255,255,0.72)", color: C.dark, border: `1px solid ${C.border}`, padding: "15px 24px", borderRadius: 999, ...TYPE.button, cursor: "pointer" }}>{copy.hero.secondaryCta}</button>
           </a>
         </div>
       </section>
 
       <section className="reveal statsGrid" style={{ maxWidth: 980, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
-        {[
-          { num: "95+", label: "Website performance score", color: C.sky },
-          { num: "24/7", label: "AI response coverage", color: C.accent2 },
-          { num: "Page 1", label: "SEO growth targets", color: C.emerald },
-          { num: "3.2x", label: "More review momentum", color: C.accent },
-        ].map((stat, index) => (
-          <div key={index} style={{ textAlign: "center" }}>
+        {copy.stats.map((stat) => (
+          <div key={stat.label} style={{ textAlign: "center" }}>
             <div style={{ ...TYPE.statValue, color: stat.color }}>{stat.num}</div>
             <div style={{ ...TYPE.statLabel, marginTop: 8 }}>{stat.label}</div>
           </div>
         ))}
       </section>
 
-      <FeaturedServiceShowcase />
+      <FeaturedServiceShowcase copy={copy} />
 
       <section id="services" className="reveal" style={{ maxWidth: PAGE_MAX_WIDTH, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
-        <h2 style={{ ...TYPE.sectionTitle, textAlign: "center", margin: "0 auto 16px", maxWidth: 680 }}>
-          Choose the stack that fits your business
-        </h2>
-        <p style={{ ...TYPE.body, textAlign: "center", margin: "0 auto 60px", maxWidth: 680 }}>
-          Start with one service or combine all four for the strongest digital presence.
-        </p>
+        <h2 style={{ ...TYPE.sectionTitle, textAlign: "center", margin: "0 auto 16px", maxWidth: 680 }}>{copy.servicesSection.title}</h2>
+        <p style={{ ...TYPE.body, textAlign: "center", margin: "0 auto 60px", maxWidth: 680 }}>{copy.servicesSection.subtitle}</p>
 
         <div className="servicesGrid">
-          {SERVICE_DEFINITIONS.map((service) => (
-            <ServiceCard
-              key={service.id}
-              icon={service.icon}
-              color={service.color}
-              colorBg={service.colorBg}
-              title={service.title}
-              price={service.price}
-              desc={service.desc}
-              features={service.features}
-              popular={service.popular}
-            />
+          {serviceDefinitions.map((service) => (
+            <ServiceCard key={service.id} icon={service.icon} color={service.color} colorBg={service.colorBg} title={service.title} price={service.price} desc={service.desc} features={service.features} popular={service.popular} popularLabel={copy.servicesSection.popularLabel} orderLabel={copy.nav.order} />
           ))}
-        </div>
-      </section>
-
-      <section id="bundle" className="reveal" style={{ maxWidth: 760, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px" }}>
-        <div
-          style={{
-            background: C.card,
-            borderRadius: 32,
-            padding: "48px 42px",
-            border: `1px solid ${C.border}`,
-            boxShadow: "0 20px 54px rgba(11, 16, 32, 0.08)",
-            backdropFilter: "blur(12px)",
-          }}
-        >
-          <h3 style={{ ...TYPE.sectionTitle, textAlign: "center", margin: "0 0 14px" }}>
-            Build Your Bundle
-          </h3>
-          <p style={{ ...TYPE.body, textAlign: "center", margin: "0 auto 40px", maxWidth: 560 }}>
-            Choose any 2 or 3 services for <strong style={{ color: C.dark }}>10% off</strong>. Pick all 4 for <strong style={{ color: C.dark }}>15% off</strong>.
-          </p>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 40 }}>
-            {SERVICE_DEFINITIONS.map((service) => {
-              const checked = selectedServices.includes(service.id);
-              const theme = {
-                website: { color: C.sky, bg: "rgba(14, 165, 233, 0.08)" },
-                chatbot: { color: C.accent2, bg: "rgba(124, 58, 237, 0.08)" },
-                seo: { color: C.emerald, bg: "rgba(5, 150, 105, 0.08)" },
-                reviews: { color: C.accent, bg: "rgba(79, 70, 229, 0.08)" },
-              }[service.id];
-
-              return (
-                <button
-                  key={service.id}
-                  type="button"
-                  aria-pressed={checked}
-                  onClick={() => toggleService(service.id)}
-                  style={{
-                    width: "100%",
-                    textAlign: "left",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "16px 18px",
-                    borderRadius: 20,
-                    border: checked ? `2px solid ${theme.color}` : `1px solid ${C.border}`,
-                    background: checked ? theme.bg : "rgba(255,255,255,0.55)",
-                    cursor: "pointer",
-                    transition: "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease",
-                    boxShadow: checked ? "0 16px 42px rgba(11, 16, 32, 0.08)" : "none",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                    <div
-                      style={{
-                        width: 22,
-                        height: 22,
-                        borderRadius: 6,
-                        border: checked ? `2px solid ${theme.color}` : `2px solid ${C.border}`,
-                        background: checked ? theme.color : "transparent",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "all 0.2s",
-                      }}
-                    >
-                      {checked && <Check color="#fff" />}
-                    </div>
-                    <span style={{ ...TYPE.button, color: C.dark }}>{service.title}</span>
-                  </div>
-                  <span style={{ ...TYPE.buttonSm, color: C.muted }}>${service.price}/mo</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 24 }}>
-            {bundleDiscount > 0 && (
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-                <span style={TYPE.bodySm}>Subtotal</span>
-                <span style={{ ...TYPE.bodySm, textDecoration: "line-through" }}>${total}/mo</span>
-              </div>
-            )}
-            {bundleDiscount > 0 && (
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
-                <span style={{ ...TYPE.buttonSm, color: C.accent }}>Bundle discount ({Math.round(bundleDiscount * 100)}%)</span>
-                <span style={{ ...TYPE.buttonSm, color: C.accent }}>-${total - finalPrice}/mo</span>
-              </div>
-            )}
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-              <span style={{ ...TYPE.button, color: C.dark }}>Your price</span>
-              <div>
-                <span style={{ fontSize: 38, fontWeight: 650, color: C.dark, lineHeight: 1, letterSpacing: "-0.04em" }}>${finalPrice}</span>
-                <span style={TYPE.bodySm}>/mo</span>
-              </div>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={openSignup}
-            disabled={selectedServices.length === 0}
-            style={{
-              width: "100%",
-              marginTop: 28,
-              background: selectedServices.length > 0 ? `linear-gradient(135deg, ${C.accent}, ${C.accent2})` : C.border,
-              color: selectedServices.length > 0 ? "#fff" : C.muted,
-              border: "none",
-              padding: "17px 20px",
-              borderRadius: 999,
-              ...TYPE.button,
-              cursor: selectedServices.length > 0 ? "pointer" : "not-allowed",
-              boxShadow: selectedServices.length > 0 ? "0 16px 42px rgba(79, 70, 229, 0.18)" : "none",
-            }}
-          >
-            {selectedServices.length === 0 ? "Select a service" : `Start with ${selectedServices.length} service${selectedServices.length > 1 ? "s" : ""}`}
-          </button>
         </div>
       </section>
 
@@ -582,112 +415,39 @@ export default function BMONServicesFunnel({ embedded = false }) {
         <div style={{ textAlign: "center", maxWidth: 760, margin: "0 auto 48px" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `linear-gradient(135deg, ${C.accentLight}, ${C.accentLight2})`, border: `1px solid ${C.border}`, borderRadius: 999, padding: "8px 14px", color: C.dark, marginBottom: 18, ...TYPE.eyebrow }}>
             <span style={{ width: 10, height: 10, borderRadius: 999, background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})` }} aria-hidden="true" />
-            Talk to BMON
+            {copy.contact.eyebrow}
           </div>
-          <h2 style={{ ...TYPE.sectionTitle, margin: "0 0 16px" }}>
-            Book a demo or send a message
-          </h2>
-          <p style={{ ...TYPE.body, margin: 0 }}>
-            Use the form for details, or grab a time on the calendar for a quick walkthrough.
-          </p>
+          <h2 style={{ ...TYPE.sectionTitle, margin: "0 0 16px" }}>{copy.contact.title}</h2>
+          <p style={{ ...TYPE.body, margin: 0 }}>{copy.contact.subtitle}</p>
         </div>
 
         <div style={{ display: "flex", justifyContent: "center", marginBottom: 18 }}>
           <div style={{ display: "inline-flex", gap: 6, padding: 6, borderRadius: 999, background: "rgba(11, 16, 32, 0.04)", border: `1px solid ${C.border}` }}>
-            <button
-              type="button"
-              onClick={() => setContactTab("form")}
-              style={{
-                border: "1px solid transparent",
-                borderRadius: 999,
-                padding: "11px 16px",
-                ...TYPE.buttonSm,
-                cursor: "pointer",
-                background: contactTab === "form" ? "rgba(255,255,255,0.92)" : "transparent",
-                color: contactTab === "form" ? C.dark : "rgba(11, 16, 32, 0.68)",
-                boxShadow: contactTab === "form" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
-                transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)",
-              }}
-            >
-              Contact Form
-            </button>
-            <button
-              type="button"
-              onClick={() => setContactTab("calendar")}
-              style={{
-                border: "1px solid transparent",
-                borderRadius: 999,
-                padding: "11px 16px",
-                ...TYPE.buttonSm,
-                cursor: "pointer",
-                background: contactTab === "calendar" ? "rgba(255,255,255,0.92)" : "transparent",
-                color: contactTab === "calendar" ? C.dark : "rgba(11, 16, 32, 0.68)",
-                boxShadow: contactTab === "calendar" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none",
-                transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)",
-              }}
-            >
-              Calendar
-            </button>
+            <button type="button" onClick={() => setContactTab("form")} style={{ border: "1px solid transparent", borderRadius: 999, padding: "11px 16px", ...TYPE.buttonSm, cursor: "pointer", background: contactTab === "form" ? "rgba(255,255,255,0.92)" : "transparent", color: contactTab === "form" ? C.dark : "rgba(11, 16, 32, 0.68)", boxShadow: contactTab === "form" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none", transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)" }}>{copy.contact.tabs.form}</button>
+            <button type="button" onClick={() => setContactTab("calendar")} style={{ border: "1px solid transparent", borderRadius: 999, padding: "11px 16px", ...TYPE.buttonSm, cursor: "pointer", background: contactTab === "calendar" ? "rgba(255,255,255,0.92)" : "transparent", color: contactTab === "calendar" ? C.dark : "rgba(11, 16, 32, 0.68)", boxShadow: contactTab === "calendar" ? "0 10px 24px rgba(11, 16, 32, 0.08)" : "none", transition: "background 220ms var(--ease-out), color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out)" }}>{copy.contact.tabs.calendar}</button>
           </div>
         </div>
 
-        <div
-          style={{
-            background: C.card,
-            border: `1px solid ${C.border}`,
-            borderRadius: 32,
-            padding: 22,
-            boxShadow: "0 20px 56px rgba(11, 16, 32, 0.08)",
-            backdropFilter: "blur(12px)",
-          }}
-        >
+        <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 32, padding: 22, boxShadow: "0 20px 56px rgba(11, 16, 32, 0.08)", backdropFilter: "blur(12px)" }}>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, padding: "6px 6px 14px", flexWrap: "wrap" }}>
-            <div style={{ ...TYPE.buttonSm, color: C.dark }}>{contactTab === "form" ? "BMON - Contact Us Form" : "Book a Demo"}</div>
-            <div style={TYPE.bodySm}>{contactTab === "form" ? "Best for specifics" : "Best for a walkthrough"}</div>
+            <div style={{ ...TYPE.buttonSm, color: C.dark }}>{contactTab === "form" ? copy.contact.tabs.form : copy.contact.tabs.calendar}</div>
+            <div style={TYPE.bodySm}>{contactTab === "form" ? copy.contact.hints.form : copy.contact.hints.calendar}</div>
           </div>
 
           <div className={`embedFrameWrap embedFrameWrapWide ${contactTab === "calendar" ? "embedFrameWrapBooking" : ""}`}>
             {contactTab === "form" ? (
-              <iframe
-                src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r"
-                className="embedFrame"
-                style={{ height: 764 }}
-                id="inline-WyPVoGvcUoMU57sslr9r"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="BMON - Contact Us Form"
-                data-height="764"
-                data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r"
-                data-form-id="WyPVoGvcUoMU57sslr9r"
-                title="BMON - Contact Us Form"
-              />
+              <iframe src="https://link.bmon.ai/widget/form/WyPVoGvcUoMU57sslr9r" className="embedFrame" style={{ height: 764 }} id="inline-WyPVoGvcUoMU57sslr9r" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="BMON - Contact Us Form" data-height="764" data-layout-iframe-id="inline-WyPVoGvcUoMU57sslr9r" data-form-id="WyPVoGvcUoMU57sslr9r" title="BMON - Contact Us Form" />
             ) : (
-              <iframe
-                src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY"
-                className="embedFrame embedFrameBooking"
-                style={{ height: 1080 }}
-                scrolling="yes"
-                id="gEVDq9hfE7hZU8XvE1zY_1773246604635"
-                title="BMON - Booking Calendar"
-              />
+              <iframe src="https://link.bmon.ai/widget/booking/gEVDq9hfE7hZU8XvE1zY" className="embedFrame embedFrameBooking" style={{ height: 1080 }} scrolling="yes" id="gEVDq9hfE7hZU8XvE1zY_1773246604635" title="BMON - Booking Calendar" />
             )}
           </div>
 
           <div style={{ display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap", marginTop: 18 }}>
-            <a href="#bundle" style={{ textDecoration: "none" }}>
-              <button type="button" style={{ background: "transparent", border: `1px solid ${C.border}`, borderRadius: 999, padding: "11px 15px", ...TYPE.buttonSm, cursor: "pointer", color: "rgba(11, 16, 32, 0.82)" }}>
-                Build a bundle
-              </button>
+            <a href="https://bmon.ai/order" style={{ textDecoration: "none" }}>
+              <button type="button" style={{ background: "transparent", border: `1px solid ${C.border}`, borderRadius: 999, padding: "11px 15px", ...TYPE.buttonSm, cursor: "pointer", color: "rgba(11, 16, 32, 0.82)" }}>{copy.contact.orderCta}</button>
             </a>
             <a href="#services" style={{ textDecoration: "none" }}>
-              <button type="button" style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, border: "none", borderRadius: 999, padding: "11px 15px", ...TYPE.buttonSm, cursor: "pointer", color: "#fff", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.18)" }}>
-                See services
-              </button>
+              <button type="button" style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, border: "none", borderRadius: 999, padding: "11px 15px", ...TYPE.buttonSm, cursor: "pointer", color: "#fff", boxShadow: "0 14px 36px rgba(79, 70, 229, 0.18)" }}>{copy.contact.servicesCta}</button>
             </a>
           </div>
         </div>
@@ -696,56 +456,25 @@ export default function BMONServicesFunnel({ embedded = false }) {
       <section className="reveal" style={{ maxWidth: 760, margin: `0 auto ${SPACE.sectionBottom}`, padding: "0 24px", textAlign: "center" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 4, marginBottom: 16 }}>
           {[1, 2, 3, 4, 5].map((index) => (
-            <svg key={index} width="20" height="20" viewBox="0 0 20 20" fill="#FBBF24">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
+            <svg key={index} width="20" height="20" viewBox="0 0 20 20" fill="#FBBF24"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
           ))}
         </div>
-        <blockquote style={{ ...TYPE.quote, margin: "0 0 26px", color: C.dark }}>
-          "We activated the full stack and our inbound leads tripled. The AI systems alone paid for themselves in week one."
-        </blockquote>
-        <div style={TYPE.bodySm}>
-          <strong style={{ color: C.dark, fontWeight: 600 }}>David Park</strong> · Owner, Park Dental Studio
-        </div>
-        <div style={{ display: "none" }}>
-          <span style={TYPE.bodySm}><strong style={{ color: C.dark, fontWeight: 600 }}>David Park</strong> · Owner, Park Dental Studio</span>
-          <strong style={{ color: C.dark }}>David Park</strong> · Owner, Park Dental Studio
-        </div>
+        <blockquote style={{ ...TYPE.quote, margin: "0 0 26px", color: C.dark }}>{copy.testimonial.quote}</blockquote>
+        <div style={TYPE.bodySm}>{copy.testimonial.author}</div>
       </section>
 
-      <section
-        className="reveal"
-        style={{
-          width: "min(900px, calc(100% - 48px))",
-          margin: `0 auto ${SPACE.sectionBottom}`,
-          padding: "76px 48px",
-          background: "linear-gradient(135deg, rgba(11, 16, 32, 0.92), rgba(11, 16, 32, 0.78))",
-          borderRadius: 32,
-          textAlign: "center",
-          border: "1px solid rgba(255,255,255,0.12)",
-        }}
-      >
-        <h2 style={{ ...TYPE.sectionTitle, color: "#fff", marginTop: 0, marginBottom: 18 }}>
-          Ready to grow on autopilot?
-        </h2>
-        <p style={{ color: "#C7CAD4", margin: "0 auto 36px", fontSize: 17, lineHeight: 1.8, maxWidth: 560 }}>Pick one service or activate the full 4 service stack. Setup takes under 10 minutes.</p>
-        <button
-          type="button"
-          onClick={openSignup}
-          style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, ...TYPE.button, cursor: "pointer", boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}
-        >
-          Get Started Free
-        </button>
+      <section className="reveal" style={{ width: "min(900px, calc(100% - 48px))", margin: `0 auto ${SPACE.sectionBottom}`, padding: "76px 48px", background: "linear-gradient(135deg, rgba(11, 16, 32, 0.92), rgba(11, 16, 32, 0.78))", borderRadius: 32, textAlign: "center", border: "1px solid rgba(255,255,255,0.12)" }}>
+        <h2 style={{ ...TYPE.sectionTitle, color: "#fff", marginTop: 0, marginBottom: 18 }}>{copy.finalCta.title}</h2>
+        <p style={{ color: "#C7CAD4", margin: "0 auto 36px", fontSize: 17, lineHeight: 1.8, maxWidth: 560 }}>{copy.finalCta.body}</p>
+        <button type="button" onClick={openSignup} style={{ background: `linear-gradient(135deg, ${C.accent}, ${C.accent2})`, color: "#fff", border: "none", padding: "16px 34px", borderRadius: 999, ...TYPE.button, cursor: "pointer", boxShadow: "0 16px 42px rgba(79, 70, 229, 0.18)" }}>{copy.finalCta.button}</button>
       </section>
 
-      {!embedded && (
+      {!embedded ? (
         <footer style={{ borderTop: `1px solid ${C.border}`, padding: "40px 24px", textAlign: "center" }}>
-          <div style={{ ...TYPE.brand, marginBottom: 12 }}>
-            <span style={{ color: C.accent }}>B</span>MON
-          </div>
+          <div style={{ ...TYPE.brand, marginBottom: 12 }}><span style={{ color: C.accent }}>B</span>MON</div>
           <p style={{ ...TYPE.bodySm, margin: 0 }}>(c) {new Date().getFullYear()} BMON. All rights reserved.</p>
         </footer>
-      )}
+      ) : null}
     </div>
   );
 }
