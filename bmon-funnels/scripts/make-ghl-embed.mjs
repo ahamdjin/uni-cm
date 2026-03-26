@@ -81,12 +81,18 @@ const businessInfoOutputs = buildOutputs({
   entryPage: 'business-info',
   formEmbedScript: businessInfoFormEmbedScript,
 })
+const demoOutputs = buildOutputs({
+  entryPage: 'demo',
+  formEmbedScript: '',
+})
 
 await Promise.all([
   writeFile(path.join(distDir, 'ghl-embed.html'), mainOutputs.outputHtml, 'utf8'),
   writeFile(path.join(distDir, 'ghl-snippet.html'), mainOutputs.snippetHtml, 'utf8'),
   writeFile(path.join(distDir, 'ghl-business-info-embed.html'), businessInfoOutputs.outputHtml, 'utf8'),
   writeFile(path.join(distDir, 'ghl-business-info-snippet.html'), businessInfoOutputs.snippetHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-demo-embed.html'), demoOutputs.outputHtml, 'utf8'),
+  writeFile(path.join(distDir, 'ghl-demo-snippet.html'), demoOutputs.snippetHtml, 'utf8'),
 ])
 
-console.log('Wrote dist/ghl-embed.html, dist/ghl-snippet.html, dist/ghl-business-info-embed.html, and dist/ghl-business-info-snippet.html')
+console.log('Wrote dist/ghl-embed.html, dist/ghl-snippet.html, dist/ghl-business-info-embed.html, dist/ghl-business-info-snippet.html, dist/ghl-demo-embed.html, and dist/ghl-demo-snippet.html')

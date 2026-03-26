@@ -3,9 +3,11 @@ import "./App.css";
 
 import BMONServicesFunnel from "./bmon-funnel-services-itemized.jsx";
 import BusinessInfoPage from "./business-info-page.jsx";
+import DemoPage from "./demo-page.jsx";
 
 const TOP_MARKER = "__TOP__";
 const BUSINESS_INFO_PAGE = "business-info";
+const DEMO_PAGE = "demo";
 const HOME_BASE_URL = "https://bmon.ai/home";
 const LANGUAGE_STORAGE_KEY = "bmon-language";
 const CONTACT_HASHES = new Set(["#contactForm", "#booking"]);
@@ -27,6 +29,7 @@ const APP_COPY = {
       tryVoice: "Try AI Voice",
       bookDemo: "Book a Demo",
       jumpToForm: "Jump to form",
+      jumpToDemo: "Jump to demo",
       seeServices: "See services",
     },
     contact: {
@@ -92,6 +95,7 @@ const APP_COPY = {
       tryVoice: "AI 보이스 체험",
       bookDemo: "데모 예약",
       jumpToForm: "폼으로 이동",
+      jumpToDemo: "데모로 이동",
       seeServices: "서비스 보기",
     },
     contact: {
@@ -174,15 +178,17 @@ function resolveEntryPage() {
 
   const forcedPage = window.__BMON_ENTRY_PAGE__;
   if (forcedPage === BUSINESS_INFO_PAGE) return BUSINESS_INFO_PAGE;
+  if (forcedPage === DEMO_PAGE) return DEMO_PAGE;
 
   const pathname = (window.location.pathname || "/").toLowerCase().replace(/\/+$/, "") || "/";
   if (pathname.endsWith(`/${BUSINESS_INFO_PAGE}`)) return BUSINESS_INFO_PAGE;
+  if (pathname.endsWith(`/${DEMO_PAGE}`)) return DEMO_PAGE;
 
   return "home";
 }
 
 function resolveInitialView(entryPage) {
-  if (entryPage === BUSINESS_INFO_PAGE) return "services";
+  if (entryPage === BUSINESS_INFO_PAGE || entryPage === DEMO_PAGE) return "services";
 
   const hash = getCurrentHash();
   if (hash === "#voiceDemo") return "voice";
@@ -506,6 +512,8 @@ function VoicePage({ onNavigate, language }) {
 export default function App() {
   const entryPage = useMemo(() => resolveEntryPage(), []);
   const isBusinessInfoPage = entryPage === BUSINESS_INFO_PAGE;
+  const isDemoPage = entryPage === DEMO_PAGE;
+  const isStandalonePage = isBusinessInfoPage || isDemoPage;
   const [view, setView] = useState(() => resolveInitialView(entryPage));
   const [language, setLanguage] = useState(() => {
     if (typeof window === "undefined") return "en";
@@ -611,7 +619,7 @@ export default function App() {
 
   const navItems = useMemo(
     () =>
-      isBusinessInfoPage
+      isStandalonePage
         ? [
             { id: "home", label: copy.nav.home, href: HOME_SECTION_LINKS.home },
             { id: "voice", label: copy.nav.voice, href: HOME_SECTION_LINKS.voice },
@@ -621,20 +629,22 @@ export default function App() {
             { id: "services", label: copy.nav.home },
             { id: "contact", label: copy.nav.contact },
           ],
-    [copy.nav.contact, copy.nav.home, copy.nav.voice, isBusinessInfoPage]
+    [copy.nav.contact, copy.nav.home, copy.nav.voice, isStandalonePage]
   );
 
   const secondaryAction = useMemo(() => {
     if (isBusinessInfoPage) return { label: copy.nav.seeServices, href: HOME_SECTION_LINKS.home };
+    if (isDemoPage) return { label: copy.nav.seeServices, href: HOME_SECTION_LINKS.home };
     if (view === "contact") return { label: copy.nav.bookDemo, view: "contact", anchor: "#booking" };
     if (view === "voice") return { label: copy.nav.bookDemo, view: "contact", anchor: "#booking" };
     return { label: copy.nav.order, href: "https://bmon.ai/order" };
-  }, [copy.nav.bookDemo, copy.nav.order, copy.nav.seeServices, isBusinessInfoPage, view]);
+  }, [copy.nav.bookDemo, copy.nav.order, copy.nav.seeServices, isBusinessInfoPage, isDemoPage, view]);
 
   const primaryAction = useMemo(() => {
     if (isBusinessInfoPage) return { label: copy.nav.jumpToForm, href: "#businessInfoForm" };
+    if (isDemoPage) return { label: copy.nav.jumpToDemo, href: "#demoFrame" };
     return { label: copy.nav.tryVoice, view: "voice", anchor: "#voiceDemo" };
-  }, [copy.nav.jumpToForm, copy.nav.tryVoice, isBusinessInfoPage]);
+  }, [copy.nav.jumpToDemo, copy.nav.jumpToForm, copy.nav.tryVoice, isBusinessInfoPage, isDemoPage]);
 
   const renderNavTabs = (className = "") => (
     <nav className={`navTabs ${className}`.trim()} aria-label="Preview">
@@ -688,9 +698,9 @@ export default function App() {
             <div className="headerBar">
               <a
                 className="brand"
-                href={isBusinessInfoPage ? HOME_SECTION_LINKS.brand : "#"}
+                href={isStandalonePage ? HOME_SECTION_LINKS.brand : "#"}
                 onClick={
-                  isBusinessInfoPage
+                  isStandalonePage
                     ? () => setMobileMenuOpen(false)
                     : (e) => {
                         e.preventDefault();
@@ -737,6 +747,8 @@ export default function App() {
       <main className="main">
         {isBusinessInfoPage ? (
           <BusinessInfoPage language={language} />
+        ) : isDemoPage ? (
+          <DemoPage language={language} />
         ) : view === "services" ? (
           <div id="homeTop">
             <BMONServicesFunnel embedded language={language} />
@@ -762,7 +774,7 @@ export default function App() {
             <div className="footerSection">
               <div className="footerSectionLabel">{copy.footer.main}</div>
               <div className="footerLinks footerLinksColumn">
-                {isBusinessInfoPage ? (
+                {isStandalonePage ? (
                   <>
                     <a href={HOME_SECTION_LINKS.home}>{copy.footer.home}</a>
                     <a href={HOME_SECTION_LINKS.voice}>{copy.footer.voice}</a>

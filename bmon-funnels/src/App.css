@@ -1144,7 +1144,17 @@
   gap: clamp(56px, 7vw, 88px);
 }
 
+.demoPage {
+  display: grid;
+  gap: clamp(56px, 7vw, 88px);
+}
+
 .businessInfoHero {
+  max-width: 860px;
+  margin-bottom: 0;
+}
+
+.demoHero {
   max-width: 860px;
   margin-bottom: 0;
 }
@@ -1153,7 +1163,15 @@
   margin-top: 28px;
 }
 
+.demoHeroActions {
+  margin-top: 28px;
+}
+
 .businessInfoGrid {
+  justify-content: center;
+}
+
+.demoGrid {
   justify-content: center;
 }
 
@@ -1163,7 +1181,22 @@
   padding: 22px;
 }
 
+.demoEmbedCard {
+  flex: 0 1 920px;
+  width: min(920px, 100%);
+  padding: 22px;
+}
+
 .businessInfoFrameWrap {
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 22px 58px rgba(11, 16, 32, 0.1);
+}
+
+.demoFrameWrap {
   width: 100%;
   border-radius: 28px;
   overflow: hidden;
@@ -1178,6 +1211,13 @@
   display: block;
 }
 
+.demoFrame {
+  width: 100%;
+  border: none;
+  display: block;
+  background: #ffffff;
+}
+
 .businessInfoNote {
   margin: 14px 4px 2px;
   color: rgba(11, 16, 32, 0.62);
@@ -1185,7 +1225,18 @@
   line-height: 1.65;
 }
 
+.demoNote {
+  margin: 14px 4px 2px;
+  color: rgba(11, 16, 32, 0.62);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
 .businessInfoNextSteps {
+  margin-top: 0;
+}
+
+.demoChecklist {
   margin-top: 0;
 }
 
@@ -1378,7 +1429,15 @@
     gap: 72px;
   }
 
+  .demoPage {
+    gap: 72px;
+  }
+
   .businessInfoEmbedCard {
+    padding: 20px;
+  }
+
+  .demoEmbedCard {
     padding: 20px;
   }
 
