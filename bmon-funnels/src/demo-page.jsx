@@ -1,47 +1,141 @@
 import { openSignup } from "./bmon-links.js";
 
-const DEMO_SRC = "https://login.bmon.ai/v2/preview/hT4qFveprPxUR4XpfoJg?notrack=true";
+const DEMO_SITE_SRC = "https://empirefenceinc.com/";
+const DEMO_WIDGET_DOC = String.raw`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      body {
+        position: relative;
+      }
+
+      .deviceViewport {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      .siteFrame {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #ffffff;
+      }
+
+      [data-chat-widget] {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }
+
+      body > chat-widget {
+        position: absolute !important;
+        inset: 0 !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+        z-index: 2;
+      }
+
+      body > chat-widget * {
+        box-sizing: border-box;
+      }
+
+      body > chat-widget iframe,
+      body > chat-widget [role="dialog"],
+      body > chat-widget [role="main"] {
+        max-width: 100% !important;
+      }
+
+      body > chat-widget button,
+      body > chat-widget a,
+      body > chat-widget input,
+      body > chat-widget textarea {
+        touch-action: manipulation;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="deviceViewport">
+      <iframe class="siteFrame" src="${DEMO_SITE_SRC}" title="Empire Fence mobile preview" loading="lazy"></iframe>
+      <div data-chat-widget data-widget-id="69c01d67633c74d10c369675" data-location-id="VUXXwCAxSkjuGBKAjon6"></div>
+    </div>
+    <script
+      src="https://widgets.leadconnectorhq.com/loader.js"
+      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+      data-widget-id="69c01d67633c74d10c369675">
+    </script>
+    <script>
+      (() => {
+        const applyWidgetSizing = () => {
+          const host = document.querySelector("chat-widget");
+          if (!host) return false;
+
+          const widgetWidth = Math.min(340, Math.max(280, window.innerWidth - 20));
+          host.style.setProperty("--chat-widget-width", widgetWidth + "px");
+          return true;
+        };
+
+        const observer = new MutationObserver(() => {
+          applyWidgetSizing();
+        });
+
+        observer.observe(document.body, { childList: true });
+        window.addEventListener("resize", applyWidgetSizing);
+        window.addEventListener("load", applyWidgetSizing, { once: true });
+        applyWidgetSizing();
+      })();
+    </script>
+  </body>
+</html>`;
 
 const DEMO_COPY = {
   en: {
     pill: "Live AI Demo",
     titleBefore: "Preview the",
-    titleAccent: "full BMON demo",
-    titleAfter: " in one place.",
+    titleAccent: "live site and widget",
+    titleAfter: " on mobile.",
     subtitle:
-      "Open the live preview below to review the website experience, messaging, and AI-assisted flow inside a dedicated standalone page.",
+      "This phone preview loads the Empire Fence website and overlays the separate LeadConnector chat widget directly inside the same mobile frame.",
     jumpToDemo: "Jump to demo",
     orderNow: "Order Now",
-    cardTitle: "Embedded live preview",
-    cardHint: "Standalone demo page for quick review",
+    cardTitle: "Empire Fence mobile preview",
+    cardHint: "Live site inside the phone with the separate widget overlay",
     note:
-      "Use this page when you want a direct embedded view of the live preview without the main service-page flow around it.",
-    checklistTitle: "Best way to review it",
-    checklist: [
-      "Open it on desktop first for the full layout view.",
-      "Check mobile behavior after that for spacing and clarity.",
-      "Use the order page when you are ready to move forward.",
-    ],
+      "The screen shows the embedded website while the custom chat widget loads on top of it, so you can review the exact mobile-style interaction in one frame.",
   },
   ko: {
-    pill: "라이브 AI 데모",
-    titleBefore: "한 페이지에서",
-    titleAccent: "전체 BMON 데모",
-    titleAfter: "를 확인하세요.",
+    pill: "??? AI ??",
+    titleBefore: "?????",
+    titleAccent: "??? ???? ??",
+    titleAfter: "? ?????.",
     subtitle:
-      "아래 라이브 프리뷰에서 웹사이트 경험, 메시지 구성, AI 흐름을 별도의 독립 페이지로 바로 확인할 수 있습니다.",
-    jumpToDemo: "데모로 이동",
-    orderNow: "주문하기",
-    cardTitle: "라이브 프리뷰 임베드",
-    cardHint: "빠른 검토를 위한 독립 데모 페이지",
+      "? ??? ????? Empire Fence ????? ????, ??? LeadConnector ?? ??? ?? ??? ??? ?? ?? ??? ??? ? ?? ???.",
+    jumpToDemo: "??? ??",
+    orderNow: "????",
+    cardTitle: "Empire Fence ??? ????",
+    cardHint: "??? ?? ??? ???? ?? ??? ?? ?????",
     note:
-      "이 페이지는 메인 서비스 흐름 없이 라이브 프리뷰만 바로 확인하고 싶을 때 사용합니다.",
-    checklistTitle: "가장 좋은 확인 방법",
-    checklist: [
-      "먼저 데스크톱에서 전체 레이아웃을 확인하세요.",
-      "그다음 모바일에서 간격과 가독성을 확인하세요.",
-      "진행할 준비가 되면 주문 페이지로 이동하세요.",
-    ],
+      "?? ??? ????? ?????, ? ?? ??? ?? ??? ???? ? ????? ??? ????? ?? ??? ? ????.",
   },
 };
 
@@ -87,10 +181,11 @@ export default function DemoPage({ language = "en" }) {
               <span className="voicePhoneNotch" />
             </div>
             <iframe
-              src={DEMO_SRC}
-              title="BMON Live Demo"
+              srcDoc={DEMO_WIDGET_DOC}
+              title="Empire Fence live mobile demo"
               className="voicePhoneScreen"
               loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
               referrerPolicy="strict-origin-when-cross-origin"
               allow="clipboard-write; fullscreen"
             />
