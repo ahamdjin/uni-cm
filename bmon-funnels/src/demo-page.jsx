@@ -1,118 +1,6 @@
 ﻿import { openSignup } from "./bmon-links.js";
 
-const DEMO_SITE_SRC = "https://empirefenceinc.com/";
-const DEMO_WIDGET_DOC = String.raw`<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background: #ffffff;
-      }
-
-      body {
-        position: relative;
-      }
-
-      .deviceViewport {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-        background: #ffffff;
-      }
-
-      .siteFrame {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        background: #ffffff;
-      }
-
-      body > chat-widget {
-        position: fixed !important;
-        right: 16px !important;
-        bottom: 18px !important;
-        display: block !important;
-        width: auto !important;
-        height: auto !important;
-        overflow: visible !important;
-        z-index: 3;
-        pointer-events: none !important;
-      }
-
-      body > chat-widget * {
-        box-sizing: border-box;
-      }
-
-      body > chat-widget iframe,
-      body > chat-widget button,
-      body > chat-widget a,
-      body > chat-widget [role="dialog"],
-      body > chat-widget [role="main"],
-      body > chat-widget input,
-      body > chat-widget textarea {
-        pointer-events: auto !important;
-      }
-
-      body > chat-widget iframe,
-      body > chat-widget [role="dialog"],
-      body > chat-widget [role="main"] {
-        max-width: 100% !important;
-      }
-
-      body > chat-widget button,
-      body > chat-widget a,
-      body > chat-widget input,
-      body > chat-widget textarea {
-        touch-action: manipulation;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="deviceViewport">
-      <iframe class="siteFrame" src="${DEMO_SITE_SRC}" title="Empire Fence mobile preview" loading="lazy"></iframe>
-    </div>
-    <div data-chat-widget data-widget-id="69c01d67633c74d10c369675" data-location-id="VUXXwCAxSkjuGBKAjon6"></div>
-    <script
-      src="https://widgets.leadconnectorhq.com/loader.js"
-      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="69c01d67633c74d10c369675">
-    </script>
-    <script>
-      (() => {
-        const applyWidgetSizing = () => {
-          const host = document.querySelector("chat-widget");
-          if (!host) return false;
-
-          const widgetWidth = Math.min(320, Math.max(260, window.innerWidth - 24));
-          host.style.setProperty("--chat-widget-width", widgetWidth + "px");
-          return true;
-        };
-
-        const observer = new MutationObserver(() => {
-          applyWidgetSizing();
-        });
-
-        observer.observe(document.body, { childList: true });
-        window.addEventListener("resize", applyWidgetSizing);
-        window.addEventListener("load", applyWidgetSizing, { once: true });
-        applyWidgetSizing();
-      })();
-    </script>
-  </body>
-</html>`;
+const DEMO_PREVIEW_SRC = "https://login.bmon.ai/v2/preview/5zr6UpTBCNQPnDwmIsFd";
 
 const DEMO_COPY = {
   en: {
@@ -127,7 +15,7 @@ const DEMO_COPY = {
     primaryAction: "Talk To Your Custom Assistant",
     secondaryAction: "Order Now",
     phoneBadge: "Live mobile preview",
-    phoneCaption: "Empire Fence site in the phone with the separate widget fitted into the same screen.",
+    phoneCaption: "The phone now runs the requested BMON preview page directly inside the device frame.",
   },
   ko: {
     eyebrow: "라이브 AI 데모",
@@ -141,7 +29,7 @@ const DEMO_COPY = {
     primaryAction: "맞춤 AI와 대화하기",
     secondaryAction: "주문하기",
     phoneBadge: "라이브 모바일 미리보기",
-    phoneCaption: "휴대폰 안에서 Empire Fence 사이트와 별도 위젯이 같은 화면에 맞춰 실행됩니다.",
+    phoneCaption: "휴대폰 안에서 요청한 BMON 미리보기 페이지가 기기 프레임에 직접 실행됩니다.",
   },
 };
 
@@ -185,11 +73,10 @@ export default function DemoPage({ language = "en" }) {
                 <span className="voicePhoneNotch" />
               </div>
               <iframe
-                srcDoc={DEMO_WIDGET_DOC}
-                title="Empire Fence live mobile demo"
+                src={DEMO_PREVIEW_SRC}
+                title="BMON live mobile demo"
                 className="voicePhoneScreen"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allow="clipboard-write; fullscreen"
               />
