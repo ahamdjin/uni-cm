@@ -1247,11 +1247,11 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 390px;
-  height: 844px;
+  width: 360px;
+  height: 720px;
   border: 0;
   background: #ffffff;
-  transform: translateX(-50%) scale(0.785);
+  transform: translateX(-50%) scale(0.85);
   transform-origin: top center;
 }
 
@@ -1477,11 +1477,11 @@
   }
 
   .demoPhoneViewport {
-    height: 580px;
+    height: 620px;
   }
 
   .demoPhonePreviewFrame {
-    transform: translateX(-50%) scale(0.735);
+    transform: translateX(-50%) scale(0.85);
   }
 
   .businessInfoEmbedCard {
