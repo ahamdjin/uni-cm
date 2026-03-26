@@ -1,4 +1,4 @@
-import { openSignup } from "./bmon-links.js";
+﻿import { openSignup } from "./bmon-links.js";
 
 const DEMO_SITE_SRC = "https://empirefenceinc.com/";
 const DEMO_WIDGET_DOC = String.raw`<!doctype html>
@@ -116,32 +116,32 @@ const DEMO_WIDGET_DOC = String.raw`<!doctype html>
 
 const DEMO_COPY = {
   en: {
-    pill: "Live AI Demo",
-    titleBefore: "Preview the",
-    titleAccent: "live site and widget",
-    titleAfter: " on mobile.",
-    subtitle:
-      "This phone preview loads the Empire Fence website and overlays the separate LeadConnector chat widget directly inside the same mobile frame.",
-    jumpToDemo: "Jump to demo",
-    orderNow: "Order Now",
-    cardTitle: "Empire Fence mobile preview",
-    cardHint: "Live site inside the phone with the separate widget overlay",
+    eyebrow: "Live AI Demo",
+    cardEyebrow: "Preview context",
+    title: "Meet Your AI Employee",
+    lead: ["Chat with it.", "Talk to it."],
+    intro: "Role-play real customer conversations for your business, right now.",
+    instruction: "Tap the phone to choose Chat or Voice and experience your AI employee in action.",
     note:
-      "The screen shows the embedded website while the custom chat widget loads on top of it, so you can review the exact mobile-style interaction in one frame.",
+      "This is a personalized demo preview. Live AI employees are fully trained on your business, services, FAQs, and booking system.",
+    primaryAction: "Talk To Your Custom Assistant",
+    secondaryAction: "Order Now",
+    phoneBadge: "Live mobile preview",
+    phoneCaption: "Empire Fence site in the phone with the separate widget fitted into the same screen.",
   },
   ko: {
-    pill: "??? AI ??",
-    titleBefore: "?????",
-    titleAccent: "??? ???? ??",
-    titleAfter: "? ?????.",
-    subtitle:
-      "? ??? ????? Empire Fence ????? ????, ??? LeadConnector ?? ??? ?? ??? ??? ?? ?? ??? ??? ? ?? ???.",
-    jumpToDemo: "??? ??",
-    orderNow: "????",
-    cardTitle: "Empire Fence ??? ????",
-    cardHint: "??? ?? ??? ???? ?? ??? ?? ?????",
+    eyebrow: "라이브 AI 데모",
+    cardEyebrow: "미리보기 안내",
+    title: "당신의 AI 직원을 만나보세요",
+    lead: ["채팅해 보세요.", "직접 말해 보세요."],
+    intro: "지금 바로 실제 고객 대화를 비즈니스 상황처럼 체험해 볼 수 있습니다.",
+    instruction: "휴대폰 화면에서 Chat 또는 Voice를 선택하고 AI 직원이 어떻게 응답하는지 직접 확인해 보세요.",
     note:
-      "?? ??? ????? ?????, ? ?? ??? ?? ??? ???? ? ????? ??? ????? ?? ??? ? ????.",
+      "이 화면은 맞춤형 데모 미리보기입니다. 실제 AI 직원은 비즈니스, 서비스, FAQ, 예약 흐름까지 학습된 상태로 제공됩니다.",
+    primaryAction: "맞춤 AI와 대화하기",
+    secondaryAction: "주문하기",
+    phoneBadge: "라이브 모바일 미리보기",
+    phoneCaption: "휴대폰 안에서 Empire Fence 사이트와 별도 위젯이 같은 화면에 맞춰 실행됩니다.",
   },
 };
 
@@ -150,54 +150,52 @@ export default function DemoPage({ language = "en" }) {
 
   return (
     <div className="container page demoPage">
-      <section className="pageHero demoHero reveal" id="demoTop">
-        <div className="pill">
-          <span className="pillDot" aria-hidden="true" />
-          {copy.pill}
-        </div>
-        <h1 className="pageTitle">
-          {copy.titleBefore}{" "}
-          <span
-            style={{
-              background: "linear-gradient(135deg, var(--accent), var(--accent-2))",
-              WebkitBackgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            {copy.titleAccent}
-          </span>
-          {copy.titleAfter}
-        </h1>
-        <p className="pageSubtitle">{copy.subtitle}</p>
-        <div className="actionsRow demoHeroActions" aria-label="Demo page actions">
-          <a className="btn btnPrimary" href="#demoFrame">
-            {copy.jumpToDemo}
-          </a>
-          <button type="button" className="btn btnGhost" onClick={openSignup}>
-            {copy.orderNow}
-          </button>
-        </div>
-      </section>
+      <section className="voiceShowcase demoShowcase reveal" id="demoTop">
+        <div className="voiceShowcaseContent demoShowcaseContent">
+          <div className="voiceSectionEyebrow">{copy.eyebrow}</div>
+          <h1 className="voiceSectionTitle demoShowcaseTitle">{copy.title}</h1>
+          <p className="demoShowcaseLead">
+            <strong>{copy.lead[0]}</strong> <strong>{copy.lead[1]}</strong>
+          </p>
+          <p className="voiceSectionBody demoShowcaseBody">{copy.intro}</p>
+          <p className="voiceSectionBody demoShowcaseBody">{copy.instruction}</p>
 
-      <section className="demoPhoneWrap reveal" id="demoFrame" aria-label="Standalone demo preview">
-        <div className="voicePhoneStage demoPhoneStage">
-          <div className="voicePhoneBadge">{copy.cardTitle}</div>
-          <div className="voicePhoneFrame">
-            <div className="voicePhoneHardware" aria-hidden="true">
-              <span className="voicePhoneNotch" />
-            </div>
-            <iframe
-              srcDoc={DEMO_WIDGET_DOC}
-              title="Empire Fence live mobile demo"
-              className="voicePhoneScreen"
-              loading="lazy"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="clipboard-write; fullscreen"
-            />
+          <div className="voiceDemoCard demoShowcaseCard">
+            <div className="voiceDemoCardEyebrow">{copy.cardEyebrow}</div>
+            <p className="voiceDemoCardBody">
+              <em>{copy.note}</em>
+            </p>
           </div>
-          <p className="voicePhoneCaption">{copy.cardHint}</p>
-          <p className="demoNote">{copy.note}</p>
+
+          <div className="actionsRow voiceShowcaseActions demoShowcaseActions" aria-label="Demo page actions">
+            <a className="btn btnPrimary" href="#demoPhone">
+              {copy.primaryAction}
+            </a>
+            <button type="button" className="btn btnGhost" onClick={openSignup}>
+              {copy.secondaryAction}
+            </button>
+          </div>
+        </div>
+
+        <div className="voiceShowcaseMedia" id="demoPhone">
+          <div className="voicePhoneStage demoPhoneStage">
+            <div className="voicePhoneBadge">{copy.phoneBadge}</div>
+            <div className="voicePhoneFrame">
+              <div className="voicePhoneHardware" aria-hidden="true">
+                <span className="voicePhoneNotch" />
+              </div>
+              <iframe
+                srcDoc={DEMO_WIDGET_DOC}
+                title="Empire Fence live mobile demo"
+                className="voicePhoneScreen"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="clipboard-write; fullscreen"
+              />
+            </div>
+            <p className="voicePhoneCaption demoPhoneCaption">{copy.phoneCaption}</p>
+          </div>
         </div>
       </section>
     </div>

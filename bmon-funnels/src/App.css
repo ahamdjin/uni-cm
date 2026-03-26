@@ -1149,6 +1149,38 @@
   gap: clamp(56px, 7vw, 88px);
 }
 
+.demoShowcase {
+  margin-bottom: var(--space-section);
+}
+
+.demoShowcaseTitle {
+  max-width: 520px;
+}
+
+.demoShowcaseLead {
+  margin: 18px 0 0;
+  color: rgba(11, 16, 32, 0.96);
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.32;
+  letter-spacing: -0.03em;
+}
+
+.demoShowcaseLead strong {
+  font-weight: 700;
+}
+
+.demoShowcaseBody {
+  max-width: 560px;
+}
+
+.demoShowcaseCard {
+  max-width: 560px;
+}
+
+.demoShowcaseActions {
+  justify-content: flex-start;
+}
+
 .businessInfoHero {
   max-width: 860px;
   margin-bottom: 0;
@@ -1200,6 +1232,10 @@
 
 .demoPhoneStage {
   gap: 18px;
+}
+
+.demoPhoneCaption {
+  max-width: 300px;
 }
 
 .businessInfoNote {
@@ -1413,6 +1449,10 @@
 
   .demoPage {
     gap: 72px;
+  }
+
+  .demoShowcaseLead {
+    font-size: 24px;
   }
 
   .businessInfoEmbedCard {
