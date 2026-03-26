@@ -1171,32 +1171,13 @@
   justify-content: center;
 }
 
-.demoGrid {
-  justify-content: center;
-}
-
 .businessInfoEmbedCard {
   flex: 0 1 760px;
   width: min(760px, 100%);
   padding: 22px;
 }
 
-.demoEmbedCard {
-  flex: 0 1 920px;
-  width: min(920px, 100%);
-  padding: 22px;
-}
-
 .businessInfoFrameWrap {
-  width: 100%;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(11, 16, 32, 0.08);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 22px 58px rgba(11, 16, 32, 0.1);
-}
-
-.demoFrameWrap {
   width: 100%;
   border-radius: 28px;
   overflow: hidden;
@@ -1211,11 +1192,14 @@
   display: block;
 }
 
-.demoFrame {
-  width: 100%;
-  border: none;
-  display: block;
-  background: #ffffff;
+.demoPhoneWrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto var(--space-section);
+}
+
+.demoPhoneStage {
+  gap: 18px;
 }
 
 .businessInfoNote {
@@ -1226,17 +1210,15 @@
 }
 
 .demoNote {
-  margin: 14px 4px 2px;
+  margin: 0 auto;
+  max-width: 300px;
+  text-align: center;
   color: rgba(11, 16, 32, 0.62);
   font-size: 13px;
   line-height: 1.65;
 }
 
 .businessInfoNextSteps {
-  margin-top: 0;
-}
-
-.demoChecklist {
   margin-top: 0;
 }
 
@@ -1434,10 +1416,6 @@
   }
 
   .businessInfoEmbedCard {
-    padding: 20px;
-  }
-
-  .demoEmbedCard {
     padding: 20px;
   }
 

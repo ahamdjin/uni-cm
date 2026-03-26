@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { openSignup } from "./bmon-links.js";
 
 const DEMO_SRC = "https://login.bmon.ai/v2/preview/hT4qFveprPxUR4XpfoJg?notrack=true";
@@ -46,28 +45,8 @@ const DEMO_COPY = {
   },
 };
 
-function getDemoHeight() {
-  if (typeof window === "undefined") return 900;
-
-  const width = window.innerWidth;
-  const viewportHeight = window.innerHeight || 900;
-
-  if (width <= 480) return Math.max(820, Math.round(viewportHeight * 1.15));
-  if (width <= 768) return Math.max(880, Math.round(viewportHeight * 1.06));
-  if (width <= 1080) return 900;
-  return 840;
-}
-
 export default function DemoPage({ language = "en" }) {
-  const [frameHeight, setFrameHeight] = useState(() => getDemoHeight());
   const copy = DEMO_COPY[language] ?? DEMO_COPY.en;
-
-  useEffect(() => {
-    const onResize = () => setFrameHeight(getDemoHeight());
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
 
   return (
     <div className="container page demoPage">
@@ -100,39 +79,24 @@ export default function DemoPage({ language = "en" }) {
         </div>
       </section>
 
-      <section className="embedGrid demoGrid" aria-label="Standalone demo preview">
-        <div className="embedCard demoEmbedCard reveal" id="demoFrame">
-          <div className="embedHeader">
-            <div>
-              <h2 className="embedTitle">{copy.cardTitle}</h2>
-              <p className="embedHint">{copy.cardHint}</p>
+      <section className="demoPhoneWrap reveal" id="demoFrame" aria-label="Standalone demo preview">
+        <div className="voicePhoneStage demoPhoneStage">
+          <div className="voicePhoneBadge">{copy.cardTitle}</div>
+          <div className="voicePhoneFrame">
+            <div className="voicePhoneHardware" aria-hidden="true">
+              <span className="voicePhoneNotch" />
             </div>
-          </div>
-
-          <div className="embedFrameWrap embedFrameWrapWide demoFrameWrap" style={{ minHeight: `${frameHeight}px` }}>
             <iframe
               src={DEMO_SRC}
               title="BMON Live Demo"
-              className="demoFrame"
-              style={{ width: "100%", height: `${frameHeight}px`, border: "none" }}
+              className="voicePhoneScreen"
               loading="lazy"
               referrerPolicy="strict-origin-when-cross-origin"
               allow="clipboard-write; fullscreen"
             />
           </div>
-
+          <p className="voicePhoneCaption">{copy.cardHint}</p>
           <p className="demoNote">{copy.note}</p>
-        </div>
-      </section>
-
-      <section className="contactInfo demoChecklist reveal" aria-label="Demo review checklist">
-        <h2 className="infoHeading">{copy.checklistTitle}</h2>
-        <div className="infoGrid">
-          {copy.checklist.map((item) => (
-            <div key={item} className="infoCard">
-              <p className="infoBody">{item}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>
