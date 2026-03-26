@@ -736,7 +736,7 @@ export default function App() {
 
       <main className="main">
         {isBusinessInfoPage ? (
-          <BusinessInfoPage />
+          <BusinessInfoPage language={language} />
         ) : view === "services" ? (
           <div id="homeTop">
             <BMONServicesFunnel embedded language={language} />
