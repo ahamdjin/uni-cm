@@ -40,24 +40,30 @@ const DEMO_WIDGET_DOC = String.raw`<!doctype html>
         background: #ffffff;
       }
 
-      [data-chat-widget] {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-      }
-
       body > chat-widget {
-        position: absolute !important;
-        inset: 0 !important;
+        position: fixed !important;
+        right: 16px !important;
+        bottom: 18px !important;
         display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-        overflow: hidden !important;
-        z-index: 2;
+        width: auto !important;
+        height: auto !important;
+        overflow: visible !important;
+        z-index: 3;
+        pointer-events: none !important;
       }
 
       body > chat-widget * {
         box-sizing: border-box;
+      }
+
+      body > chat-widget iframe,
+      body > chat-widget button,
+      body > chat-widget a,
+      body > chat-widget [role="dialog"],
+      body > chat-widget [role="main"],
+      body > chat-widget input,
+      body > chat-widget textarea {
+        pointer-events: auto !important;
       }
 
       body > chat-widget iframe,
@@ -77,8 +83,8 @@ const DEMO_WIDGET_DOC = String.raw`<!doctype html>
   <body>
     <div class="deviceViewport">
       <iframe class="siteFrame" src="${DEMO_SITE_SRC}" title="Empire Fence mobile preview" loading="lazy"></iframe>
-      <div data-chat-widget data-widget-id="69c01d67633c74d10c369675" data-location-id="VUXXwCAxSkjuGBKAjon6"></div>
     </div>
+    <div data-chat-widget data-widget-id="69c01d67633c74d10c369675" data-location-id="VUXXwCAxSkjuGBKAjon6"></div>
     <script
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
@@ -90,7 +96,7 @@ const DEMO_WIDGET_DOC = String.raw`<!doctype html>
           const host = document.querySelector("chat-widget");
           if (!host) return false;
 
-          const widgetWidth = Math.min(340, Math.max(280, window.innerWidth - 20));
+          const widgetWidth = Math.min(320, Math.max(260, window.innerWidth - 24));
           host.style.setProperty("--chat-widget-width", widgetWidth + "px");
           return true;
         };
